@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import org.newdawn.slick.tests.xml.Inventory;
+
 public abstract class Entity {
 	
 	/**
@@ -11,7 +13,7 @@ public abstract class Entity {
 	/**
 	 * Players inventory
 	 */
-	private Inventory inventory
+	private Inventory inventory;
 	
 	/**
 	 * Array of images for multidirectional movement
@@ -78,6 +80,7 @@ public abstract class Entity {
 	}
 	
 	public boolean isColliding(Entity e){
+		return isDead;
 		
 	}
 	
