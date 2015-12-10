@@ -1,4 +1,4 @@
-package utility;
+package com.monochromatic.god_of_fire.utility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -1,12 +1,13 @@
+package com.monochromatic.god_of_fire;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import graphics.LoadingScreen;
-import gui.GUI;
-import utility.Logger;
+import com.monochromatic.god_of_fire.graphics.LoadingScreen;
+import com.monochromatic.god_of_fire.gui.GUI;
+import com.monochromatic.god_of_fire.utility.Logger;
 
 public class Main {
 

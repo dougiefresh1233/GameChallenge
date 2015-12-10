@@ -1,7 +1,7 @@
-package utility;
+package com.monochromatic.god_of_fire.utility;
 import java.io.FileNotFoundException;
 
-import utility.encryption.Encryption;
+import com.monochromatic.god_of_fire.utility.encryption.Encryption;
 
 public class EncryptedFiles {
 	Files f = new Files();

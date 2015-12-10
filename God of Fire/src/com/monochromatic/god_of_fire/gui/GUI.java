@@ -1,4 +1,4 @@
-package gui;
+package com.monochromatic.god_of_fire.gui;
 
 import javax.swing.JFrame;
 

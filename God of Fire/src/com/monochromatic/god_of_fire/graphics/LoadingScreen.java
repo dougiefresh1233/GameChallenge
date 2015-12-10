@@ -1,4 +1,4 @@
-package graphics;
+package com.monochromatic.god_of_fire.graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
