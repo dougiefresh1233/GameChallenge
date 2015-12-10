@@ -19,8 +19,16 @@ public class Player extends Entity{
 		movementSpeed=1;
 	}
 	
+	public void tick(){
+		userInput();
+	}
 	
-	public void userInput(GameContainer gameScreen) throws SlickException{
+	public void render(Graphics pane){
+		currentAnimation.draw(location.getX(), location.getY());
+	}
+	
+
+	private void userInput(GameContainer gameScreen) throws SlickException{
 		Input userInput=gameScreen.getInput();
 		
 		if(userInput.isKeyDown(userInput.KEY_W)){
