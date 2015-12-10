@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
 import graphics.LoadingScreen;
 import gui.GUI;
 import utility.Logger;
@@ -9,13 +12,18 @@ public class Main {
 
 	static LoadingScreen lsc;
 
-	public static void main(String[] args) {
-		lsc = new LoadingScreen();
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new SetupClass("Title"));
+		app.setDisplayMode(600, 800, false);
+		app.setAlwaysRender(true);
+		app.start();
+		
+		/*lsc = new LoadingScreen();
 		lsc.startLoadingScreen();
 		LoadGame();
 		lsc.closeLoadingScreen();
 		QuitGame();
-		//TODO Remove this ^
+		//TODO Remove this ^*/
 	}
 
 	public static void LoadGame() {
