@@ -23,19 +23,19 @@ public class MenuState  extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) 
 		throws SlickException {
 			g.drawString("Title",300,300);
-			g.draw(playButton);
-			g.drawString("Play", 300, 400);
+			//g.draw(playButton);
+			//g.drawString("Play", 300, 400);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
 		throws SlickException {
-			cursor.setCenterX(gc.getInput().getMouseX());
+			/*cursor.setCenterX(gc.getInput().getMouseX());
 			cursor.setCenterY(gc.getInput().getMouseY());
 			hover=cursor.intersects(playButton);
 			click=gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON);
 			if(hover && click){
 				sbg.enterState(1);
-			}
+			}*/
 	}
 
 	public int getID() {

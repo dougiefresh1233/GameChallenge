@@ -14,9 +14,12 @@ public class Main {
 	static LoadingScreen lsc;
 
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new SetupClass("Title"));
-		app.setDisplayMode(600, 800, false);
+		AppGameContainer app = new AppGameContainer(new SetupClass());
+		app.setDisplayMode(640, 480, false);
 		app.setAlwaysRender(true);
+		app.setShowFPS(true);	//TODO change to false
+		app.setVSync(true);
+		app.setTargetFrameRate(60);
 		app.start();
 		
 		/*lsc = new LoadingScreen();

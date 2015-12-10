@@ -8,8 +8,8 @@ import com.monochromatic.god_of_fire.state.MenuState;
 
 public class SetupClass extends StateBasedGame{
 
-	public SetupClass(String title) {
-		super(title);
+	public SetupClass() {
+		super("title");
 		// TODO Auto-generated constructor stub
 	}
 
