@@ -1,4 +1,5 @@
 package com.monochromatic.god_of_fire.state;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -13,7 +14,8 @@ public class GameState extends BasicGameState{
 	}
 
 	public void render(GameContainer arg0, StateBasedGame sbg, Graphics g) throws SlickException {
-		g.drawString("Game Start", 300, 400);
+		g.setColor(Color.white);
+		g.drawString("Game Start", 270, 100);
 	}
 
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
@@ -21,7 +23,7 @@ public class GameState extends BasicGameState{
 	}
 
 	public int getID() {
-		return 0;
+		return 1;
 	}
 
 }
