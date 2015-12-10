@@ -1,4 +1,4 @@
-package utility.encryption;
+package com.monochromatic.god_of_fire.utility.encryption;
 import javax.xml.bind.DatatypeConverter;
 
 public class Build {

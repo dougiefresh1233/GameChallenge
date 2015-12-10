@@ -1,4 +1,4 @@
-package utility.encryption;
+package com.monochromatic.god_of_fire.utility.encryption;
 public class Encryption {
 	Build b = new Build();
 	Breakdown br = new Breakdown();

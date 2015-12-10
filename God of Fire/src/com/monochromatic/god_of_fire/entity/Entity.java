@@ -1,3 +1,4 @@
+package com.monochromatic.god_of_fire.entity;
 import java.awt.*;
 
 import java.awt.image.BufferedImage;
@@ -122,14 +123,30 @@ public abstract class Entity {
 	 * @throws SlickException
 	 */
 	public void init() throws SlickException{
-		upwardsMovementImages= {spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		downwardMovementImages={spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		rightMovementImages={spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		leftMovementImages={spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		stationaryImages= {spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		attackingImages =  {spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		castingImages= {spriteSheet.getSubImage(x, y, width, height), spriteSheet.getSubImage(x, y, width, height)};
-		
+		// TODO
+		int x=0, y=0, width=0, height=0;
+		upwardsMovementImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		downwardMovementImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		rightMovementImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		leftMovementImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		stationaryImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		attackingImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+		castingImages = new Image[] { 
+				spriteSheet.getSubImage(x, y, width, height),
+				spriteSheet.getSubImage(x, y, width, height) };
+
 		upwardsMovementAnimation=new Animation(upwardsMovementImages, 1, false);
 		downwardMovementAnimation=new Animation(downwardMovementImages, 1, false);
 		rightMovementAnimation=new Animation(rightMovementImages, 1, false);

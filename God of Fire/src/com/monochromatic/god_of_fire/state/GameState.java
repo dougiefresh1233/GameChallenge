@@ -1,3 +1,4 @@
+package com.monochromatic.god_of_fire.state;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
