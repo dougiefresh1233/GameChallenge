@@ -116,6 +116,9 @@ public abstract class Entity {
 	
 	/**
 	 * Looks like a clusterfuck now, but it will improve!
+	 * Basically, if we can have the same format on all the sprite sheets, this one
+	 * block of code will take care of it for every single entity.
+	 * I just left it all as is for now as a place holder and so everyone can see whats to come
 	 * @throws SlickException
 	 */
 	public void init() throws SlickException{
