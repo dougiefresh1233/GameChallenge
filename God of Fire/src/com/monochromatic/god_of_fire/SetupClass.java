@@ -45,6 +45,7 @@ public class SetupClass extends StateBasedGame{
 			
 			appGC.setAlwaysRender(true);
 			appGC.setVSync(true);
+			appGC.setShowFPS(false);
 			
 			appGC.setTargetFrameRate(60);
 			
