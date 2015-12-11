@@ -1,4 +1,4 @@
-###Remeber to Comment your code
+###Remember to Comment your code
 
 # God of Fire
 Game for the Monochromatic Games GameChallenge
