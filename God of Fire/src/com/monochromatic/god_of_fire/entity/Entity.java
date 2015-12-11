@@ -1,119 +1,55 @@
 package com.monochromatic.god_of_fire.entity;
 import java.awt.*;
 
-import java.awt.image.BufferedImage;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.tests.xml.Inventory;
 
 public abstract class Entity {
+	/** Location of the entity */
+	protected Point location;
+	/** Orientation of the entity */
+	protected Direction orientation;
+	/** How fast the entity moves */
+	protected int movementSpeed;
 	
-	/**
-	 * Location of the player
-	 */
-	protected Point playerLocation;
-	
-	/**
-	 * Players inventory
-	 */
-	protected Inventory inventory;
-	
-	/**
-	 * Spritesheet for all images
-	 */
+	/** Spritesheet for all images **/
 	protected SpriteSheet spriteSheet;
-	
-	/**
-	 * Orientation of the character
-	 * @author kaolinhart
-	 *
-	 */
-	protected enum direction {up, down, left, right};
-	
-	protected direction orientation;
-	
-	/**
-	 * Array of images for multidirectional movement
-	 */
+	/** Array of images for multidirectional movement **/
 	protected Image[] upwardsMovementImages, downwardMovementImages, rightMovementImages, leftMovementImages;
-
-	/**
-	 * What animation is currently being used
-	 */
+	/** What animation is currently being used **/
 	protected Animation currentAnimation;
 	
-	/**
-	 * Animations for the entity
-	 */
+	/** Animations for the entity **/
 	protected Animation upwardsMovementAnimation, downwardMovementAnimation, leftMovementAnimation, rightMovementAnimation  ;
 	
 	
 	/**
-	 * Array of images and animation for when entities not moving
+	 * Array of images and animation for when the entity is not moving
 	 */
 	protected Image[] stationaryImages;
-	
 	protected Animation stationaryAnimation;
 	
 	/**
 	 * Array of images and animation for entities physical attacks
 	 */
 	protected Image[] attackingImages, castingImages;
-	
 	protected Animation attackingAnimation, castingAnimation;
-	
-
-	/**
-	 * If entities alive or not
-	 */
-	protected boolean isDead;
-	
-	/**
-	 * The entities current health
-	 */
-	protected int health;
-	
-	/**
-	 * How fast the entity moves
-	 */
-	protected int movementSpeed;
-	
-	/**
-	 * The entities maximum health
-	 */
-	protected int maximumHealth;
-	
-	/**
-	 * Damage capable by player. Increase
-	 */
-	protected int attack;
-	
-	/**
-	 * Defense modifier. Reduces damage taken
-	 */
-	protected int defense;
-	
-	/**
-	 * Modifier for critical chance.
-	 */
-	protected int critChance;
-	
-	/**
-	 * Default constructor
-	 */
-	public Entity(){
-		this(0, 0, 0, 0, 0);
+		
+	public Entity(int x, int y){
+		this(x, y, Direction.DOWN);
 	}
 	
-	public Entity(int xPosition, int yPosition, int attack, int maxHealth, int defense){
-		this.playerLocation=new Point(xPosition, yPosition);
-		this.attack=attack;
-		this.maximumHealth=maxHealth;
-		this.defense=defense;
+	public Entity(int x, int y, Direction d){
+		this(x, y, d, 0);
 	}
 	
+	public Entity(int x, int y, Direction d, int s){
+		this.location = new Point(x, y);
+		this.orientation = d;
+		this.movementSpeed = s;
+	}
 	
 	/**
 	 * Looks like a clusterfuck now, but it will improve!
@@ -157,51 +93,39 @@ public abstract class Entity {
 		
 	}
 	
-	public boolean isColliding(Entity e){
-		return isDead;
+	/**
+	 * Determines if the given entity has collided with this one.
+	 * 
+	 * @param entity
+	 */
+	public boolean isColliding(Entity entity){
+		//TODO - Advanced collision logic
+		Point them = entity.location();
+		boolean collided = ((int) them.getX() == (int) location.getX() &&
+							(int) them.getY() == (int) location.getY()) 
+							? true : false;
+		return collided;
+	}
+	
+	/**
+	 * Returns a copy of this entities location.
+	 */
+	public Point location() {
+		return new Point((int) location.getX(), (int) location.getY());
 	}
 	
 	/**
 	 * Sets orientation of the entity
 	 * @param d
 	 */
-	protected void setOrientation(direction d){
-		orientation=d;
+	protected void setOrientation(Direction d){
+		orientation = d;
 	}
 	
-	/**
-	 * Kills the target
-	 */
-	public void kill(){
-		health=0;
-		isDead=true;
+	public void move() {
+		//TODO
 	}
-	 
-	/**
-	 * Returns if the entity is still alive
-	 * @return
-	 */
-	public boolean isAlive(){
-		if(!isDead){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	/**
-	 * For healing and taking damage
-	 * @param value- amount to increase or decrease health by
-	 */
-	public void alterHealth(int value){
-		health+=value;
-	}
-	
-	public abstract void attack();
-	
-	public abstract void move();
 	
 	public abstract void render();
-	
 	
 }
