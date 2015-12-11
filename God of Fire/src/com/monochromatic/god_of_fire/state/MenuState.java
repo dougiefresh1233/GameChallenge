@@ -3,6 +3,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -60,16 +61,31 @@ public class MenuState  extends BasicGameState {
 			//cursor follows mouse movement
 			cursor.setCenterX(gc.getInput().getMouseX());
 			cursor.setCenterY(gc.getInput().getMouseY());
-			//collison detection
+			//Collision detection
 			hoverContinue=cursor.intersects(continueButton);
 			hoverNew=cursor.intersects(newButton);
 			hoverLoad=cursor.intersects(loadButton);
 			hoverOptions=cursor.intersects(optionsButton);
 			hoverExit=cursor.intersects(exitButton);
 			
-			click=gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON);
-			if(hoverContinue && click){
-				sbg.enterState(1);	//begin game
+			gc.getInput();	//Not sure why eclipse wants this here
+			click=gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON);
+			if(hoverContinue && click){	//Continue is pressed
+				//TODO add load game function
+				sbg.enterState(1);	//goes to GameState
+			}
+			if(hoverNew && click){	//New is pressed
+				sbg.enterState(2);	//goes to NewGameState
+			}
+			if(hoverLoad && click){ //Load is pressed
+				sbg.enterState(3);	//goes to LoadGameState
+			}
+			if(hoverOptions && click){	//Options is pressed
+				sbg.enterState(4);	//goes to OptionsState
+			}
+			if(hoverExit && click){	//Exit is pressed
+				//appGC.exit();	/<-- Probably a better way to exit
+				System.exit(0); //Closes app
 			}
 	}
 

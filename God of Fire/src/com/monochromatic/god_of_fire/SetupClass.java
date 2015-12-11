@@ -6,13 +6,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.monochromatic.god_of_fire.state.GameState;
+import com.monochromatic.god_of_fire.state.LoadGameState;
 import com.monochromatic.god_of_fire.state.MenuState;
+import com.monochromatic.god_of_fire.state.NewGameState;
+import com.monochromatic.god_of_fire.state.OptionsState;
 
 public class SetupClass extends StateBasedGame{
 
 	public static final String gameName = "God of Fire";
 	public static final int menuState = 0;
 	public static final int gameState = 1;
+	public static final int newGameState = 2;
+	public static final int loadGameState = 3;
+	public static final int optionsState = 4;
 	
 	public SetupClass() {
 		
@@ -23,6 +29,9 @@ public class SetupClass extends StateBasedGame{
 		//create all necessary states
 		this.addState(new MenuState()); 
 		this.addState(new GameState());
+		this.addState(new NewGameState()); 
+		this.addState(new LoadGameState());
+		this.addState(new OptionsState());
 	}
 
 	public void initStatesList(GameContainer container) throws SlickException {
