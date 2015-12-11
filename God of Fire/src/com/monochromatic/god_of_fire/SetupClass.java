@@ -20,7 +20,7 @@ public class SetupClass extends StateBasedGame{
 		super(gameName);
 		
 		
-		//create all necisarry states
+		//create all necessary states
 		this.addState(new MenuState()); 
 		this.addState(new GameState());
 	}
@@ -42,6 +42,9 @@ public class SetupClass extends StateBasedGame{
 			appGC.setDisplayMode(640, 480, false);
 			
 			//TODO add icon to the window when we get one
+			
+			appGC.setAlwaysRender(true);
+			appGC.setVSync(true);
 			
 			appGC.setTargetFrameRate(60);
 			
