@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class GameState extends BasicGameState{
+public class OptionsState extends BasicGameState{
 	
 	//declare variables here
 	
@@ -18,7 +18,7 @@ public class GameState extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		//Draw objects on screen
 		g.setColor(Color.white);
-		g.drawString("Game Start", 270, 100);
+		g.drawString("Options Screen goes here", 270, 100);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -26,7 +26,7 @@ public class GameState extends BasicGameState{
 	}
 
 	public int getID() {	//returns ID for SetupClass
-		return 1;
+		return 4;
 	}
 
 }
