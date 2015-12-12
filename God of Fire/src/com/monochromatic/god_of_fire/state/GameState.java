@@ -12,6 +12,8 @@ public class GameState extends BasicGameState{
 	
 	Player player;
 	
+	
+	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		 player=new Player(100, 100, 10, 10, 10);
 		
