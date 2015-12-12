@@ -14,7 +14,7 @@ public class Player extends LivingEntity {
 	
 	public Player(int x, int y, int h, int a, int d) {
 		super(x, y, h, a, d);
-		movementSpeed=4;
+		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
 		try {
 			init();
@@ -32,6 +32,7 @@ public class Player extends LivingEntity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		
 
 	}
@@ -43,26 +44,38 @@ public class Player extends LivingEntity {
 		
 		if(userInput.isKeyDown(Input.KEY_W)){
 			setOrientation(Direction.UP);
+			upwardsMovementAnimation.start();
 			currentAnimation=upwardsMovementAnimation;
 			location.translate(0, -movementSpeed);
+		}else{
+			upwardsMovementAnimation.stop();
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_A)){
 			setOrientation(Direction.LEFT);
+			leftMovementAnimation.start();
 			currentAnimation=leftMovementAnimation;
 			location.translate(-movementSpeed, 0);
+		}else{
+			leftMovementAnimation.stop();
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_S)){
 			setOrientation(Direction.DOWN);
+			downwardMovementAnimation.start();
 			currentAnimation=downwardMovementAnimation;
 			location.translate(0, movementSpeed);
+		}else{
+			downwardMovementAnimation.stop();
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_D)){
 			setOrientation(Direction.RIGHT);
+			rightMovementAnimation.start();
 			currentAnimation=rightMovementAnimation;
 			location.translate(movementSpeed, 0);
+		}else{
+			rightMovementAnimation.stop();
 		}
 		
 
