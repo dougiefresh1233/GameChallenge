@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import com.monochromatic.god_of_fire.SetupClass;
 
 public class NewGameState extends BasicGameState{
 	
@@ -26,7 +27,7 @@ public class NewGameState extends BasicGameState{
 	}
 
 	public int getID() {	//returns ID for SetupClass
-		return 2;
+		return SetupClass.newGameState;
 	}
 
 }
