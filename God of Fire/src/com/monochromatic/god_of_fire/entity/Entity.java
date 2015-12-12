@@ -6,6 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SpriteSheet;
 
+import com.monochromatic.god_of_fire.enums.Direction;
+
 public abstract class Entity {
 	/** Location of the entity */
 	protected Point location;

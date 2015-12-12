@@ -47,7 +47,8 @@ public abstract class LivingEntity extends Entity {
 	 * @param d - amount to damage
 	 * @return boolean - killing blow
 	 */
-	public boolean damage(int d){
+	public boolean takeDamage(int d){
+		//TODO use the Damage class to incorporate advanced damaging mechanics.
 		//TODO - advanced defense algorithm
 		int damage;
 		if(d > 0) {

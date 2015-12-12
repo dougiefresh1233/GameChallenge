@@ -4,7 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tests.xml.Inventory;
 
-import com.monochromatic.god_of_fire.entity.Direction;
+import com.monochromatic.god_of_fire.enums.Direction;
 
 public class Player extends LivingEntity {
 	/**

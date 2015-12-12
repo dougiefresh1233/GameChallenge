@@ -1,7 +1,7 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
-import com.monochromatic.god_of_fire.entity.Direction;
 import com.monochromatic.god_of_fire.entity.Entity;
+import com.monochromatic.god_of_fire.enums.Direction;
 
 /**
  * A non-living entity, represents any entity which does not have a 
