@@ -68,8 +68,8 @@ public abstract class LivingEntity extends Entity {
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-		
+		if(initComplete)
+		currentAnimation.draw((int)location.getX(), (int)location.getY());
 	}
 	
 }

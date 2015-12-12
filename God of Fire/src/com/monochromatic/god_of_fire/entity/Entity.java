@@ -16,10 +16,12 @@ public abstract class Entity {
 	/** How fast the entity moves */
 	protected int movementSpeed;
 	
+	protected boolean initComplete=false;
 	/** Spritesheet for all images **/
-	protected SpriteSheet spriteSheet;
+	protected Image spriteSheet;
 	/** Array of images for multidirectional movement **/
-	protected Image[] upwardsMovementImages, downwardMovementImages, rightMovementImages, leftMovementImages;
+	protected SpriteSheet upwardsMovementImages, leftMovementImages, downwardMovementImages, rightMovementImages;
+	
 	/** What animation is currently being used **/
 	protected Animation currentAnimation;
 	
@@ -62,37 +64,36 @@ public abstract class Entity {
 	 */
 	public void init() throws SlickException{
 		// TODO
-		int x=0, y=0, width=0, height=0;
-		upwardsMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		downwardMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		rightMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		leftMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, 192, 64), 32, 64);
+		leftMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 64, 192, 64), 32, 64);
+		upwardsMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 128, 192, 64), 32, 64);
+		rightMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 192, 192, 64),32, 64);
+		
+		/**
 		stationaryImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
 		attackingImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
 		castingImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
+		*/
 
-		upwardsMovementAnimation=new Animation(upwardsMovementImages, 1, false);
-		downwardMovementAnimation=new Animation(downwardMovementImages, 1, false);
-		rightMovementAnimation=new Animation(rightMovementImages, 1, false);
-		leftMovementAnimation=new Animation(leftMovementImages, 1, false);
+		upwardsMovementAnimation=new Animation(upwardsMovementImages, 100);
+		downwardMovementAnimation=new Animation(downwardMovementImages, 100);
+		rightMovementAnimation=new Animation(rightMovementImages, 100);
+		leftMovementAnimation=new Animation(leftMovementImages, 100);
+		currentAnimation=upwardsMovementAnimation;
+	
+		
+		/**
 		stationaryAnimation=new Animation(stationaryImages, 1, false);
 		attackingAnimation=new Animation(attackingImages, 1, false);
 		castingAnimation=new Animation(castingImages, 1, false);
-		
+		*/
+		initComplete=true;
 	}
 	
 	/**
@@ -122,6 +123,15 @@ public abstract class Entity {
 	 */
 	protected void setOrientation(Direction d){
 		orientation = d;
+	}
+	
+	protected void setImage(String filePath){
+		try {
+			spriteSheet=new SpriteSheet(filePath, 32, 64);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void move() {
