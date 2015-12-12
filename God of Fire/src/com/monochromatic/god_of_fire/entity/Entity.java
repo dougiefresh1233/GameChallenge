@@ -64,7 +64,7 @@ public abstract class Entity {
 	 */
 	public void init() throws SlickException{
 		// TODO
-		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, 192, 64), 32, 64);
+		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, 192, 62), 32, 62);
 		leftMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 64, 192, 64), 32, 64);
 		upwardsMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 128, 192, 64), 32, 64);
 		rightMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 192, 192, 64),32, 64);
@@ -87,7 +87,6 @@ public abstract class Entity {
 		leftMovementAnimation=new Animation(leftMovementImages, 100);
 		currentAnimation=upwardsMovementAnimation;
 	
-		
 		/**
 		stationaryAnimation=new Animation(stationaryImages, 1, false);
 		attackingAnimation=new Animation(attackingImages, 1, false);
