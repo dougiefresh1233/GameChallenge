@@ -1,6 +1,6 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
-import com.monochromatic.god_of_fire.entity.Direction;
+import com.monochromatic.god_of_fire.enums.Direction;
 
 /**
  * Represents a static hazard entity (ie. spikes or lava).
