@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="17" tilewidth="24" tileheight="24" nextobjectid="1">
+ <tileset firstgid="1" name="Dungeon" tilewidth="24" tileheight="24" spacing="1" margin="3" tilecount="120">
+  <image source="Dungeon.png" width="205" height="394"/>
+ </tileset>
+ <layer name="Floor1" width="26" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UuwqDMACF4czxBjVWaLGF2Cr0kr7/2/UXMricTgZScPiWH8FADrHGmAIlKtRoYDfuB7Rw6HBEn6CfcI7/HHDBddUfoqvvX6J7jLjhjglzgr6c9xnP8UbAJ0Hf+r5z2UEl7k/twIleir7v4D92EMT9DaKr98D/6PsO8t3BF205q6noBgAA
+  </data>
+ </layer>
+ <layer name="Stairs" width="26" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMgpEH3AbaAaOAbgAAGuRJcugGAAA=
+  </data>
+ </layer>
+ <layer name="Floor2" width="26" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBQMReAIxE5A7AzELkDsSiN7PIHYC4i9gdgHiH1pZE8gEAcBcTAQhwBxKI3siQTiKCg7BohjaWTPKBg8AAC0PDf/6AYAAA==
+  </data>
+ </layer>
+ <layer name="Walls" width="26" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkYGBgAmJmIGaBsmF8JjQ5QhiXPg4g5mSgPdAAYkE62SNJgX4ZIsVB9ihSYB6xwACINWlgLjoA+YfSdOCORmMDIP9Qmg780Whc9lCSDkAgHI3GBohNB/hAPBqNDeBKB6SAdDQaGcDSE3I6oHYaQwbUSAfEAErLA2IByD+UpgNiwhvkH0rTATEA5B9DIDYCYmMgNgFiUyA2A2JzLHxzHOoI6bEAYgBUqX3O6AYAAA==
+  </data>
+ </layer>
+</map>
