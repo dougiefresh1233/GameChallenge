@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import com.monochromatic.god_of_fire.SetupClass;
 
 public class MenuState  extends BasicGameState {
 
@@ -72,25 +73,25 @@ public class MenuState  extends BasicGameState {
 			click=gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON);
 			if(hoverContinue && click){	//Continue is pressed
 				//TODO add load game function
-				sbg.enterState(1);	//goes to GameState
+				sbg.enterState(SetupClass.gameState);	//goes to GameState
 			}
 			if(hoverNew && click){	//New is pressed
-				sbg.enterState(2);	//goes to NewGameState
+				sbg.enterState(SetupClass.newGameState);	//goes to NewGameState
 			}
 			if(hoverLoad && click){ //Load is pressed
-				sbg.enterState(3);	//goes to LoadGameState
+				sbg.enterState(SetupClass.loadGameState);	//goes to LoadGameState
 			}
 			if(hoverOptions && click){	//Options is pressed
-				sbg.enterState(4);	//goes to OptionsState
+				sbg.enterState(SetupClass.optionsState);	//goes to OptionsState
 			}
 			if(hoverExit && click){	//Exit is pressed
-				//appGC.exit();	/<-- Probably a better way to exit
+				//appGC.exit();	//<-- Probably a better way to exit
 				System.exit(0); //Closes app
 			}
 	}
 
 	public int getID() {
-		return 0;
+		return SetupClass.menuState;
 	}
 
 }
