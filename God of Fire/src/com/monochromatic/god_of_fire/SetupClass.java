@@ -4,12 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
-import com.monochromatic.god_of_fire.state.GameState;
-import com.monochromatic.god_of_fire.state.LoadGameState;
-import com.monochromatic.god_of_fire.state.MenuState;
-import com.monochromatic.god_of_fire.state.NewGameState;
-import com.monochromatic.god_of_fire.state.OptionsState;
+import com.monochromatic.god_of_fire.state.*;	//Imports all states
 
 public class SetupClass extends StateBasedGame{
 
