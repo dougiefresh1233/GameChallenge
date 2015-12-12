@@ -11,6 +11,19 @@ public class Damage {
 	private RangeType rangeType;
 	private ElementalType elementalType;
 
+	/**
+	 * Create a Damage Object containing all information necessary for any
+	 * damage taking formula.
+	 * 
+	 * @param amount
+	 *            The amount of damage taken
+	 * @param dType
+	 *            The type of damage taken
+	 * @param range
+	 *            The ranged type of the damage
+	 * @param eType
+	 *            The element of the damage
+	 */
 	public Damage(int amount, DamageType dType, RangeType range, ElementalType eType) {
 		hasElement = true;
 		damageAmount = amount;
@@ -19,6 +32,17 @@ public class Damage {
 		elementalType = eType;
 	}
 
+	/**
+	 * Creates a Damage object containing all information necessary for any
+	 * damage taking formula use.
+	 * 
+	 * @param amount
+	 *            The amount of damage taken
+	 * @param dType
+	 *            The type of damage taken
+	 * @param range
+	 *            The ranged type of the damage
+	 */
 	public Damage(int amount, DamageType dType, RangeType range) {
 		hasElement = false;
 		damageAmount = amount;
@@ -26,6 +50,10 @@ public class Damage {
 		this.rangeType = range;
 	}
 
+	/**
+	 * 
+	 * @return Returns whether or not this Damage object has an element.
+	 */
 	public boolean hasElement() {
 		return hasElement;
 	}
@@ -59,6 +87,7 @@ public class Damage {
 	}
 
 	public void setElementalType(ElementalType eType) {
+		hasElement = true;
 		elementalType = eType;
 	}
 }
