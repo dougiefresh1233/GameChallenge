@@ -14,11 +14,32 @@ public class Player extends LivingEntity {
 	
 	public Player(int x, int y, int h, int a, int d) {
 		super(x, y, h, a, d);
-		movementSpeed=1;
+		movementSpeed=4;
+		setImage("resources/spriteSheet.png");
+		try {
+			init();
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void userInput(GameContainer gameScreen) throws SlickException{
+
+	public void update(GameContainer gameScreen){
+		try {
+			userInput(gameScreen);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	private void userInput(GameContainer gameScreen) throws SlickException{
 		Input userInput=gameScreen.getInput();
+		
+		
 		
 		if(userInput.isKeyDown(Input.KEY_W)){
 			setOrientation(Direction.UP);
@@ -35,14 +56,16 @@ public class Player extends LivingEntity {
 		if(userInput.isKeyDown(Input.KEY_S)){
 			setOrientation(Direction.DOWN);
 			currentAnimation=downwardMovementAnimation;
-			location.translate(movementSpeed, 0);
+			location.translate(0, movementSpeed);
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_D)){
 			setOrientation(Direction.RIGHT);
 			currentAnimation=rightMovementAnimation;
-			location.translate(0, -movementSpeed);
+			location.translate(movementSpeed, 0);
 		}
+		
+
 		
 	}
 	
