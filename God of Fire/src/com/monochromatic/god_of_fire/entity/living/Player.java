@@ -1,5 +1,8 @@
 package com.monochromatic.god_of_fire.entity.living;
 import org.newdawn.slick.Input;
+
+import java.awt.Point;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 //import org.newdawn.slick.tests.xml.Inventory;
@@ -7,13 +10,20 @@ import org.newdawn.slick.tiled.TiledMap;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.state.GameState;
 import com.monochromatic.god_of_fire.items.Inventory;
+import com.monochromatic.god_of_fire.items.MeleeWeapon;
 
 public class Player extends LivingEntity {
 	/**
 	 * Players inventory
 	 */
 	protected Inventory inventory;
+	
 	GameState game;
+	
+	Point cameraOffsetPoint=new Point(0,0);
+	
+	MeleeWeapon practiceSword;
+	
 	public Player(GameState game, int x, int y, int h, int a, int d, int c, TiledMap m) {
 		super(m, x, y, h, a, d, c);
 		this.game=game;
@@ -26,6 +36,10 @@ public class Player extends LivingEntity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		practiceSword=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
+				 c, true, true, 10, 10, 10);
+		practiceSword.equip(cameraOffsetPoint);
 	}
 	
 
@@ -38,6 +52,8 @@ public class Player extends LivingEntity {
 		}
 
 		game.getCamera().centerCamera(this);
+		cameraOffsetPoint.setLocation((int)(location.getX()-game.getCamera().getxOffset()),
+					(int)(location.getY()-game.getCamera().getyOffset()));
 	
 	}
 	
@@ -82,6 +98,22 @@ public class Player extends LivingEntity {
 			rightMovementAnimation.stop();
 		}
 		
+		if(userInput.isKeyDown(Input.KEY_SPACE)){
+			switch (orientation) {
+			case UP:
+				practiceSword.attack(90);
+				break;
+			case DOWN:
+				practiceSword.attack(270);
+				break;
+			case LEFT:
+				practiceSword.attack(180);
+				break;
+			case RIGHT:
+				practiceSword.attack(0);
+				break;
+			}
+		}
 	}
 
 	@Override
@@ -120,7 +152,10 @@ public class Player extends LivingEntity {
 	
 	@Override
 	public void render() {
-		if(initComplete)
-		currentAnimation.draw((int)(location.getX()-game.getCamera().getxOffset()), (int)(location.getY()-game.getCamera().getyOffset()));
+		if(initComplete){
+			currentAnimation.draw((int)(location.getX()-game.getCamera().getxOffset()),
+					(int)(location.getY()-game.getCamera().getyOffset()));
+			practiceSword.render();
+		}
 	}
 }

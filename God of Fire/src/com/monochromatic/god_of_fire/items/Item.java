@@ -38,7 +38,7 @@ public abstract class Item {
 	/**
 	 * Image for the item
 	 */
-	private Image itemImage;
+	protected Image itemImage;
 	
 	public Item(){
 		
@@ -136,5 +136,7 @@ public abstract class Item {
 			e.printStackTrace();
 		}
 	}
+	
+	abstract protected void render();
 
 }
