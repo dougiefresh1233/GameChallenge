@@ -197,12 +197,14 @@ public abstract class Entity {
 			if(map.getTileId(x, y-1,walls)!=0){
 				return true;
 			}else if(map.getTileId(x, y-1,floor2)!=0){
+				if(level==2)level=3;
 				return (level==1)?true:false;
 			}else if (map.getTileId(x, y-1,stairs)!=0){
-				level=-level;
+				level=2;
 				return false;
 			}else if(map.getTileId(x, y-1,floor1)!=0){
-				return (level==-1)? true:false;
+				if(level==2)level=1;
+				return (level==1 || level==2)? false:true;
 			}
 		case DOWN:
 			x= (int)Math.round(location.getX()/TILE_SIZE);
@@ -210,12 +212,14 @@ public abstract class Entity {
 			if(map.getTileId(x, y+1,walls)!=0){
 				return true;
 			}else if(map.getTileId(x, y+1,floor2)!=0){
+				if(level==2)level=3;
 				return (level==1)?true:false;
 			}else if (map.getTileId(x, y+1,stairs)!=0){
-				level=-level;
+				level=2;
 				return false;
 			}else if(map.getTileId(x, y+1,floor1)!=0){
-				return (level==-1)? true:false;
+				if(level==2)level=1;
+				return (level==1 || level==2)? false:true;
 			}
 		case RIGHT:
 			x= (int)Math.floor(location.getX()/TILE_SIZE);
@@ -223,12 +227,14 @@ public abstract class Entity {
 			if(map.getTileId(x+1, y,walls)!=0){
 				return true;
 			}else if(map.getTileId(x+1, y,floor2)!=0){
+				if(level==2)level=3;
 				return (level==1)?true:false;
 			}else if (map.getTileId(x+1, y,stairs)!=0){
-				level=-level;
+				level=2;
 				return false;
 			}else if(map.getTileId(x+1, y,floor1)!=0){
-				return (level==-1)? true:false;
+				if(level==2)level=1;
+				return (level==1 || level==2)? false:true;
 			}
 		case LEFT:
 			x= (int)Math.ceil(location.getX()/TILE_SIZE);
@@ -236,12 +242,14 @@ public abstract class Entity {
 			if(map.getTileId(x-1, y,walls)!=0){
 				return true;
 			}else if(map.getTileId(x-1, y,floor2)!=0){
+				if(level==2)level=3;
 				return (level==1)?true:false;
 			}else if (map.getTileId(x-1, y,stairs)!=0){
-				level=-level;
+				level=2;
 				return false;
 			}else if(map.getTileId(x-1, y,floor1)!=0){
-				return (level==-1)? true:false;
+				if(level==2)level=1;
+				return (level==1 || level==2)? false:true;
 			}
 		}
 		return true;
