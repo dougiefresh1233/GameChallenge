@@ -6,70 +6,83 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.tiled.TiledMap;
-
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
+/**
+ * Base entity class. All entities need to be registered with the
+ * {@link EntityController} if they are to be interactive with the rest of the
+ * game world.
+ * 
+ * @author calmattier
+ */
 public abstract class Entity {
-	/**Size of Map tiles*/
-	int TILE_SIZE=32;
-	/**Map data */
-	TiledMap map;
-	int floor1, stairs, floor2, walls;
-	/**Floor that player is on*/
-	int level=1;
-	/** Location of the entity */
-	protected Point location;
-	/** Orientation of the entity */
-	protected Direction orientation;
-	/** How fast the entity moves */
+	protected GameState gameState; /**Game State */
+	
+	private Point location; /** Current location of the entity */
+	private Point previous; /** Previous location of the entity */
+	protected int level = 1; /**Current floor level. */
+	protected Direction orientation; /** Orientation of the entity. */
 	protected int movementSpeed;
 	
-	protected boolean setForRemoval;
-	
+	protected boolean hardCollision = false;
+	protected boolean setForRemoval = false;
 	protected boolean initComplete=false;
+	
 	/** Spritesheet for all images **/
 	protected Image spriteSheet;
 	/** Array of images for multidirectional movement **/
-	protected SpriteSheet upwardsMovementImages, leftMovementImages, downwardMovementImages, rightMovementImages;
-	
+	protected SpriteSheet 	upwardsMovementImages, 
+							leftMovementImages, 
+							downwardMovementImages, 
+							rightMovementImages;
 	/** What animation is currently being used **/
 	protected Animation currentAnimation;
-	
 	/** Animations for the entity **/
-	protected Animation upwardsMovementAnimation, downwardMovementAnimation, leftMovementAnimation, rightMovementAnimation  ;
+	protected Animation 	upwardsMovementAnimation, 
+							downwardMovementAnimation, 
+							leftMovementAnimation,
+							rightMovementAnimation;
 	
-	
-	/**
-	 * Array of images and animation for when the entity is not moving
-	 */
+	/** Array of images and animation for when the entity is not moving */
 	protected Image[] stationaryImages;
 	protected Animation stationaryAnimation;
 	
-	/**
-	 * Array of images and animation for entities physical attacks
-	 */
+	/** Array of images and animation for entities physical attacks */
 	protected Image[] attackingImages, castingImages;
 	protected Animation attackingAnimation, castingAnimation;
 		
-	public Entity(TiledMap m, int x, int y){
-		this(m, x, y, Direction.DOWN);
+	
+	public Entity(GameState g, int x, int y){
+		this(g, x, y, Direction.DOWN);
 	}
 	
-	public Entity(TiledMap m, int x, int y, Direction d){
-		this(m, x, y, d, 0);
+	public Entity(GameState g, int x, int y, Direction d){
+		this(g, x, y, d, 0);
 	}
 	
-	public Entity(TiledMap m, int x, int y, Direction d, int s){
+	public Entity(GameState g, int x, int y, Direction d, int s){
+		gameState = g;
 		this.location = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
-		map=m;
-		floor1=map.getLayerIndex("Floor1");
-		stairs=map.getLayerIndex("Stairs");
-		floor2=map.getLayerIndex("Floor2");
-		walls=map.getLayerIndex("Walls");
 	}
+	
+	/**
+	 * Updates this entity. Movement and AI happen at this step.
+	 */
+	public abstract void update(GameContainer g);
+	
+	/**
+	 * Renders this entity.
+	 */
+	public abstract void render();
+	
+	/**
+	 * Applies the effects on the given entity, if it were to collide with
+	 * this entity.
+	 */
+	public abstract void collide(Entity e);
 	
 	/**
 	 * Looks like a clusterfuck now, but it will improve!
@@ -102,8 +115,6 @@ public abstract class Entity {
 		rightMovementAnimation=new Animation(rightMovementImages, 100);
 		leftMovementAnimation=new Animation(leftMovementImages, 100);
 		currentAnimation=upwardsMovementAnimation;
-		
-
 	
 		/**
 		stationaryAnimation=new Animation(stationaryImages, 1, false);
@@ -113,15 +124,7 @@ public abstract class Entity {
 		initComplete=true;
 	}
 	
-	public boolean isSetForRemoval() {
-		return setForRemoval;
-	}
-	
-	public void setForRemoval(boolean b) {
-		setForRemoval = b;
-	}
-	
-	protected void setImage(String filePath){
+	public void setImage(String filePath){
 		try {
 			spriteSheet=new SpriteSheet(filePath, 32, 64);
 		} catch (SlickException e) {
@@ -131,10 +134,88 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Moves the entity in the given direction and changes to the corresponding
+	 * animation.
+	 */
+	public void move(Direction d) {
+		previous = location;
+		if (d == Direction.UP) moveUp();
+		else if (!upwardsMovementAnimation.isStopped())
+			upwardsMovementAnimation.stop();
+
+		if (d == Direction.LEFT) moveLeft();
+		else if (!leftMovementAnimation.isStopped())
+			leftMovementAnimation.stop();
+
+		if (d == Direction.DOWN) moveDown();
+		else if (!downwardMovementAnimation.isStopped())
+			downwardMovementAnimation.stop();
+
+		if (d == Direction.RIGHT) moveRight();
+		else if (!rightMovementAnimation.isStopped())
+			rightMovementAnimation.stop();
+	}
+	
+	/**
+	 * Moves the entity up and changes corresponding animations.
+	 */
+	private void moveUp() {
+		orientation(Direction.UP);
+		upwardsMovementAnimation.start();
+		currentAnimation = upwardsMovementAnimation;
+		location.translate(0, -movementSpeed);
+	}
+	
+	/**
+	 * Moves the entity down and changes corresponding animations.
+	 */
+	private void moveDown() {
+		orientation(Direction.DOWN);
+		downwardMovementAnimation.start();
+		currentAnimation = downwardMovementAnimation;
+		location.translate(0, movementSpeed);
+	}
+	
+	/**
+	 * Moves the entity to the left and changes corresponding animations.
+	 */
+	private void moveLeft() {
+		orientation(Direction.LEFT);
+		leftMovementAnimation.start();
+		currentAnimation = leftMovementAnimation;
+		location.translate(-movementSpeed, 0);
+	}
+	
+	/**
+	 * Moves the entity to the right and changes corresponding animations.
+	 */
+	private void moveRight() {
+		orientation(Direction.RIGHT);
+		rightMovementAnimation.start();
+		currentAnimation = rightMovementAnimation;
+		location.translate(movementSpeed, 0);
+	}
+	
+	/**
+	 * Sets this entities location.
+	 */
+	public void location(Point p) {
+		previous = location;
+		location = p;
+	}
+	
+	/**
 	 * Returns a copy of this entities location.
 	 */
 	public Point location() {
 		return new Point((int) location.getX(), (int) location.getY());
+	}
+	
+	/**
+	 * Returns a copy of this entities previous location.
+	 */
+	public Point previous() {
+		return new Point((int) previous.getX(), (int) previous.getY());
 	}
 	
 	/**
@@ -152,135 +233,50 @@ public abstract class Entity {
 		orientation = d;
 	}
 	
-	public void move(Direction d) {
-		if (d == Direction.UP) {
-			orientation(Direction.UP);
-			upwardsMovementAnimation.start();
-			currentAnimation = upwardsMovementAnimation;
-			if (!collides(Direction.UP))
-				location.translate(0, -movementSpeed);
-		} else if (!upwardsMovementAnimation.isStopped()) {
-			upwardsMovementAnimation.stop();
-		}
-
-		if (d == Direction.LEFT) {
-			orientation(Direction.LEFT);
-			leftMovementAnimation.start();
-			currentAnimation = leftMovementAnimation;
-			if (!collides(Direction.LEFT))
-				location.translate(-movementSpeed, 0);
-		} else if (!leftMovementAnimation.isStopped()) {
-			leftMovementAnimation.stop();
-		}
-
-		if (d == Direction.DOWN) {
-			orientation(Direction.DOWN);
-			downwardMovementAnimation.start();
-			currentAnimation = downwardMovementAnimation;
-			if (!collides(Direction.DOWN))
-				location.translate(0, movementSpeed);
-		} else if (!downwardMovementAnimation.isStopped()) {
-			downwardMovementAnimation.stop();
-		}
-
-		if (d == Direction.RIGHT) {
-			orientation(Direction.RIGHT);
-			rightMovementAnimation.start();
-			currentAnimation = rightMovementAnimation;
-			if (!collides(Direction.RIGHT))
-				location.translate(movementSpeed, 0);
-		} else if (!rightMovementAnimation.isStopped()) {
-			rightMovementAnimation.stop();
-		}
+	/**
+	 * Retrieves the current room level for this entity.
+	 */
+	public int getLevel() {
+		return level;
 	}
-	
 
-	public void move() {
-		//TODO
-	}
-	public boolean collides(Direction d){	//layer based tile collision
-		int x,y;
-		switch(d){
-		case UP:
-			x= (int)Math.round(location.getX()/TILE_SIZE);
-			y= (int)Math.ceil(location.getY()/TILE_SIZE)+1;
-			if(map.getTileId(x, y-1,walls)!=0){
-				return true;
-			}else if(map.getTileId(x, y-1,floor2)!=0){
-				if(level==2)level=3;
-				return (level==1)?true:false;
-			}else if (map.getTileId(x, y-1,stairs)!=0){
-				level=2;
-				return false;
-			}else if(map.getTileId(x, y-1,floor1)!=0){
-				if(level==2)level=1;
-				return (level==1 || level==2)? false:true;
-			}
-		case DOWN:
-			x= (int)Math.round(location.getX()/TILE_SIZE);
-			y= (int)Math.floor(location.getY()/TILE_SIZE)+1;
-			if(map.getTileId(x, y+1,walls)!=0){
-				return true;
-			}else if(map.getTileId(x, y+1,floor2)!=0){
-				if(level==2)level=3;
-				return (level==1)?true:false;
-			}else if (map.getTileId(x, y+1,stairs)!=0){
-				level=2;
-				return false;
-			}else if(map.getTileId(x, y+1,floor1)!=0){
-				if(level==2)level=1;
-				return (level==1 || level==2)? false:true;
-			}
-		case RIGHT:
-			x= (int)Math.floor(location.getX()/TILE_SIZE);
-			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
-			if(map.getTileId(x+1, y,walls)!=0){
-				return true;
-			}else if(map.getTileId(x+1, y,floor2)!=0){
-				if(level==2)level=3;
-				return (level==1)?true:false;
-			}else if (map.getTileId(x+1, y,stairs)!=0){
-				level=2;
-				return false;
-			}else if(map.getTileId(x+1, y,floor1)!=0){
-				if(level==2)level=1;
-				return (level==1 || level==2)? false:true;
-			}
-		case LEFT:
-			x= (int)Math.ceil(location.getX()/TILE_SIZE);
-			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
-			if(map.getTileId(x-1, y,walls)!=0){
-				return true;
-			}else if(map.getTileId(x-1, y,floor2)!=0){
-				if(level==2)level=3;
-				return (level==1)?true:false;
-			}else if (map.getTileId(x-1, y,stairs)!=0){
-				level=2;
-				return false;
-			}else if(map.getTileId(x-1, y,floor1)!=0){
-				if(level==2)level=1;
-				return (level==1 || level==2)? false:true;
-			}
-		}
-		return true;
+	/**
+	 * Sets the current room level for this entity.
+	 */
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	/**
-	 * Determines if the given entity has collided with this one.
-	 * 
-	 * @param entity
+	 * Checks the hard collision value for this entity. If set to true, this
+	 * entity cannot occupy the same tile as another entity and will act
+	 * like a wall.
 	 */
-	public boolean collides(Entity e){
-		//TODO - Advanced collision logic
-		Point them = e.location();
-		boolean collided = ((int) them.getX() == (int) location.getX() &&
-							(int) them.getY() == (int) location.getY()) 
-							? true : false;
-		return collided;
+	public boolean isHardCollision() {
+		return hardCollision;
+	}
+
+	/**
+	 * Sets the hard collision value for this entity. If set to true, this
+	 * entity cannot occupy the same tile as another entity and will act
+	 * like a wall.
+	 */
+	public void setHardCollision(boolean hardCollision) {
+		this.hardCollision = hardCollision;
 	}
 	
-	public abstract void render();
+	/**
+	 * Checks to see if this entity has been flagged for removal.
+	 */
+	public boolean isSetForRemoval() {
+		return setForRemoval;
+	}
 	
-	public abstract void update(GameContainer gameScreen);
+	/**
+	 * Sets this entities removal flag.
+	 */
+	public void setForRemoval(boolean b) {
+		setForRemoval = b;
+	}
 	
 }

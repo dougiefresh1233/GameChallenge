@@ -1,9 +1,12 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.tiled.TiledMap;
 
+import com.monochromatic.god_of_fire.entity.Entity;
+import com.monochromatic.god_of_fire.entity.living.LivingEntity;
+import com.monochromatic.god_of_fire.enums.DamageTarget;
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
 /**
  * Represents a projectile entity.
@@ -11,41 +14,48 @@ import com.monochromatic.god_of_fire.enums.Direction;
  * @author calmattier
  */
 public class EntityProjectile extends NonlivingEntity {
+	/** The damage value applied by this entity upon collision. */
 	protected int attack;
+	protected DamageTarget target;
 
-	public EntityProjectile(TiledMap m, int x, int y, Direction d, int s, int a) {
-		super(m, x, y, d, s);
+	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int a) {
+		this(g, x, y, d, s, a, DamageTarget.NEUTRAL);
+	}
+	
+	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int a, DamageTarget t) {
+		super(g, x, y, d, s);
 		attack = a;
 	}
 
+	/**
+	 * Get the damage applied by this entity upon collision.
+	 */
 	public int getAttack() {
 		return attack;
 	}
 
-	public void setAttack(int attack) {
-		this.attack = attack;
+	/**
+	 * Get the {@link DamageTarget target} for this source of damage.
+	 */
+	public DamageTarget getTarget() {
+		return target;
 	}
 
 	@Override
-	public void update(GameContainer gameScreen) {
-		switch(this.orientation) {
-			case UP:
-				location.translate(0, -movementSpeed);
-				if (collides(Direction.UP))
-					setForRemoval(true);
-			case DOWN:
-				if (collides(Direction.DOWN))
-					setForRemoval(true);
-				location.translate(0, movementSpeed);
-			case LEFT:
-				if (collides(Direction.LEFT))
-					setForRemoval(true);
-				location.translate(-movementSpeed, 0);
-			case RIGHT:
-				if (collides(Direction.RIGHT))
-					setForRemoval(true);
-				location.translate(movementSpeed, 0);
-		}
+	public void update(GameContainer g) {
+		move(this.orientation());
+	}
+
+	@Override
+	public void collide(Entity e) {
+		if (target.value().isInstance(e))
+			((LivingEntity) e).adjustHealth(attack);
+		setForRemoval(true);
+	}
+	
+	@Override
+	public void render() {
+		// TODO - render sprite
 	}
 
 }

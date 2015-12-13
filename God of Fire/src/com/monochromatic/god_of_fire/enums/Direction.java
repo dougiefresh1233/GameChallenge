@@ -22,11 +22,11 @@ public enum Direction {
 	/**
 	 * Return a random Direction, excluding the provided direction.
 	 */
-	public static Direction change(Direction d) {
+	public static Direction exclude(Direction d) {
         Random random = new Random();
         Direction change = values()[random.nextInt(values().length)];
         if (change == d)
-        	return change(d);
+        	return exclude(d);
         return change;
     }
 	
