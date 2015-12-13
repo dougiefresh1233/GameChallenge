@@ -59,12 +59,24 @@ public class Player extends LivingEntity {
 		Input userInput = gameScreen.getInput();
 		if(userInput.isKeyDown(Input.KEY_W))
 			move(Direction.UP);
-		else if(userInput.isKeyDown(Input.KEY_S))
+		else
+			upwardsMovementAnimation.stop();
+		
+		if(userInput.isKeyDown(Input.KEY_S))
 			move(Direction.DOWN);
-		else if (userInput.isKeyDown(Input.KEY_A))
+		else
+			downwardMovementAnimation.stop();
+		
+		if (userInput.isKeyDown(Input.KEY_A))
 			move(Direction.LEFT);
-		else if (userInput.isKeyDown(Input.KEY_D))
+		else
+			leftMovementAnimation.stop();
+		
+		if (userInput.isKeyDown(Input.KEY_D))
 			move(Direction.RIGHT);
+		else
+			rightMovementAnimation.stop();
+
 		
 		if(userInput.isKeyDown(Input.KEY_SPACE)){
 			switch (orientation) {
