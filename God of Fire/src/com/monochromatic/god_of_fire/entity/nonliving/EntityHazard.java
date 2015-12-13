@@ -1,6 +1,7 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.enums.Direction;
 
@@ -12,8 +13,8 @@ import com.monochromatic.god_of_fire.enums.Direction;
 public class EntityHazard extends NonlivingEntity{
 	protected int attack;
 	
-	public EntityHazard(int x, int y, Direction d, int a){
-		super(x, y, d, 0);
+	public EntityHazard(TiledMap m, int x, int y, Direction d, int a){
+		super(m, x, y, d, 0);
 	}
 	
 	public int getAttack() {

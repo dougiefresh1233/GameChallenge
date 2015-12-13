@@ -1,6 +1,7 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.enums.Direction;
@@ -14,16 +15,16 @@ import com.monochromatic.god_of_fire.enums.Direction;
  */
 public abstract class NonlivingEntity extends Entity {
 
-	public NonlivingEntity(int x, int y) {
-		super(x, y);
+	public NonlivingEntity(TiledMap m, int x, int y) {
+		super(m, x, y);
 	}
 
-	public NonlivingEntity(int x, int y, Direction d) {
-		super(x, y, d);
+	public NonlivingEntity(TiledMap m, int x, int y, Direction d) {
+		super(m, x, y, d);
 	}
 
-	public NonlivingEntity(int x, int y, Direction d, int s) {
-		super(x, y, d, s);
+	public NonlivingEntity(TiledMap m, int x, int y, Direction d, int s) {
+		super(m, x, y, d, s);
 	}
 
 	@Override
