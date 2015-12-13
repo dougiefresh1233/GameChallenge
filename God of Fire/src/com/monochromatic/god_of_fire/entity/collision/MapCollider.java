@@ -16,6 +16,7 @@ public class MapCollider {
 	private int floor1, floor2, walls, stairs;
 	
 	public MapCollider(TiledMap map) {
+		this.map = map;
 		floor1		= map.getLayerIndex(LAYER_FLOOR_1);
 		floor2		= map.getLayerIndex(LAYER_FLOOR_2);
 		walls		= map.getLayerIndex(LAYER_WALLS);
@@ -59,7 +60,7 @@ public class MapCollider {
 		int x, y;
 		x= (int)Math.round(e.previous().getX()/TILE_SIZE);
 		y= (int)Math.floor(e.previous().getY()/TILE_SIZE)+1;
-		if(map.getTileId(x, y+1, walls) != 0){
+		if(map.getTileId(x, y+1, walls) != 0) {
 			return true;
 		} else if(map.getTileId(x, y+1, floor2) != 0){
 			if(e.getLevel() == 2) e.setLevel(3);

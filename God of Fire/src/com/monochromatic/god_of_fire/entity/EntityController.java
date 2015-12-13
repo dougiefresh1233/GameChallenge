@@ -15,6 +15,7 @@ public class EntityController {
 	
 	public EntityController(GameState state) {
 		this.state = state;
+		this.entities = new ArrayList<Entity>();
 		collision = new CollisionController(state, entities);
 		
 	}
