@@ -2,18 +2,18 @@ package com.monochromatic.god_of_fire.entity.living;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tests.xml.Inventory;
 
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.items.Inventory;
 
 public class Player extends LivingEntity {
 	/**
 	 * Players inventory
 	 */
 	protected Inventory inventory;
-	
-	public Player(int x, int y, int h, int a, int d) {
-		super(x, y, h, a, d);
+
+	public Player(int x, int y, int h, int a, int d, int c) {
+		super(x, y, h, a, d, c);
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
 		try {
@@ -78,12 +78,44 @@ public class Player extends LivingEntity {
 			rightMovementAnimation.stop();
 		}
 		
+	}
 
+	@Override
+	public void attackAnim() {
+		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public void attack() {
+	public void hurtAnim() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void healedAnim() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deathAnim() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
+	@Override
+	public void render() {
 		// TODO Auto-generated method stub
 		
 	}
