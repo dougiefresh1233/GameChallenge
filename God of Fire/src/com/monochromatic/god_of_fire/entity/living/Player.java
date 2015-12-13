@@ -50,10 +50,12 @@ public class Player extends LivingEntity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		practiceSword.update();
 		game.getCamera().centerCamera(this);
 		cameraOffsetPoint.setLocation((int)(location.getX()-game.getCamera().getxOffset()),
 					(int)(location.getY()-game.getCamera().getyOffset()));
+		
 	
 	}
 	
@@ -101,16 +103,16 @@ public class Player extends LivingEntity {
 		if(userInput.isKeyDown(Input.KEY_SPACE)){
 			switch (orientation) {
 			case UP:
-				practiceSword.attack(90);
+				practiceSword.attack(180, 270);
 				break;
 			case DOWN:
-				practiceSword.attack(270);
+				practiceSword.attack(0, 90);
 				break;
 			case LEFT:
-				practiceSword.attack(180);
+				practiceSword.attack(90, 180);
 				break;
 			case RIGHT:
-				practiceSword.attack(0);
+				practiceSword.attack(270, 360);
 				break;
 			}
 		}
