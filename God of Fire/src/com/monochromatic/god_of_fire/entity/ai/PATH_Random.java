@@ -7,10 +7,12 @@ public class PATH_Random implements AI {
 
 	@Override
 	public void update(Entity e) {
-		Direction d = Direction.random();
-		if (e.collides(d))
-			d = Direction.change(d);
-		e.move(Direction.random());
+		Direction d;
+		if((Math.random() <= 0.25) || (e.location() == e.previous()))
+			d = Direction.exclude(e.orientation());
+		else
+			d = e.orientation();
+		e.move(d);
 	}
 
 }

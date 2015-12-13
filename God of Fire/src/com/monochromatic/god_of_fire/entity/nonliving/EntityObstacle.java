@@ -1,11 +1,20 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
-import org.newdawn.slick.tiled.TiledMap;
-
+import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
 public class EntityObstacle  extends NonlivingEntity {
-	public EntityObstacle(TiledMap m, int x, int y, Direction d){
-		super(m, x, y, d);
+	
+	public EntityObstacle(GameState g, int x, int y, Direction d){
+		super(g, x, y, d);
+		setHardCollision(true);
 	}
+
+	@Override
+	public void collide(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
