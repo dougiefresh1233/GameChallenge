@@ -25,6 +25,8 @@ public abstract class Entity {
 	/** How fast the entity moves */
 	protected int movementSpeed;
 	
+	protected boolean setForRemoval;
+	
 	protected boolean initComplete=false;
 	/** Spritesheet for all images **/
 	protected Image spriteSheet;
@@ -109,6 +111,14 @@ public abstract class Entity {
 		castingAnimation=new Animation(castingImages, 1, false);
 		*/
 		initComplete=true;
+	}
+	
+	public boolean isSetForRemoval() {
+		return setForRemoval;
+	}
+	
+	public void setForRemoval(boolean b) {
+		setForRemoval = b;
 	}
 	
 	protected void setImage(String filePath){

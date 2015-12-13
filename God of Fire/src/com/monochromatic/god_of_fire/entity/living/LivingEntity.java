@@ -37,6 +37,7 @@ public abstract class LivingEntity extends Entity {
 	 */
 	public void kill() {
 		alive = false;
+		setForRemoval = true;
 	}
 
 	/**

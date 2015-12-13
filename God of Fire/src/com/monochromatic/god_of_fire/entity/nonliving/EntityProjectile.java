@@ -31,11 +31,19 @@ public class EntityProjectile extends NonlivingEntity {
 		switch(this.orientation) {
 			case UP:
 				location.translate(0, -movementSpeed);
+				if (collides(Direction.UP))
+					setForRemoval(true);
 			case DOWN:
+				if (collides(Direction.DOWN))
+					setForRemoval(true);
 				location.translate(0, movementSpeed);
 			case LEFT:
+				if (collides(Direction.LEFT))
+					setForRemoval(true);
 				location.translate(-movementSpeed, 0);
 			case RIGHT:
+				if (collides(Direction.RIGHT))
+					setForRemoval(true);
 				location.translate(movementSpeed, 0);
 		}
 	}
