@@ -86,6 +86,8 @@ public abstract class Entity {
 		rightMovementAnimation=new Animation(rightMovementImages, 100);
 		leftMovementAnimation=new Animation(leftMovementImages, 100);
 		currentAnimation=upwardsMovementAnimation;
+		
+
 	
 		/**
 		stationaryAnimation=new Animation(stationaryImages, 1, false);

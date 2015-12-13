@@ -6,6 +6,7 @@ import org.newdawn.slick.tests.xml.Inventory;
 import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
 public class Player extends LivingEntity {
 	/**
@@ -14,12 +15,13 @@ public class Player extends LivingEntity {
 	protected Inventory inventory;
 	TiledMap map;
 	int walls, floor1, floor2, stairs, level;
-	
-	public Player(int x, int y, int h, int a, int d, TiledMap m) {
+	GameState game;
+	public Player(GameState game, int x, int y, int h, int a, int d, TiledMap m) {
 		super(x, y, h, a, d);
+		this.game=game;
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
-		//values for collisoon
+		//values for collision
 		map=m;
 		floor1=map.getLayerIndex("Floor1");
 		stairs=map.getLayerIndex("Stairs");
@@ -41,9 +43,9 @@ public class Player extends LivingEntity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		
 
+		game.getCamera().centerCamera(this);
+	
 	}
 	
 	private void userInput(GameContainer gameScreen) throws SlickException{
@@ -91,6 +93,7 @@ public class Player extends LivingEntity {
 		
 	}
 	
+	
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
@@ -120,5 +123,9 @@ public class Player extends LivingEntity {
 		return true;
 	}
 	
-	
+	@Override
+	public void render() {
+		if(initComplete)
+		currentAnimation.draw((int)(location.getX()-game.getCamera().getxOffset()), (int)(location.getY()-game.getCamera().getyOffset()));
+	}
 }
