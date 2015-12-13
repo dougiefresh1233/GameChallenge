@@ -1,6 +1,7 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.enums.Direction;
 
@@ -12,8 +13,8 @@ import com.monochromatic.god_of_fire.enums.Direction;
 public class EntityProjectile extends NonlivingEntity {
 	protected int attack;
 
-	public EntityProjectile(int x, int y, Direction d, int s, int a) {
-		super(x, y, d, s);
+	public EntityProjectile(TiledMap m, int x, int y, Direction d, int s, int a) {
+		super(m, x, y, d, s);
 		attack = a;
 	}
 

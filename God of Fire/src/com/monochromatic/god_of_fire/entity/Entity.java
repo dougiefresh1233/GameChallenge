@@ -6,10 +6,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.enums.Direction;
 
 public abstract class Entity {
+	/**Size of Map tiles*/
+	int TILE_SIZE=32;
+	/**Map data */
+	TiledMap map;
+	int floor1, stairs, floor2, walls;
 	/** Location of the entity */
 	protected Point location;
 	/** Orientation of the entity */
@@ -42,18 +48,23 @@ public abstract class Entity {
 	protected Image[] attackingImages, castingImages;
 	protected Animation attackingAnimation, castingAnimation;
 		
-	public Entity(int x, int y){
-		this(x, y, Direction.DOWN);
+	public Entity(TiledMap m, int x, int y){
+		this(m, x, y, Direction.DOWN);
 	}
 	
-	public Entity(int x, int y, Direction d){
-		this(x, y, d, 0);
+	public Entity(TiledMap m, int x, int y, Direction d){
+		this(m, x, y, d, 0);
 	}
 	
-	public Entity(int x, int y, Direction d, int s){
+	public Entity(TiledMap m, int x, int y, Direction d, int s){
 		this.location = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
+		map=m;
+		floor1=map.getLayerIndex("Floor1");
+		stairs=map.getLayerIndex("Stairs");
+		floor2=map.getLayerIndex("Floor2");
+		walls=map.getLayerIndex("Walls");
 	}
 	
 	/**
@@ -138,6 +149,28 @@ public abstract class Entity {
 	
 	public void move() {
 		//TODO
+	}
+	protected boolean collides(Direction d){
+		int x= (int)Math.round(location.getX()/TILE_SIZE);
+		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
+		System.out.println(y);
+		System.out.println(location.getY());
+		switch(d){
+		case UP:
+			if(map.getTileId(x, y-1,walls)==0)
+			if(map.getTileId(x, y-1,walls)==0) return false;
+			/*else*/ return true;
+		case DOWN:
+			if(map.getTileId(x, y+1, walls)==0) return false;
+			/*else*/ return true;
+		case RIGHT:
+			if(map.getTileId(x+1, y, walls)==0) return false;
+			/*else*/ return true;
+		case LEFT:
+			if(map.getTileId(x-1, y, walls)==0) return false;
+			/*else*/ return true;
+		}
+		return true;
 	}
 	
 	public abstract void render();

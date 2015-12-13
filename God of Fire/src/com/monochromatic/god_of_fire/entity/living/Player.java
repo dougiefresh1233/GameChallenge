@@ -13,21 +13,13 @@ public class Player extends LivingEntity {
 	 * Players inventory
 	 */
 	protected Inventory inventory;
-	TiledMap map;
-	int TILE_SIZE=32;
-	int walls, floor1, floor2, stairs, level;
 	GameState game;
 	public Player(GameState game, int x, int y, int h, int a, int d, int c, TiledMap m) {
-		super(x, y, h, a, d, c);
+		super(m, x, y, h, a, d, c);
 		this.game=game;
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
 		//values for collision
-		map=m;
-		floor1=map.getLayerIndex("Floor1");
-		stairs=map.getLayerIndex("Stairs");
-		floor2=map.getLayerIndex("Floor2");
-		walls=map.getLayerIndex("Walls");
 		try {
 			init();
 		} catch (SlickException e) {
@@ -124,30 +116,6 @@ public class Player extends LivingEntity {
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
-	}
-	
-	private boolean collides(Direction d){
-		int x= (int)Math.round(location.getX()/TILE_SIZE);
-		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
-		System.out.println(y);
-		System.out.println(location.getY());
-		switch(d){
-		case UP:
-			if(map.getTileId(x, y-1,walls)==0)
-			if(map.getTileId(x, y-1,walls)==0) return false;
-			/*else*/ return true;
-		case DOWN:
-			if(map.getTileId(x, y+1, walls)==0) return false;
-			/*else*/ return true;
-		case RIGHT:
-			if(map.getTileId(x+1, y, walls)==0) return false;
-			/*else*/ return true;
-		case LEFT:
-			if(map.getTileId(x-1, y, walls)==0) return false;
-			/*else*/ return true;
-		}
-		
-		return true;
 	}
 	
 	@Override

@@ -2,6 +2,8 @@ package com.monochromatic.god_of_fire.entity.nonliving;
 
 import java.awt.Point;
 
+import org.newdawn.slick.tiled.TiledMap;
+
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.items.Item;
@@ -16,8 +18,8 @@ public class EntityItem extends NonlivingEntity{
 	/** Item added to inventory when this item is picked up. */
 	protected Item item;
 
-	public EntityItem(int x, int y, Item i) {
-		super(x, y);
+	public EntityItem(TiledMap m, int x, int y, Item i) {
+		super(m, x, y);
 		// TODO Auto-generated constructor stub
 	}
 
