@@ -151,22 +151,29 @@ public abstract class Entity {
 		//TODO
 	}
 	protected boolean collides(Direction d){
-		int x= (int)Math.round(location.getX()/TILE_SIZE);
-		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
-		System.out.println(y);
-		System.out.println(location.getY());
+		int x,y;
+		//int x= (int)Math.round(location.getX()/TILE_SIZE);
+		//int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
 		switch(d){
 		case UP:
+			x= (int)Math.round(location.getX()/TILE_SIZE);
+			y= (int)Math.ceil(location.getY()/TILE_SIZE)+1;
 			if(map.getTileId(x, y-1,walls)==0)
 			if(map.getTileId(x, y-1,walls)==0) return false;
 			/*else*/ return true;
 		case DOWN:
+			x= (int)Math.round(location.getX()/TILE_SIZE);
+			y= (int)Math.floor(location.getY()/TILE_SIZE)+1;
 			if(map.getTileId(x, y+1, walls)==0) return false;
 			/*else*/ return true;
 		case RIGHT:
+			x= (int)Math.floor(location.getX()/TILE_SIZE);
+			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
 			if(map.getTileId(x+1, y, walls)==0) return false;
 			/*else*/ return true;
 		case LEFT:
+			x= (int)Math.ceil(location.getX()/TILE_SIZE);
+			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
 			if(map.getTileId(x-1, y, walls)==0) return false;
 			/*else*/ return true;
 		}
