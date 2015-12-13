@@ -27,7 +27,7 @@ public class GameState extends BasicGameState{
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		 //All variables defined here
-		testMap=new TiledMap("resources/TestMap.tmx");//TODO Replace with real map
+		testMap=new TiledMap("resources/Map.tmx");//TODO Replace with real map
 		player=new Player(this, 150, 150, 10, 10, 10,testMap);
 		playersPerspective=new Camera(this, 0,0);
 		/*wall= new Polygon();
