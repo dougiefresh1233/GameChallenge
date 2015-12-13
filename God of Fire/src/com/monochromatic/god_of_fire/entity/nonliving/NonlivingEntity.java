@@ -28,11 +28,6 @@ public abstract class NonlivingEntity extends Entity {
 	}
 
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void render() {
 		// TODO Auto-generated method stub
 	}

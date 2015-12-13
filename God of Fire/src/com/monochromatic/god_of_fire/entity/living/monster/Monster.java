@@ -21,7 +21,7 @@ public abstract class Monster extends LivingEntity {
 	
 	@Override
 	public void update(GameContainer gameScreen) {
-		controller.update(gameScreen);
+		controller.update();
 	}
 	
 	/** Attaches AI to this entities {@link AI_Controller}*/

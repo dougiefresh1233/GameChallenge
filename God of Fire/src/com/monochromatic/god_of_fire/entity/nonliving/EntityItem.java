@@ -1,7 +1,5 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
-import java.awt.Point;
-
 import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.entity.Entity;
@@ -36,8 +34,8 @@ public class EntityItem extends NonlivingEntity{
 	 * colliding entity is a player, add this item to their inventory.
 	 */
 	@Override
-	public boolean isColliding(Entity entity){
-		boolean result = super.isColliding(entity);
+	public boolean collides(Entity entity){
+		boolean result = super.collides(entity);
 		if (result && entity instanceof Player)
 			((Player) entity).getInventory().adjust(item);
 		return result;
