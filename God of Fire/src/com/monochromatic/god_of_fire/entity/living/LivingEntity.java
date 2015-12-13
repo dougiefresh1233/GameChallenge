@@ -1,8 +1,7 @@
 package com.monochromatic.god_of_fire.entity.living;
 
-import org.newdawn.slick.tiled.TiledMap;
-
 import com.monochromatic.god_of_fire.entity.Entity;
+import com.monochromatic.god_of_fire.state.GameState;
 
 public abstract class LivingEntity extends Entity {
 	/** If entities alive or not */
@@ -18,13 +17,13 @@ public abstract class LivingEntity extends Entity {
 	/** Modifier for critical chance. */
 	protected int critical = 0;
 
-	public LivingEntity(TiledMap m, int x, int y, int h) {
-		super(m, x, y);
+	public LivingEntity(GameState g, int x, int y, int h) {
+		super(g, x, y);
 		this.maximumHealth = h;
 	}
 
-	public LivingEntity(TiledMap m, int x, int y, int h, int a, int d, int c) {
-		super(m, x, y);
+	public LivingEntity(GameState g, int x, int y, int h, int a, int d, int c) {
+		super(g, x, y);
 		this.currentHealth = h;
 		this.maximumHealth = h;
 		this.attack = a;

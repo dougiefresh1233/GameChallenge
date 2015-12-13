@@ -1,44 +1,43 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
-import org.newdawn.slick.tiled.TiledMap;
-
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.items.Item;
+import com.monochromatic.god_of_fire.state.GameState;
 
 /**
  * This class represents a collectible item entity.
  * 
  * @author calmattier
- *
  */
-public class EntityItem extends NonlivingEntity{
+public class EntityItem extends NonlivingEntity {
 	/** Item added to inventory when this item is picked up. */
 	protected Item item;
 
-	public EntityItem(TiledMap m, int x, int y, Item i) {
-		super(m, x, y);
-		// TODO Auto-generated constructor stub
+	public EntityItem(GameState g, int x, int y, Item i) {
+		super(g, x, y);
 	}
 
+	/**
+	 * Get the {@link Item} associated with this entity.
+	 */
 	public Item getItem() {
 		return item;
 	}
 
+	/**
+	 * Set the {@link Item} associated with this entity.
+	 */
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	
-	/**
-	 * Determines if the given entity has collided with this one. And if the
-	 * colliding entity is a player, add this item to their inventory.
-	 */
+
 	@Override
-	public boolean collides(Entity entity){
-		boolean result = super.collides(entity);
-		if (result && entity instanceof Player)
-			((Player) entity).getInventory().adjust(item);
-		return result;
+	public void collide(Entity e) {
+		if (e instanceof Player)
+			((Player) e).getInventory().adjust(item);
+		else
+			return; // Do Nothing
 	}
-	
+
 }
