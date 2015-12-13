@@ -16,6 +16,8 @@ public abstract class Entity {
 	/**Map data */
 	TiledMap map;
 	int floor1, stairs, floor2, walls;
+	/**Floor that player is on*/
+	int level=1;
 	/** Location of the entity */
 	protected Point location;
 	/** Orientation of the entity */
@@ -150,25 +152,61 @@ public abstract class Entity {
 	public void move() {
 		//TODO
 	}
-	protected boolean collides(Direction d){
-		int x= (int)Math.round(location.getX()/TILE_SIZE);
-		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
-		System.out.println(y);
-		System.out.println(location.getY());
+	protected boolean collides(Direction d){	//layer based tile collision
+		int x,y;
 		switch(d){
 		case UP:
-			if(map.getTileId(x, y-1,walls)==0)
-			if(map.getTileId(x, y-1,walls)==0) return false;
-			/*else*/ return true;
+			x= (int)Math.round(location.getX()/TILE_SIZE);
+			y= (int)Math.ceil(location.getY()/TILE_SIZE)+1;
+			if(map.getTileId(x, y-1,walls)!=0){
+				return true;
+			}else if(map.getTileId(x, y-1,floor2)!=0){
+				return (level==1)?true:false;
+			}else if (map.getTileId(x, y-1,stairs)!=0){
+				level=-level;
+				return false;
+			}else if(map.getTileId(x, y-1,floor1)!=0){
+				return (level==-1)? true:false;
+			}
 		case DOWN:
-			if(map.getTileId(x, y+1, walls)==0) return false;
-			/*else*/ return true;
+			x= (int)Math.round(location.getX()/TILE_SIZE);
+			y= (int)Math.floor(location.getY()/TILE_SIZE)+1;
+			if(map.getTileId(x, y+1,walls)!=0){
+				return true;
+			}else if(map.getTileId(x, y+1,floor2)!=0){
+				return (level==1)?true:false;
+			}else if (map.getTileId(x, y+1,stairs)!=0){
+				level=-level;
+				return false;
+			}else if(map.getTileId(x, y+1,floor1)!=0){
+				return (level==-1)? true:false;
+			}
 		case RIGHT:
-			if(map.getTileId(x+1, y, walls)==0) return false;
-			/*else*/ return true;
+			x= (int)Math.floor(location.getX()/TILE_SIZE);
+			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
+			if(map.getTileId(x+1, y,walls)!=0){
+				return false;
+			}else if(map.getTileId(x+1, y,floor2)!=0){
+				return (level==1)?true:false;
+			}else if (map.getTileId(x+1, y,stairs)!=0){
+				level=-level;
+				return false;
+			}else if(map.getTileId(x+1, y,floor1)!=0){
+				return (level==-1)? true:false;
+			}
 		case LEFT:
-			if(map.getTileId(x-1, y, walls)==0) return false;
-			/*else*/ return true;
+			x= (int)Math.ceil(location.getX()/TILE_SIZE);
+			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
+			if(map.getTileId(x-1, y,walls)!=0){
+				return true;
+			}else if(map.getTileId(x-1, y,floor2)!=0){
+				return (level==1)?true:false;
+			}else if (map.getTileId(x-1, y,stairs)!=0){
+				level=-level;
+				return false;
+			}else if(map.getTileId(x-1, y,floor1)!=0){
+				return (level==-1)? true:false;
+			}
 		}
 		return true;
 	}
