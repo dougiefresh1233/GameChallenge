@@ -64,6 +64,7 @@ public abstract class Entity {
 	public Entity(GameState g, int x, int y, Direction d, int s){
 		gameState = g;
 		this.location = new Point(x, y);
+		this.previous = location;
 		this.orientation = d;
 		this.movementSpeed = s;
 	}

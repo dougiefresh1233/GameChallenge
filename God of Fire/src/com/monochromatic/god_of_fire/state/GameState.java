@@ -27,10 +27,12 @@ public class GameState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		 //All variables defined here
 		map = new TiledMap("resources/Map.tmx");//TODO Replace with real map
+		EC = new EntityController(this);
+		
 		player = new Player(this, 800, 1020, 10, 10, 10, 5);
 		//monster = new Monster(map, 150, 150, 200, 10, 20, 3); 
 		//REGISTER PLAYER WITH EC
-		//EC.register(player);
+		EC.register(player);
 		playersPerspective=new Camera(this, 0,0);
 		
 		//Test this 
@@ -43,14 +45,14 @@ public class GameState extends BasicGameState{
 		//Draw objects on screen
 		map.render(0 - (int)playersPerspective.getxOffset(), 
 				0- (int)playersPerspective.getyOffset());
-		player.render();
+		//player.render();
 		//monster.render();
-		//EC.render();
+		EC.render();
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		player.update(gc);
-		//EC.update(gc);
+		//player.update(gc);
+		EC.update(gc);
 	}
 
 	public int getID() {	//returns ID for SetupClass
