@@ -221,7 +221,7 @@ public abstract class Entity {
 			x= (int)Math.floor(location.getX()/TILE_SIZE);
 			y= (int)Math.round(location.getY()/TILE_SIZE)+1;
 			if(map.getTileId(x+1, y,walls)!=0){
-				return false;
+				return true;
 			}else if(map.getTileId(x+1, y,floor2)!=0){
 				return (level==1)?true:false;
 			}else if (map.getTileId(x+1, y,stairs)!=0){
