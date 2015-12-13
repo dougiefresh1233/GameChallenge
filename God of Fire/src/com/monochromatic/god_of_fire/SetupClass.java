@@ -15,6 +15,9 @@ public class SetupClass extends StateBasedGame{
 	public static final int loadGameState = 3;
 	public static final int optionsState = 4;
 	
+	private final int gameWidth=640;
+	private final int gameHeight=480;
+	
 	public SetupClass() {
 		
 		//set title 
@@ -27,6 +30,14 @@ public class SetupClass extends StateBasedGame{
 		this.addState(new NewGameState()); 
 		this.addState(new LoadGameState());
 		this.addState(new OptionsState());
+	}
+
+	public int getGameWidth() {
+		return gameWidth;
+	}
+
+	public int getGameHeight() {
+		return gameHeight;
 	}
 
 	public void initStatesList(GameContainer container) throws SlickException {
