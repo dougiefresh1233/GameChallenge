@@ -4,6 +4,7 @@ import java.awt.*;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SpriteSheet;
 
 import com.monochromatic.god_of_fire.enums.Direction;
@@ -140,5 +141,7 @@ public abstract class Entity {
 	}
 	
 	public abstract void render();
+	
+	public abstract void update(GameContainer gameScreen);
 	
 }
