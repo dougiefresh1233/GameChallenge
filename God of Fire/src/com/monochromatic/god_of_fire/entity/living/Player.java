@@ -47,7 +47,7 @@ public class Player extends LivingEntity {
 		
 		
 		if(userInput.isKeyDown(Input.KEY_W)){
-			setOrientation(Direction.UP);
+			orientation(Direction.UP);
 			upwardsMovementAnimation.start();
 			currentAnimation=upwardsMovementAnimation;
 			if (!collides(Direction.UP)) location.translate(0, -movementSpeed);
@@ -56,7 +56,7 @@ public class Player extends LivingEntity {
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_A)){
-			setOrientation(Direction.LEFT);
+			orientation(Direction.LEFT);
 			leftMovementAnimation.start();
 			currentAnimation=leftMovementAnimation;
 			if (!collides(Direction.LEFT)) location.translate(-movementSpeed, 0);
@@ -65,7 +65,7 @@ public class Player extends LivingEntity {
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_S)){
-			setOrientation(Direction.DOWN);
+			orientation(Direction.DOWN);
 			downwardMovementAnimation.start();
 			currentAnimation=downwardMovementAnimation;
 			if (!collides(Direction.DOWN)) location.translate(0, movementSpeed);
@@ -74,7 +74,7 @@ public class Player extends LivingEntity {
 		}
 		
 		if(userInput.isKeyDown(Input.KEY_D)){
-			setOrientation(Direction.RIGHT);
+			orientation(Direction.RIGHT);
 			rightMovementAnimation.start();
 			currentAnimation=rightMovementAnimation;
 			if (!collides(Direction.RIGHT)) location.translate(movementSpeed, 0);

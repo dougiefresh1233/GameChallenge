@@ -109,18 +109,13 @@ public abstract class Entity {
 		initComplete=true;
 	}
 	
-	/**
-	 * Determines if the given entity has collided with this one.
-	 * 
-	 * @param entity
-	 */
-	public boolean isColliding(Entity entity){
-		//TODO - Advanced collision logic
-		Point them = entity.location();
-		boolean collided = ((int) them.getX() == (int) location.getX() &&
-							(int) them.getY() == (int) location.getY()) 
-							? true : false;
-		return collided;
+	protected void setImage(String filePath){
+		try {
+			spriteSheet=new SpriteSheet(filePath, 32, 64);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -131,26 +126,63 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Gets orientation of the entity
+	 */
+	public Direction orientation(){
+		return orientation;
+	}
+	
+	/**
 	 * Sets orientation of the entity
 	 * @param d
 	 */
-	protected void setOrientation(Direction d){
+	public void orientation(Direction d){
 		orientation = d;
 	}
 	
-	protected void setImage(String filePath){
-		try {
-			spriteSheet=new SpriteSheet(filePath, 32, 64);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void move(Direction d) {
+		if (d == Direction.UP) {
+			orientation(Direction.UP);
+			upwardsMovementAnimation.start();
+			currentAnimation = upwardsMovementAnimation;
+			if (!collides(Direction.UP))
+				location.translate(0, -movementSpeed);
+		} else if (!upwardsMovementAnimation.isStopped()) {
+			upwardsMovementAnimation.stop();
+		}
+
+		if (d == Direction.LEFT) {
+			orientation(Direction.LEFT);
+			leftMovementAnimation.start();
+			currentAnimation = leftMovementAnimation;
+			if (!collides(Direction.LEFT))
+				location.translate(-movementSpeed, 0);
+		} else if (!leftMovementAnimation.isStopped()) {
+			leftMovementAnimation.stop();
+		}
+
+		if (d == Direction.DOWN) {
+			orientation(Direction.DOWN);
+			downwardMovementAnimation.start();
+			currentAnimation = downwardMovementAnimation;
+			if (!collides(Direction.DOWN))
+				location.translate(0, movementSpeed);
+		} else if (!downwardMovementAnimation.isStopped()) {
+			downwardMovementAnimation.stop();
+		}
+
+		if (d == Direction.RIGHT) {
+			orientation(Direction.RIGHT);
+			rightMovementAnimation.start();
+			currentAnimation = rightMovementAnimation;
+			if (!collides(Direction.RIGHT))
+				location.translate(movementSpeed, 0);
+		} else if (!rightMovementAnimation.isStopped()) {
+			rightMovementAnimation.stop();
 		}
 	}
 	
-	public void move() {
-		//TODO
-	}
-	protected boolean collides(Direction d){
+	public boolean collides(Direction d){
 		int x= (int)Math.round(location.getX()/TILE_SIZE);
 		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
 		System.out.println(y);
@@ -171,6 +203,20 @@ public abstract class Entity {
 			/*else*/ return true;
 		}
 		return true;
+	}
+	
+	/**
+	 * Determines if the given entity has collided with this one.
+	 * 
+	 * @param entity
+	 */
+	public boolean collides(Entity e){
+		//TODO - Advanced collision logic
+		Point them = e.location();
+		boolean collided = ((int) them.getX() == (int) location.getX() &&
+							(int) them.getY() == (int) location.getY()) 
+							? true : false;
+		return collided;
 	}
 	
 	public abstract void render();
