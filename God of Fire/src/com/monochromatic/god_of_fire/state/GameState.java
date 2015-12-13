@@ -3,7 +3,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Polygon;
+//import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
@@ -28,7 +28,7 @@ public class GameState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		 //All variables defined here
 		testMap=new TiledMap("resources/TestMap.tmx");//TODO Replace with real map
-		player=new Player(this, 100, 100, 10, 10, 10);
+		player=new Player(this, 150, 150, 10, 10, 10,testMap);
 		playersPerspective=new Camera(this, 0,0);
 		/*wall= new Polygon();
 		wall.addPoint(0,0);
