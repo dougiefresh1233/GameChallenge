@@ -5,6 +5,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tests.xml.Inventory;
 
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
 public class Player extends LivingEntity {
 	/**
@@ -12,8 +13,11 @@ public class Player extends LivingEntity {
 	 */
 	protected Inventory inventory;
 	
-	public Player(int x, int y, int h, int a, int d) {
+	GameState game;
+	
+	public Player(GameState game, int x, int y, int h, int a, int d) {
 		super(x, y, h, a, d);
+		this.game=game;
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
 		try {
@@ -32,9 +36,9 @@ public class Player extends LivingEntity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		
 
+		game.getCamera().centerCamera(this);
+	
 	}
 	
 	private void userInput(GameContainer gameScreen) throws SlickException{
@@ -82,10 +86,17 @@ public class Player extends LivingEntity {
 		
 	}
 	
+	
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void render() {
+		if(initComplete)
+		currentAnimation.draw((int)(location.getX()-game.getCamera().getxOffset()), (int)(location.getY()-game.getCamera().getyOffset()));
 	}
 	
 }
