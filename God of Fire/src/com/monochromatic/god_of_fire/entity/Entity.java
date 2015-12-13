@@ -152,7 +152,7 @@ public abstract class Entity {
 	public void move() {
 		//TODO
 	}
-	protected boolean collides(Direction d){
+	protected boolean collides(Direction d){	//layer based tile collision
 		int x,y;
 		switch(d){
 		case UP:

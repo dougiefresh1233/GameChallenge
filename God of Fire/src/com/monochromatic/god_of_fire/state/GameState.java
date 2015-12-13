@@ -33,7 +33,6 @@ public class GameState extends BasicGameState{
 		//Draw objects on screen
 		testMap.render(0 - (int)playersPerspective.getxOffset(), 
 				0- (int)playersPerspective.getyOffset());
-		g.setColor(Color.white);
 		player.render();
 	}
 
