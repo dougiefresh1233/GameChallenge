@@ -103,16 +103,16 @@ public class Player extends LivingEntity {
 		if(userInput.isKeyDown(Input.KEY_SPACE)){
 			switch (orientation) {
 			case UP:
-				equippedWeapon.attack(180, 270);
+				equippedWeapon.attack(180, 1);
 				break;
 			case DOWN:
-				equippedWeapon.attack(0, 90);
+				equippedWeapon.attack(180, -1);
 				break;
 			case LEFT:
-				equippedWeapon.attack(90, 180);
+				equippedWeapon.attack(270, -1);
 				break;
 			case RIGHT:
-				equippedWeapon.attack(270, 360);
+				equippedWeapon.attack(270, 1);
 				break;
 			}
 		}

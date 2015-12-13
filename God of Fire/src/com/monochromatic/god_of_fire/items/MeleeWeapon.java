@@ -33,6 +33,8 @@ public class MeleeWeapon extends Weapon{
 	 */
 	private int framesTillCompletion;
 
+	private int direction;
+
 
 
 	/**
@@ -52,7 +54,7 @@ public class MeleeWeapon extends Weapon{
 			int speed, int damage){
 		super(name, description, filePath, value, isEquippable, isSellable, range,
 				speed, damage);
-		itemImage.setCenterOfRotation(-10, itemImage.getHeight()/2);
+		itemImage.setCenterOfRotation(-10, 4*itemImage.getHeight()/10);
 
 	}
 
@@ -69,11 +71,11 @@ public class MeleeWeapon extends Weapon{
 	 * @param startingAngle
 	 * @param endingAngle
 	 */
-	public void attack(float startingAngle, float endingAngle){
+	public void attack(float startingAngle, int direction){
 		this.startingAngle=startingAngle;
-		this.endingAngle=endingAngle;
+		this.direction=direction;
 		attacking=true;
-		itemImage.setRotation(startingAngle+10);
+		itemImage.setRotation(startingAngle);
 		framesTillCompletion=0;
 	}
 
@@ -83,8 +85,8 @@ public class MeleeWeapon extends Weapon{
 	public void update(){
 		if(attacking){
 			framesTillCompletion++;
-			itemImage.rotate(10);
-			if(framesTillCompletion>10){
+			itemImage.rotate(15*direction);
+			if(framesTillCompletion>11){
 				attacking=false;
 			}
 		}
