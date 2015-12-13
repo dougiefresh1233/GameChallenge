@@ -22,7 +22,7 @@ public class Player extends LivingEntity {
 	
 	Point cameraOffsetPoint=new Point(0,0);
 	
-	MeleeWeapon practiceSword;
+	MeleeWeapon equippedWeapon;
 	
 	public Player(GameState game, int x, int y, int h, int a, int d, int c, TiledMap m) {
 		super(m, x, y, h, a, d, c);
@@ -37,9 +37,9 @@ public class Player extends LivingEntity {
 			e.printStackTrace();
 		}
 		
-		practiceSword=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
+		equippedWeapon=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				 c, true, true, 10, 10, 10);
-		practiceSword.equip(cameraOffsetPoint);
+		equippedWeapon.equip(cameraOffsetPoint);
 	}
 	
 
@@ -51,7 +51,7 @@ public class Player extends LivingEntity {
 			e.printStackTrace();
 		}
 		
-		practiceSword.update();
+		equippedWeapon.update();
 		game.getCamera().centerCamera(this);
 		cameraOffsetPoint.setLocation((int)(location.getX()-game.getCamera().getxOffset()),
 					(int)(location.getY()-game.getCamera().getyOffset()));
@@ -103,16 +103,16 @@ public class Player extends LivingEntity {
 		if(userInput.isKeyDown(Input.KEY_SPACE)){
 			switch (orientation) {
 			case UP:
-				practiceSword.attack(180, 270);
+				equippedWeapon.attack(180, 270);
 				break;
 			case DOWN:
-				practiceSword.attack(0, 90);
+				equippedWeapon.attack(0, 90);
 				break;
 			case LEFT:
-				practiceSword.attack(90, 180);
+				equippedWeapon.attack(90, 180);
 				break;
 			case RIGHT:
-				practiceSword.attack(270, 360);
+				equippedWeapon.attack(270, 360);
 				break;
 			}
 		}
@@ -157,7 +157,7 @@ public class Player extends LivingEntity {
 		if(initComplete){
 			currentAnimation.draw((int)(location.getX()-game.getCamera().getxOffset()),
 					(int)(location.getY()-game.getCamera().getyOffset()));
-			practiceSword.render();
+			equippedWeapon.render();
 		}
 	}
 }
