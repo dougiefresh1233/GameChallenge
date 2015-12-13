@@ -14,6 +14,7 @@ public class Player extends LivingEntity {
 	 */
 	protected Inventory inventory;
 	TiledMap map;
+	int TILE_SIZE=32;
 	int walls, floor1, floor2, stairs, level;
 	GameState game;
 	public Player(GameState game, int x, int y, int h, int a, int d, TiledMap m) {
@@ -101,12 +102,13 @@ public class Player extends LivingEntity {
 	}
 	
 	private boolean collides(Direction d){
-		int x= (int)Math.round(location.getX()/24);
-		int y= (int)Math.round(location.getY()/24)+1;
-		System.out.println(x);
-		System.out.println(location.getX());
+		int x= (int)Math.round(location.getX()/TILE_SIZE);
+		int y= (int)Math.round(location.getY()/TILE_SIZE)+1;
+		System.out.println(y);
+		System.out.println(location.getY());
 		switch(d){
 		case UP:
+			if(map.getTileId(x, y-1,walls)==0)
 			if(map.getTileId(x, y-1,walls)==0) return false;
 			/*else*/ return true;
 		case DOWN:
