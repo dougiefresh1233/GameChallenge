@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import com.monochromatic.god_of_fire.entity.Entity;
+import com.monochromatic.god_of_fire.entity.ai.PATH_Chase;
 import com.monochromatic.god_of_fire.entity.ai.PATH_Random;
 import com.monochromatic.god_of_fire.state.GameState;
 
@@ -14,6 +15,7 @@ public class Clone extends Monster {
 		movementSpeed = 2;
 		setImage("resources/spriteSheet.png");
 		this.attachAI(new PATH_Random());
+		//this.attachAI(new PATH_Chase());
 		
 		try {
 			init();
