@@ -28,7 +28,7 @@ public class MapCollider {
 			e.location(e.previous());
 	}
 	
-	public boolean collides(Entity e, Direction d) {
+	private boolean collides(Entity e, Direction d) {
 		switch(d){
 			case UP: 	return collidesTileUp(e);
 			case DOWN: 	return collidesTileDown(e);
