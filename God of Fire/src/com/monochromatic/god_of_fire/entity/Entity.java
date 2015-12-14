@@ -289,4 +289,12 @@ public abstract class Entity {
 		setForRemoval = b;
 	}
 	
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+	
 }

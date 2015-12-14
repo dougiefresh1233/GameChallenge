@@ -7,7 +7,6 @@ public class PATH_Astar implements AI {
 	@Override
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
