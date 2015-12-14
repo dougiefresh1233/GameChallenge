@@ -19,7 +19,7 @@ import com.monochromatic.god_of_fire.state.GameState;
 public abstract class Entity {
 	protected GameState gameState; /**Game State */
 	
-	private Point location; /** Current location of the entity */
+	protected Point location; /** Current location of the entity */
 	private Point previous; /** Previous location of the entity */
 	protected int level = 1; /**Current floor level. */
 	protected Direction orientation; /** Orientation of the entity. */
