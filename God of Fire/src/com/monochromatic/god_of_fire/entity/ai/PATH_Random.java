@@ -8,7 +8,7 @@ public class PATH_Random implements AI {
 	@Override
 	public void update(Entity e) {
 		Direction d;
-		if((Math.random() <= 0.25) || (e.location() == e.previous()))
+		if((Math.random() <= 0.01) || (e.location() == e.previous()))
 			d = Direction.exclude(e.orientation());
 		else
 			d = e.orientation();
