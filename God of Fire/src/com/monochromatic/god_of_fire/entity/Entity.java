@@ -64,7 +64,7 @@ public abstract class Entity {
 	public Entity(GameState g, int x, int y, Direction d, int s){
 		gameState = g;
 		this.location = new Point(x, y);
-		this.previous = location;
+		this.previous = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
 	}
@@ -139,7 +139,7 @@ public abstract class Entity {
 	 * animation.
 	 */
 	public void move(Direction d) {
-		previous = location;
+		previous.setLocation(location.getX(), location.getY());
 		if (d == Direction.UP) moveUp();
 		else if (!upwardsMovementAnimation.isStopped())
 			upwardsMovementAnimation.stop();
@@ -198,25 +198,34 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Moves this entity back to the previous location.
+	 */
+	public void movePrevious() {
+		double dX = previous.getX() - location.getX();
+		double dY = previous.getY() - location.getY();
+		location.translate((int) dX, (int) dY);
+	}
+	
+	/**
 	 * Sets this entities location.
 	 */
 	public void location(Point p) {
-		previous = location;
-		location = p;
+		previous.setLocation(location.getX(), location.getY());
+		location.setLocation(p.getX(), p.getY());
 	}
 	
 	/**
 	 * Returns a copy of this entities location.
 	 */
 	public Point location() {
-		return new Point((int) location.getX(), (int) location.getY());
+		return (Point) location.clone();
 	}
 	
 	/**
 	 * Returns a copy of this entities previous location.
 	 */
 	public Point previous() {
-		return new Point((int) previous.getX(), (int) previous.getY());
+		return (Point) previous.clone();
 	}
 	
 	/**

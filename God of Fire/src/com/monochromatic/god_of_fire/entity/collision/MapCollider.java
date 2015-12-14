@@ -24,8 +24,8 @@ public class MapCollider {
 	}
 	
 	public void collide(Entity e) {
-		if(collides(e, e.orientation()));
-			e.location(e.previous());
+		if(collides(e, e.orientation()))
+			e.movePrevious();
 	}
 	
 	private boolean collides(Entity e, Direction d) {
@@ -52,7 +52,7 @@ public class MapCollider {
 			if (e.getLevel() == 2) e.setLevel(1);
 			return (e.getLevel() == 1 || e.getLevel() == 2) ? false : true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class MapCollider {
 			if(e.getLevel() == 2) e.setLevel(1);
 			return (e.getLevel() == 1 || e.getLevel() == 2) ? false : true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class MapCollider {
 			if(e.getLevel() == 2) e.setLevel(1);
 			return (e.getLevel() == 1 || e.getLevel() == 2) ? false : true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class MapCollider {
 			if(e.getLevel() == 2) e.setLevel(1);
 			return (e.getLevel() == 1 || e.getLevel() == 2) ? false : true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 	
