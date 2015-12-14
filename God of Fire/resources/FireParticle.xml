@@ -9,7 +9,7 @@
   <initialDistance enabled="true" max="50.0" min="50.0"/>
   <speed enabled="true" max="500.0" min="250.0"/>
   <length enabled="true" max="250.0" min="250.0"/>
-  <spread value="180.0"/>
+  <spread value="90.0"/>
   <angularOffset value="0.0"/>
   <growthFactor value="100.0"/>
   <gravityFactor value="0.0"/>
@@ -17,8 +17,8 @@
   <startAlpha value="255.0"/>
   <endAlpha value="10.0"/>
   <color>
-    <step b="0.0" g="0.8" offset="0.0" r="2"/>
-    <step b="0.0" g="0.7" offset="0.5" r="0.9"/>
-    <step b="0.0" g="0.1" offset="1.0" r="0.3"/>
+    <step b="0.0" g="0.1" offset="0.0" r="1"/>
+    <step b="0.0" g="0.4" offset="0.5" r="0.8"/>
+    <step b="0.01" g="0.3" offset="1.0" r="0.3"/>
   </color>
 </emitter>
