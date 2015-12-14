@@ -1,6 +1,8 @@
 package com.monochromatic.god_of_fire.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.newdawn.slick.GameContainer;
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.collision.CollisionController;
@@ -9,7 +11,7 @@ import com.monochromatic.god_of_fire.state.GameState;
 public class EntityController {
 	protected GameState state;
 	protected ArrayList<Entity> entities;
-	
+
 	// Sub-Controllers
 	protected CollisionController collision;
 	
@@ -25,11 +27,14 @@ public class EntityController {
 	 * removal.
 	 */
 	public void update(GameContainer gameScreen) {
-		for (Entity e : entities)
+		Iterator<Entity> iterate = entities.iterator();
+		while(iterate.hasNext()) {
+			Entity e = iterate.next();
 			if (!e.isSetForRemoval())
 				update(e, gameScreen);
 			else
-				remove(e);
+				iterate.remove();
+		}
 	}
 	
 	/**
@@ -64,6 +69,10 @@ public class EntityController {
 	public void remove(Entity e) {
 		if(entities.contains(e))
 			entities.remove(e);
+	}
+	
+	public ArrayList<Entity> getEntities() {
+		return entities;
 	}
 	
 }
