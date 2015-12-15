@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -16,6 +18,9 @@ import org.newdawn.slick.particles.ParticleSystem;
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.EntityUtility;
 import com.monochromatic.god_of_fire.entity.living.monster.Monster;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityMagic;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityMagicWave;
+import com.monochromatic.god_of_fire.enums.DamageType;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.state.GameState;
 import com.monochromatic.god_of_fire.items.Inventory;
@@ -30,6 +35,7 @@ public class Player extends LivingEntity {
 
 	Point cameraOffsetPoint=new Point(0,0);
 
+	EntityMagicWave magicWave;
 
 	ParticleSystem particleSystem;
 	Image particleImage;
@@ -44,7 +50,6 @@ public class Player extends LivingEntity {
 		super(g, x, y, h, a, d, c);
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
-		initParticles();
 		//values for collision
 		try {
 			init();
@@ -56,33 +61,16 @@ public class Player extends LivingEntity {
 		equippedWeapon=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				c, true, true, 10, 10, 10);
 		equippedWeapon.equip(cameraOffsetPoint);
+		magicWave= new EntityMagicWave(gameState, 0, 0, Direction.UP, 10, 10, DamageType.MAGIC);
 	}
 
-	public void initParticles(){
-
-		try {
-			particleImage= new Image("resources/Particle.png", false);
-		} catch (SlickException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		particleSystem= new ParticleSystem(particleImage, 1500);
-
-		try {
-			File xmlFile=new File("resources/FireParticle.xml");
-			emitter = ParticleIO.loadEmitter(xmlFile);
-			particleSystem.addEmitter(emitter);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 
 	public void update(GameContainer gameScreen){
-		particleSystem.update(10);
-		particleSystem.setPosition((float)(location().getX()-gameState.getCamera().getxOffset()+15),
+		
+		magicWave.updatePosition((float)(location().getX()-gameState.getCamera().getxOffset()+15),
 				(float)(location().getY()-gameState.getCamera().getyOffset()+30));
+		
 		try {
 			userInput(gameScreen);
 		} catch (SlickException e) {
@@ -121,32 +109,18 @@ public class Player extends LivingEntity {
 			rightMovementAnimation.stop();
 
 
-		if (userInput.isKeyDown(Input.KEY_F)){
+	if (userInput.isKeyDown(Input.KEY_F)){
 			superPower=true;
-			switch(orientation){
-			case UP: emitter.angularOffset.setValue(0); 
-			break;
-			case DOWN: emitter.angularOffset.setValue(180);
-			break;
-			case LEFT: emitter.angularOffset.setValue(270);
-			break;
-			case RIGHT: emitter.angularOffset.setValue(90);
-			break;
-			}
-			
-			particleSystem.render();
-			particleSystem.setVisible(true);
-			superPower=true;
-			
-			List<Monster> targets = EntityUtility.intersectsMonsters(getGameState().getEC().getEntities(), 
-					calculateAttackArea(orientation));
-			for (Monster m : targets)
-				if(m.adjustHealth(calculateAttack()))
-					m.kill();
+			magicWave.particleSystem.setVisible(true);
+			magicWave.cast(orientation);
+
+
 		}else{
-			particleSystem.reset();
+			magicWave.resetMagicSkill();
+			magicWave.particleSystem.setVisible(false);
 			superPower=false;
 		}
+		
 
 
 		if(userInput.isKeyPressed(Input.KEY_SPACE)){
@@ -240,12 +214,10 @@ public class Player extends LivingEntity {
 					(int)(location().getY()-gameState.getCamera().getyOffset()));
 			equippedWeapon.render();
 		}
+		
+		magicWave.render();
 
-		particleSystem.render();
-		if(superPower){
-			particleSystem.setVisible(true);
-		}else
-			particleSystem.setVisible(false);
+
 
 
 	}
