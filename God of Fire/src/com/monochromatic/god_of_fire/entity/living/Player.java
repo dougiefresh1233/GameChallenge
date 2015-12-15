@@ -18,6 +18,7 @@ import org.newdawn.slick.particles.ParticleSystem;
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.EntityUtility;
 import com.monochromatic.god_of_fire.entity.living.monster.Monster;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityMagic;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityMagicWave;
 import com.monochromatic.god_of_fire.enums.DamageType;
@@ -35,7 +36,6 @@ public class Player extends LivingEntity {
 
 	Point cameraOffsetPoint=new Point(0,0);
 
-	EntityMagicWave magicWave;
 
 	ParticleSystem particleSystem;
 	Image particleImage;
@@ -61,15 +61,13 @@ public class Player extends LivingEntity {
 		equippedWeapon=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				c, true, true, 10, 10, 10);
 		equippedWeapon.equip(cameraOffsetPoint);
-		magicWave= new EntityMagicWave(gameState, 0, 0, Direction.UP, 10, 10, DamageType.MAGIC);
+		
 	}
 
 
 
 	public void update(GameContainer gameScreen){
 		
-		magicWave.updatePosition((float)(location().getX()-gameState.getCamera().getxOffset()+15),
-				(float)(location().getY()-gameState.getCamera().getyOffset()+30));
 		
 		try {
 			userInput(gameScreen);
@@ -110,16 +108,26 @@ public class Player extends LivingEntity {
 
 
 	if (userInput.isKeyDown(Input.KEY_F)){
-			superPower=true;
-			magicWave.particleSystem.setVisible(true);
-			magicWave.cast(orientation);
-
-
-		}else{
-			magicWave.resetMagicSkill();
-			magicWave.particleSystem.setVisible(false);
-			superPower=false;
+		EntityMagicWave magicWave= new EntityMagicWave(gameState, 
+				(int)(this.location().getX()),
+				(int)(this.location().getY()),
+				Direction.UP, 1, 1, 
+				DamageType.MAGIC);
+		
+		
+		switch (orientation) {
+		case UP: magicWave.setDirection(new Vector2d(0, 10)); 
+		break;
+		case DOWN: magicWave.setDirection(new Vector2d(0, -10));
+		break;
+		case LEFT: magicWave.setDirection(new Vector2d(-10, 0));
+		break;
+		case RIGHT: magicWave.setDirection(new Vector2d(10, 0));
+		break;
 		}
+		
+		this.getGameState().getEC().register(magicWave);
+	}
 		
 
 
@@ -214,9 +222,6 @@ public class Player extends LivingEntity {
 					(int)(location().getY()-gameState.getCamera().getyOffset()));
 			equippedWeapon.render();
 		}
-		
-		magicWave.render();
-
 
 
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.vecmath.Vector2d;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ConfigurableEmitter;
@@ -62,26 +63,20 @@ public class EntityMagic extends EntityProjectile{
 		this.emitterFilePath=string;
 	}
 	
-	public void cast(Direction direction){
-		startOfCooldown=System.currentTimeMillis();
-		switch(orientation){
-		case UP: emitter.angularOffset.setValue(0); 
-		break;
-		case DOWN: emitter.angularOffset.setValue(180);
-		break;
-		case LEFT: emitter.angularOffset.setValue(270);
-		break;
-		case RIGHT: emitter.angularOffset.setValue(90);
-		break;
-		}
+
+	public void update(GameContainer gc){
+		particleSystem.update(10);
+		emitter.setPosition((float)location.getX(), (float)location.getY());
+		System.out.println("Update is working");
+		super.update(gc);
+
+		
 	}
-	
-	public void resetMagicSkill(){
-		if((System.currentTimeMillis()-startOfCooldown)>1000)
-			emitter.reset();
-	}
+
 	
 	public void render(){
-		particleSystem.render();
+		System.out.println("Render is working");
+		particleSystem.render((int)(location().getX()-gameState.getCamera().getxOffset()),
+				(int)(location().getY()-gameState.getCamera().getyOffset()));
 	}
 }

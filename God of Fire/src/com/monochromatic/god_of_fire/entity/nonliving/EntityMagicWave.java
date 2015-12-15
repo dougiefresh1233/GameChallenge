@@ -10,11 +10,8 @@ public class EntityMagicWave extends EntityMagic{
 		super(g, x, y, d, s, a, type);
 		setEmitterFilePath("resources/FireParticle.xml");
 		initParticles();
+		System.out.println("Constructor is working");
 	}
-	
-	public void updatePosition(float xCoordinate, float yCoordinate){
-		particleSystem.update(10);
-		particleSystem.setPosition(xCoordinate, yCoordinate);
-	}
+
 
 }
