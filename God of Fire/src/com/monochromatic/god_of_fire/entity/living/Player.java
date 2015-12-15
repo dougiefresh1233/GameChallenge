@@ -107,7 +107,7 @@ public class Player extends LivingEntity {
 			rightMovementAnimation.stop();
 
 
-	if (userInput.isKeyDown(Input.KEY_F)){
+	if (userInput.isKeyPressed(Input.KEY_F)){
 		EntityMagicWave magicWave= new EntityMagicWave(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),

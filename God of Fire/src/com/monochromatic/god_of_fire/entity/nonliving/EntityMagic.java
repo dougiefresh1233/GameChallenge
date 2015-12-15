@@ -65,8 +65,7 @@ public class EntityMagic extends EntityProjectile{
 	
 
 	public void update(GameContainer gc){
-		particleSystem.update(10);
-		emitter.setPosition((float)location.getX(), (float)location.getY());
+		particleSystem.update(100);
 		System.out.println("Update is working");
 		super.update(gc);
 
