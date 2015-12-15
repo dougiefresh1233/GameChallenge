@@ -116,9 +116,9 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: magicWave.setDirection(new Vector2d(0, 10)); 
+		case UP: magicWave.setDirection(new Vector2d(0, -10)); 
 		break;
-		case DOWN: magicWave.setDirection(new Vector2d(0, -10));
+		case DOWN: magicWave.setDirection(new Vector2d(0, 10));
 		break;
 		case LEFT: magicWave.setDirection(new Vector2d(-10, 0));
 		break;

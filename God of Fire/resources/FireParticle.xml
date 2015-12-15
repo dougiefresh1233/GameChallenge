@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <emitter imageName="" name="Test Particle">
-  <spawnInterval enabled="true" max="100.0" min="100.0"/>
-  <spawnCount enabled="true" max="100.0" min="100.0"/>
+  <spawnInterval enabled="true" max="10.0" min="100.0"/>
+  <spawnCount enabled="true" max="10.0" min="100.0"/>
   <initialLife enabled="true" max="1000.0" min="100.0"/>
   <initialSize enabled="true" max="5.0" min="1.0"/>
   <xOffset enabled="true" max="10.0" min="-10.0"/>
   <yOffset enabled="true" max="10.0" min="-10.0"/>
-  <initialDistance enabled="true" max="50.0" min="50.0"/>
+  <initialDistance enabled="true" max="0.0" min="0.0"/>
   <speed enabled="true" max="10.0" min="2.0"/>
   <length enabled="true" max="2500.0" min="2500.0"/>
   <spread value="360.0"/>
