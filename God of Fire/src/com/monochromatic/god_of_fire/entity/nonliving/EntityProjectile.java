@@ -1,5 +1,7 @@
 package com.monochromatic.god_of_fire.entity.nonliving;
 
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.GameContainer;
 
 import com.monochromatic.god_of_fire.entity.Entity;
@@ -33,6 +35,14 @@ public class EntityProjectile extends NonlivingEntity {
 	public int getAttack() {
 		return attack;
 	}
+	
+	/**
+	 * Sets the direction this projectile will move.
+	 */
+	public void setDirection(Vector2d direction) {
+		direction.scale(movementSpeed);
+		this.setVelocity(direction);
+	}
 
 	/**
 	 * Get the {@link DamageTarget target} for this source of damage.
@@ -43,7 +53,7 @@ public class EntityProjectile extends NonlivingEntity {
 
 	@Override
 	public void update(GameContainer g) {
-		move(this.orientation());
+		move();
 	}
 
 	@Override
