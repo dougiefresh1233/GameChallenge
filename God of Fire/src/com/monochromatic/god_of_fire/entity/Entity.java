@@ -1,6 +1,8 @@
 package com.monochromatic.god_of_fire.entity;
 import java.awt.*;
 
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
@@ -23,7 +25,8 @@ public abstract class Entity {
 	private Point previous; /** Previous location of the entity */
 	protected int level = 1; /**Current floor level. */
 	protected Direction orientation; /** Orientation of the entity. */
-	protected int movementSpeed;
+	protected int movementSpeed = 0;
+	protected Vector2d velocity = new Vector2d(0, 0);
 	
 	protected boolean hardCollision = false;
 	protected boolean setForRemoval = false;
@@ -138,22 +141,51 @@ public abstract class Entity {
 	 * Moves the entity in the given direction and changes to the corresponding
 	 * animation.
 	 */
+	@Deprecated
 	public void move(Direction d) {
+		if (d == Direction.UP) move(new Vector2d(0, -movementSpeed));
+		if (d == Direction.DOWN) move(new Vector2d(0, movementSpeed));
+		if (d == Direction.LEFT) move(new Vector2d(-movementSpeed, 0));
+		if (d == Direction.RIGHT) move(new Vector2d(movementSpeed, 0));
+	}
+	
+	public void move() {
+		move(velocity);
+	}
+
+	public void move(Vector2d v) {
+		Direction d;
+		if (Math.abs(v.x) > Math.abs(v.y))
+			if (v.x > 0) {
+				moveRight();
+				d = Direction.RIGHT;
+			}
+			else {
+				moveLeft();
+				d = Direction.LEFT;
+			}
+		else
+			if (v.y > 0) {
+				moveDown();
+				d = Direction.DOWN;
+			}
+			else {
+				moveUp();
+				d = Direction.UP;
+			}
+		stopAnimations(d);
 		previous.setLocation(location.getX(), location.getY());
-		if (d == Direction.UP) moveUp();
-		else if (!upwardsMovementAnimation.isStopped())
+		location.translate((int) v.x, (int) v.y);
+	}
+	
+	public void stopAnimations(Direction d) {
+		if (!(d == Direction.UP) && !upwardsMovementAnimation.isStopped())
 			upwardsMovementAnimation.stop();
-
-		if (d == Direction.LEFT) moveLeft();
-		else if (!leftMovementAnimation.isStopped())
+		if (!(d == Direction.LEFT) && !leftMovementAnimation.isStopped())
 			leftMovementAnimation.stop();
-
-		if (d == Direction.DOWN) moveDown();
-		else if (!downwardMovementAnimation.isStopped())
+		if (!(d == Direction.DOWN) && !downwardMovementAnimation.isStopped())
 			downwardMovementAnimation.stop();
-
-		if (d == Direction.RIGHT) moveRight();
-		else if (!rightMovementAnimation.isStopped())
+		if (!(d == Direction.RIGHT) && !rightMovementAnimation.isStopped())
 			rightMovementAnimation.stop();
 	}
 	
@@ -164,7 +196,6 @@ public abstract class Entity {
 		orientation(Direction.UP);
 		upwardsMovementAnimation.start();
 		currentAnimation = upwardsMovementAnimation;
-		location.translate(0, -movementSpeed);
 	}
 	
 	/**
@@ -174,7 +205,6 @@ public abstract class Entity {
 		orientation(Direction.DOWN);
 		downwardMovementAnimation.start();
 		currentAnimation = downwardMovementAnimation;
-		location.translate(0, movementSpeed);
 	}
 	
 	/**
@@ -184,7 +214,6 @@ public abstract class Entity {
 		orientation(Direction.LEFT);
 		leftMovementAnimation.start();
 		currentAnimation = leftMovementAnimation;
-		location.translate(-movementSpeed, 0);
 	}
 	
 	/**
@@ -194,7 +223,6 @@ public abstract class Entity {
 		orientation(Direction.RIGHT);
 		rightMovementAnimation.start();
 		currentAnimation = rightMovementAnimation;
-		location.translate(movementSpeed, 0);
 	}
 	
 	/**
@@ -243,6 +271,22 @@ public abstract class Entity {
 		orientation = d;
 	}
 	
+	public Vector2d getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2d velocity) {
+		this.velocity = velocity;
+	}
+	
+	public int getSpeed() {
+		return movementSpeed;
+	}
+
+	public void setSpeed(int movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+
 	/**
 	 * Retrieves the current room level for this entity.
 	 */
