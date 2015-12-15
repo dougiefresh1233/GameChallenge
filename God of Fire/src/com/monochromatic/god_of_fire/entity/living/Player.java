@@ -107,7 +107,7 @@ public class Player extends LivingEntity {
 			rightMovementAnimation.stop();
 
 
-	if (userInput.isKeyPressed(Input.KEY_F)){
+	if (userInput.isKeyPressed(Input.KEY_DOWN)){
 		EntityMagicWave magicWave= new EntityMagicWave(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),
@@ -116,9 +116,9 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: magicWave.setDirection(new Vector2d(0, 10)); 
+		case UP: magicWave.setDirection(new Vector2d(0, -10)); 
 		break;
-		case DOWN: magicWave.setDirection(new Vector2d(0, -10));
+		case DOWN: magicWave.setDirection(new Vector2d(0, 10));
 		break;
 		case LEFT: magicWave.setDirection(new Vector2d(-10, 0));
 		break;
@@ -131,7 +131,7 @@ public class Player extends LivingEntity {
 		
 
 
-		if(userInput.isKeyPressed(Input.KEY_SPACE)){
+		if(userInput.isKeyPressed(Input.KEY_UP)){
 			switch (orientation) {
 			case UP: equippedWeapon.attack(180, 1); 
 			break;
