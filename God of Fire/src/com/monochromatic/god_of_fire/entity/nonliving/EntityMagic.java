@@ -66,7 +66,6 @@ public class EntityMagic extends EntityProjectile{
 
 	public void update(GameContainer gc){
 		particleSystem.update(100);
-		System.out.println("Update is working");
 		super.update(gc);
 
 		
@@ -74,7 +73,6 @@ public class EntityMagic extends EntityProjectile{
 
 	
 	public void render(){
-		System.out.println("Render is working");
 		particleSystem.render((int)(location().getX()-gameState.getCamera().getxOffset()),
 				(int)(location().getY()-gameState.getCamera().getyOffset()));
 	}
