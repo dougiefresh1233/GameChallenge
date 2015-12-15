@@ -11,6 +11,7 @@ import com.monochromatic.god_of_fire.state.GameState;
 public class EntityController {
 	protected GameState state;
 	protected ArrayList<Entity> entities;
+	protected ArrayList<Entity> clone;
 
 	// Sub-Controllers
 	protected CollisionController collision;
@@ -27,13 +28,13 @@ public class EntityController {
 	 * removal.
 	 */
 	public void update(GameContainer gameScreen) {
-		Iterator<Entity> iterate = entities.iterator();
-		while(iterate.hasNext()) {
-			Entity e = iterate.next();
+		clone = new ArrayList<Entity>(entities);
+		for (Entity e : clone) {
 			if (!e.isSetForRemoval())
 				update(e, gameScreen);
-			else
-				iterate.remove();
+			else {
+				remove(e);
+			}
 		}
 	}
 	

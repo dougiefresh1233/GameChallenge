@@ -8,7 +8,7 @@ public class ACTION_ShootPlayer implements AI {
 
 	@Override
 	public void update(Entity e) {
-		if (e instanceof Sniper) {
+		if (e instanceof Sniper && Math.random() <= 0.01) {
 			Sniper sniper = (Sniper) e;
 			double x = e.location().getX();
 			double y = e.location().getY();
