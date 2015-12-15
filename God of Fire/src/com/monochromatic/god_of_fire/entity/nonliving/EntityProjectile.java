@@ -5,7 +5,6 @@ import javax.vecmath.Vector2d;
 import org.newdawn.slick.GameContainer;
 
 import com.monochromatic.god_of_fire.entity.Entity;
-import com.monochromatic.god_of_fire.entity.living.LivingEntity;
 import com.monochromatic.god_of_fire.enums.DamageTarget;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.state.GameState;
@@ -53,19 +52,16 @@ public class EntityProjectile extends NonlivingEntity {
 
 	@Override
 	public void update(GameContainer g) {
+		if (movedBack)
+			setForRemoval(true);
 		move();
 	}
 
 	@Override
 	public void collide(Entity e) {
-		if (target.value().isInstance(e))
-			((LivingEntity) e).adjustHealth(attack);
-		setForRemoval(true);
-	}
-	
-	@Override
-	public void render() {
-		// TODO - render sprite
+		//if (target.value().isInstance(e))
+		//	((LivingEntity) e).adjustHealth(attack);
+		//setForRemoval(true);
 	}
 
 }

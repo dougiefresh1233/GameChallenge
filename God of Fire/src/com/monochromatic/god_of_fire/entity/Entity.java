@@ -30,7 +30,8 @@ public abstract class Entity {
 	
 	protected boolean hardCollision = false;
 	protected boolean setForRemoval = false;
-	protected boolean initComplete=false;
+	protected boolean initComplete = false;
+	protected boolean movedBack = false;
 	
 	/** Spritesheet for all images **/
 	protected Image spriteSheet;
@@ -48,7 +49,7 @@ public abstract class Entity {
 							rightMovementAnimation;
 	
 	/** Array of images and animation for when the entity is not moving */
-	protected Image[] stationaryImages;
+	protected Image[] stationaryImages = new Image[9];
 	protected Animation stationaryAnimation;
 	
 	/** Array of images and animation for entities physical attacks */
@@ -154,6 +155,7 @@ public abstract class Entity {
 	}
 
 	public void move(Vector2d v) {
+		movedBack = false;
 		Direction d;
 		if (Math.abs(v.x) > Math.abs(v.y))
 			if (v.x > 0) {
@@ -179,6 +181,8 @@ public abstract class Entity {
 	}
 	
 	public void stopAnimations(Direction d) {
+		if(currentAnimation == null)
+			return;
 		if (!(d == Direction.UP) && !upwardsMovementAnimation.isStopped())
 			upwardsMovementAnimation.stop();
 		if (!(d == Direction.LEFT) && !leftMovementAnimation.isStopped())
@@ -193,6 +197,8 @@ public abstract class Entity {
 	 * Moves the entity up and changes corresponding animations.
 	 */
 	private void moveUp() {
+		if(currentAnimation == null)
+			return;
 		orientation(Direction.UP);
 		upwardsMovementAnimation.start();
 		currentAnimation = upwardsMovementAnimation;
@@ -202,6 +208,8 @@ public abstract class Entity {
 	 * Moves the entity down and changes corresponding animations.
 	 */
 	private void moveDown() {
+		if(currentAnimation == null)
+			return;
 		orientation(Direction.DOWN);
 		downwardMovementAnimation.start();
 		currentAnimation = downwardMovementAnimation;
@@ -211,6 +219,8 @@ public abstract class Entity {
 	 * Moves the entity to the left and changes corresponding animations.
 	 */
 	private void moveLeft() {
+		if(currentAnimation == null)
+			return;
 		orientation(Direction.LEFT);
 		leftMovementAnimation.start();
 		currentAnimation = leftMovementAnimation;
@@ -220,6 +230,8 @@ public abstract class Entity {
 	 * Moves the entity to the right and changes corresponding animations.
 	 */
 	private void moveRight() {
+		if(currentAnimation == null)
+			return;
 		orientation(Direction.RIGHT);
 		rightMovementAnimation.start();
 		currentAnimation = rightMovementAnimation;
@@ -232,6 +244,7 @@ public abstract class Entity {
 		double dX = previous.getX() - location.getX();
 		double dY = previous.getY() - location.getY();
 		location.translate((int) dX, (int) dY);
+		movedBack = true;
 	}
 	
 	/**

@@ -1,4 +1,6 @@
 package com.monochromatic.god_of_fire.state;
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -10,6 +12,9 @@ import com.monochromatic.god_of_fire.SetupClass;
 import com.monochromatic.god_of_fire.entity.EntityController;
 import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.entity.living.monster.Clone;
+import com.monochromatic.god_of_fire.entity.living.monster.FireTurret;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
+import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.graphics.Camera;
 
 public class GameState extends BasicGameState{
@@ -28,14 +33,19 @@ public class GameState extends BasicGameState{
 		EC = new EntityController(this); // Must be declared AFTER map
 		
 		player = new Player(this, 800, 1020, 10, 10, 10, 5);
+		//EntityFireball fireball = new EntityFireball(this, 
+		//		300, 800,
+		//		Direction.DOWN, 3, 0);
+		//fireball.setDirection(new Vector2d(.5, .5));
 		Clone clone1 = new Clone(this, 800, 1020, 10, 10, 8, 5);
 		Clone clone2 = new Clone(this, 800, 1020, 10, 10, 8, 5);
-		Clone clone3 = new Clone(this, 800, 1020, 10, 10, 8, 5);
+		FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
 		
 		EC.register(player);
+		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
-		EC.register(clone3);
+		EC.register(turret);
 		
 		playersPerspective=new Camera(this, 0,0);
 		
