@@ -2,6 +2,7 @@ package com.monochromatic.god_of_fire.entity.nonliving;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.ElementType;
 
 import javax.vecmath.Vector2d;
 
@@ -14,11 +15,12 @@ import org.newdawn.slick.particles.ParticleSystem;
 
 import com.monochromatic.god_of_fire.enums.DamageType;
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.enums.ElementalType;
 import com.monochromatic.god_of_fire.state.GameState;
 
 public class EntityMagic extends EntityProjectile{
 
-	private DamageType damageType;
+	private ElementalType elementType;
 	
 	public ParticleSystem particleSystem;
 	
@@ -31,9 +33,9 @@ public class EntityMagic extends EntityProjectile{
 	private long startOfCooldown;
 
 	public EntityMagic(GameState g, int x, int y, Direction d, 
-			int s, int a, DamageType type) {
+			int s, int a, ElementalType type) {
 		super(g, x, y, d, s, a);
-		this.damageType=type;
+		this.elementType=type;
 	}
 	
 	/**
@@ -41,12 +43,6 @@ public class EntityMagic extends EntityProjectile{
 	 */
 	protected void initParticles(){
 
-		try {
-			particleImage= new Image("resources/Particle.png", false);
-		} catch (SlickException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		particleSystem= new ParticleSystem(particleImage, 1500);
 
 		try {
@@ -69,6 +65,15 @@ public class EntityMagic extends EntityProjectile{
 		super.update(gc);
 
 		
+	}
+	
+	public void setImage(String filePath){
+		try {
+			particleImage= new Image(filePath, false);
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	
