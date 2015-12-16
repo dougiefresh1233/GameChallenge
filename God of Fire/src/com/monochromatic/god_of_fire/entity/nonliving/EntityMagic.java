@@ -43,12 +43,6 @@ public class EntityMagic extends EntityProjectile{
 	 */
 	protected void initParticles(){
 
-		try {
-			particleImage= new Image("resources/Particle.png", false);
-		} catch (SlickException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		particleSystem= new ParticleSystem(particleImage, 1500);
 
 		try {
@@ -71,6 +65,15 @@ public class EntityMagic extends EntityProjectile{
 		super.update(gc);
 
 		
+	}
+	
+	public void setImage(String filePath){
+		try {
+			particleImage= new Image(filePath, false);
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	

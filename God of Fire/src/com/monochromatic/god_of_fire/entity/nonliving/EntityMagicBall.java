@@ -15,13 +15,21 @@ public class EntityMagicBall extends EntityMagic{
 		super(g, x, y, d, s, a, type);
 		
 		switch (type) {
-		case IGNIS: setEmitterFilePath("resources/FireParticle.xml");; 
+		case IGNIS: 
+			setImage("resources/Particle.png");
+			setEmitterFilePath("resources/FireParticle.xml"); 
 		break;
-		case FLUMINIS: setEmitterFilePath("resources/WaterParticle.xml");;
+		case FLUMINIS: 
+			setImage("resources/waterDrop.png");
+			setEmitterFilePath("resources/WaterParticle.xml");
 		break;
-		case VIRENTIA: setEmitterFilePath("resources/PlantParticle.xml");;
+		case VIRENTIA: 
+			setImage("resources/leaf.png");
+			setEmitterFilePath("resources/PlantParticle.xml");
 		break;
-		case AERIS: setEmitterFilePath("resources/AirParticle.xml");;
+		case AERIS: 
+			setImage("resources/Particle.png");
+			setEmitterFilePath("resources/AirParticle.xml");
 		break;
 		}
 		

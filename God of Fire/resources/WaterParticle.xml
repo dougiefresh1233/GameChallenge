@@ -3,16 +3,16 @@
   <spawnInterval enabled="true" max="10.0" min="100.0"/>
   <spawnCount enabled="true" max="10.0" min="100.0"/>
   <initialLife enabled="true" max="1000.0" min="100.0"/>
-  <initialSize enabled="true" max="3.0" min="1.0"/>
+  <initialSize enabled="true" max="7.0" min="1.0"/>
   <xOffset enabled="true" max="10.0" min="-10.0"/>
   <yOffset enabled="true" max="10.0" min="-10.0"/>
   <initialDistance enabled="true" max="0.0" min="0.0"/>
-  <speed enabled="true" max="10.0" min="2.0"/>
+  <speed enabled="true" max="20.0" min="2.0"/>
   <length enabled="true" max="2500.0" min="2500.0"/>
   <spread value="360.0"/>
   <angularOffset value="0.0"/>
   <growthFactor value="10.0"/>
-  <gravityFactor value="2.0"/>
+  <gravityFactor value="1.5"/>
   <windFactor value="0.0"/>
   <startAlpha value="255.0"/>
   <endAlpha value="10.0"/>
