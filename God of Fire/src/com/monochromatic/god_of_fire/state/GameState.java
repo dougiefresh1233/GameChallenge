@@ -3,6 +3,7 @@ import javax.vecmath.Vector2d;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -21,6 +22,7 @@ public class GameState extends BasicGameState{
 	EntityController EC;
 	TiledMap map;
 	Player player;
+	Image HUD;
 	
 	private final int gameWidth=640;
 	private final int gameHeight=480;
@@ -31,6 +33,7 @@ public class GameState extends BasicGameState{
 		 //All variables defined here
 		map = new TiledMap("resources/Map.tmx");//TODO Replace with real map
 		EC = new EntityController(this); // Must be declared AFTER map
+		HUD = new Image("resources/HUD.png");
 		
 		player = new Player(this, 800, 1020, 10, 10, 10, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
@@ -60,6 +63,7 @@ public class GameState extends BasicGameState{
 		map.render(0 - (int)playersPerspective.getxOffset(), 
 				0- (int)playersPerspective.getyOffset());
 		EC.render();
+		g.drawImage(HUD,0,0);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
