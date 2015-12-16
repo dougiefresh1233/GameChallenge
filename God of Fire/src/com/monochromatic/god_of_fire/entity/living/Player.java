@@ -20,9 +20,10 @@ import com.monochromatic.god_of_fire.entity.EntityUtility;
 import com.monochromatic.god_of_fire.entity.living.monster.Monster;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityMagic;
-import com.monochromatic.god_of_fire.entity.nonliving.EntityMagicWave;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityMagicBall;
 import com.monochromatic.god_of_fire.enums.DamageType;
 import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.enums.ElementalType;
 import com.monochromatic.god_of_fire.state.GameState;
 import com.monochromatic.god_of_fire.items.Inventory;
 import com.monochromatic.god_of_fire.items.MeleeWeapon;
@@ -108,29 +109,72 @@ public class Player extends LivingEntity {
 
 
 	if (userInput.isKeyPressed(Input.KEY_DOWN)){
-		EntityMagicWave magicWave= new EntityMagicWave(gameState, 
+		EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),
 				Direction.UP, 1, 1, 
-				DamageType.MAGIC);
+				ElementalType.FLUMINIS);
 		
 		
 		switch (orientation) {
-		case UP: magicWave.setDirection(new Vector2d(0, -10)); 
+		case UP: waterMagicBall.setDirection(new Vector2d(0, -10)); 
 		break;
-		case DOWN: magicWave.setDirection(new Vector2d(0, 10));
+		case DOWN: waterMagicBall.setDirection(new Vector2d(0, 10));
 		break;
-		case LEFT: magicWave.setDirection(new Vector2d(-10, 0));
+		case LEFT: waterMagicBall.setDirection(new Vector2d(-10, 0));
 		break;
-		case RIGHT: magicWave.setDirection(new Vector2d(10, 0));
+		case RIGHT: waterMagicBall.setDirection(new Vector2d(10, 0));
 		break;
 		}
 		
-		this.getGameState().getEC().register(magicWave);
+		this.getGameState().getEC().register(waterMagicBall);
 	}
 		
 
+	if (userInput.isKeyPressed(Input.KEY_RIGHT)){
+		EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
+				(int)(this.location().getX()),
+				(int)(this.location().getY()),
+				Direction.UP, 1, 1, 
+				ElementalType.VIRENTIA);
+		
+		
+		switch (orientation) {
+		case UP: plantMagicBall.setDirection(new Vector2d(0, -10)); 
+		break;
+		case DOWN: plantMagicBall.setDirection(new Vector2d(0, 10));
+		break;
+		case LEFT: plantMagicBall.setDirection(new Vector2d(-10, 0));
+		break;
+		case RIGHT: plantMagicBall.setDirection(new Vector2d(10, 0));
+		break;
+		}
+		
+		this.getGameState().getEC().register(plantMagicBall);
+	}
 
+	if (userInput.isKeyPressed(Input.KEY_LEFT)){
+		EntityMagicBall fireMagicBall= new EntityMagicBall(gameState, 
+				(int)(this.location().getX()),
+				(int)(this.location().getY()),
+				Direction.UP, 1, 1, 
+				ElementalType.IGNIS);
+		
+		
+		switch (orientation) {
+		case UP: fireMagicBall.setDirection(new Vector2d(0, -10)); 
+		break;
+		case DOWN: fireMagicBall.setDirection(new Vector2d(0, 10));
+		break;
+		case LEFT: fireMagicBall.setDirection(new Vector2d(-10, 0));
+		break;
+		case RIGHT: fireMagicBall.setDirection(new Vector2d(10, 0));
+		break;
+		}
+		
+		this.getGameState().getEC().register(fireMagicBall);
+	}
+	
 		if(userInput.isKeyPressed(Input.KEY_UP)){
 			switch (orientation) {
 			case UP: equippedWeapon.attack(180, 1); 
