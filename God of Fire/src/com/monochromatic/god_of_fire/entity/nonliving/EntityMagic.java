@@ -3,6 +3,7 @@ package com.monochromatic.god_of_fire.entity.nonliving;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.ElementType;
+import java.util.List;
 
 import javax.vecmath.Vector2d;
 
@@ -13,6 +14,8 @@ import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
 
+import com.monochromatic.god_of_fire.entity.EntityUtility;
+import com.monochromatic.god_of_fire.entity.living.monster.Monster;
 import com.monochromatic.god_of_fire.enums.DamageType;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.enums.ElementalType;
@@ -27,6 +30,8 @@ public class EntityMagic extends EntityProjectile{
 	Image particleImage;
 	
 	public ConfigurableEmitter emitter;
+	
+	private boolean isIntersected=false;
 	
 	String emitterFilePath;
 
@@ -67,10 +72,36 @@ public class EntityMagic extends EntityProjectile{
 
 	public void update(GameContainer gc){
 		particleSystem.update(100);
-		super.update(gc);
+		if(!isIntersected){
+			super.update(gc);
+		}
 
-		
+		List<Monster> targets = EntityUtility.intersectsMonsters(getGameState().getEC().getEntities(), 
+				calculateAttackArea());
+		for (Monster m : targets){
+			System.out.println(m);
+			if(m.adjustHealth(getAttack()))
+				isIntersected=true;
+				emitter.spawnCount.setMax(300);
+				emitter.speed.setMax(50);
+				emitter.spread.setValue(360);
+				emitter.initialDistance.setMax(10);
+				m.kill();
+		}
 	}
+	
+
+	
+	private double[] calculateAttackArea() {
+		double[] area = new double[4];
+			area[0] = (location().getX()+32);
+			area[1] = (location().getY()+32);
+			area[2] = (location().getX() - 32);
+			area[3] = (location().getY() - 32);
+			System.out.println(area[0]);
+		return area;
+	}
+
 	
 	public void setImage(String filePath){
 		try {
