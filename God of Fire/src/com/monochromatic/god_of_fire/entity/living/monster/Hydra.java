@@ -2,6 +2,7 @@ package com.monochromatic.god_of_fire.entity.living.monster;
 
 import javax.vecmath.Vector2d;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import com.monochromatic.god_of_fire.entity.Entity;
@@ -16,7 +17,7 @@ import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.enums.ElementalType;
 import com.monochromatic.god_of_fire.state.GameState;
 
-public class Hydra extends Monster implements Sniper, AI{
+public class Hydra extends Monster implements Sniper{
 
 	public Hydra(GameState g, int x, int y, int h, int a, int d, int c){
 		super(g, x, y, h, a, d, c);
@@ -27,12 +28,12 @@ public class Hydra extends Monster implements Sniper, AI{
 			e.printStackTrace();
 		}
 		this.attachAI(new ACTION_ShootPlayer());
-		//this.attachAI(new PATH_Random());
+		this.attachAI(new PATH_Random());
 	}
 
 	public void shoot(Vector2d direction) {
 		EntityFireball fireball = new EntityFireball(getGameState(), 
-				(int) location().getX(), (int) location().getY(),
+				(int) location().getX()+32, (int) location().getY()+32,
 				Direction.DOWN, 3, 0);
 		fireball.setDirection(direction);
 		this.getGameState().getEC().register(fireball);
@@ -74,12 +75,11 @@ public class Hydra extends Monster implements Sniper, AI{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
-	@Override
-	public void update(Entity e) {
-		
-		
-	}
+
+
+
 	
 	
 
