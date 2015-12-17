@@ -49,7 +49,7 @@ public abstract class Entity {
 							rightMovementAnimation;
 	
 	/** Array of images and animation for when the entity is not moving */
-	protected Image[] stationaryImages = new Image[9];
+	protected SpriteSheet stationaryImages;
 	protected Animation stationaryAnimation;
 	
 	/** Array of images and animation for entities physical attacks */
@@ -127,6 +127,12 @@ public abstract class Entity {
 		castingAnimation=new Animation(castingImages, 1, false);
 		*/
 		initComplete=true;
+	}
+	
+	public void initSingleSpriteSheet() throws SlickException{
+		stationaryImages = new SpriteSheet(spriteSheet, 32, 32);
+		stationaryAnimation=new Animation(stationaryImages, 300);
+		currentAnimation=stationaryAnimation;
 	}
 	
 	public void setImage(String filePath){
