@@ -129,9 +129,13 @@ public abstract class Entity {
 		initComplete=true;
 	}
 	
-	public void initSingleSpriteSheet() throws SlickException{
-		stationaryImages = new SpriteSheet(spriteSheet, 32, 32);
+	public void initSingleSpriteSheet(int height, int width) throws SlickException{
+		stationaryImages = new SpriteSheet(spriteSheet, height, width);
 		stationaryAnimation=new Animation(stationaryImages, 300);
+		upwardsMovementAnimation=stationaryAnimation;
+		downwardMovementAnimation=stationaryAnimation;
+		rightMovementAnimation=stationaryAnimation;
+		leftMovementAnimation=stationaryAnimation;
 		currentAnimation=stationaryAnimation;
 	}
 	
