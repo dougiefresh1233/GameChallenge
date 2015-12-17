@@ -1,4 +1,4 @@
-package com.monochromatic.god_of_fire.utility;
+package com.monochromatic.god_of_fire.utility.files;
 import java.io.FileNotFoundException;
 
 import com.monochromatic.god_of_fire.utility.encryption.Encryption;
