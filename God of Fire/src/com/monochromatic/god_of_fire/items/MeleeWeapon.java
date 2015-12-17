@@ -105,14 +105,13 @@ public class MeleeWeapon extends Weapon{
 
 
 
-	@Override
 	public void render() {
 		
 		if(attacking){
 			
 		itemImage.draw((float)(playersLocation.getX()+25), 
 				(float)playersLocation.getY());
-	}
+		}
 
 
 	}

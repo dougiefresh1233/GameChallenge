@@ -16,6 +16,7 @@ public class EntityItem extends NonlivingEntity {
 
 	public EntityItem(GameState g, int x, int y, Item i) {
 		super(g, x, y);
+		this.item = i;
 	}
 
 	/**
@@ -34,10 +35,18 @@ public class EntityItem extends NonlivingEntity {
 
 	@Override
 	public void collide(Entity e) {
-		if (e instanceof Player)
+		if (e instanceof Player) {
 			((Player) e).getInventory().adjust(item);
+			this.setForRemoval(true);
+		}
 		else
 			return; // Do Nothing
+	}
+	
+	@Override
+	public void render() {
+		item.getImage().draw((int)(location().getX()-gameState.getCamera().getxOffset()),
+				(int)(location().getY()-gameState.getCamera().getyOffset()));
 	}
 
 }

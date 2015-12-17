@@ -15,8 +15,10 @@ import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.entity.living.monster.Clone;
 import com.monochromatic.god_of_fire.entity.living.monster.FireTurret;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
+import com.monochromatic.god_of_fire.entity.nonliving.EntityItem;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.graphics.Camera;
+import com.monochromatic.god_of_fire.items.Item;
 
 public class GameState extends BasicGameState{
 	EntityController EC;
@@ -44,11 +46,15 @@ public class GameState extends BasicGameState{
 		Clone clone2 = new Clone(this, 800, 1020, 10, 10, 8, 5);
 		FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
 		
+		Item itemLeaf = new Item("Leaf", "It's a leaf.", "resources/leaf.png", 0, false, false);
+		EntityItem entityLeaf = new EntityItem(this, 1000, 1020, itemLeaf);
+		
 		EC.register(player);
 		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
 		EC.register(turret);
+		EC.register(entityLeaf);
 		
 		playersPerspective=new Camera(this, 0,0);
 		
