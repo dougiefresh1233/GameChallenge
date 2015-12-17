@@ -162,13 +162,13 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: fireMagicBall.setDirection(new Vector2d(0, -10)); 
+		case UP: fireMagicBall.setDirection(new Vector2d(0, -5)); 
 		break;
-		case DOWN: fireMagicBall.setDirection(new Vector2d(0, 10));
+		case DOWN: fireMagicBall.setDirection(new Vector2d(0, 5));
 		break;
-		case LEFT: fireMagicBall.setDirection(new Vector2d(-10, 0));
+		case LEFT: fireMagicBall.setDirection(new Vector2d(-5, 0));
 		break;
-		case RIGHT: fireMagicBall.setDirection(new Vector2d(10, 0));
+		case RIGHT: fireMagicBall.setDirection(new Vector2d(5, 0));
 		break;
 		}
 		
