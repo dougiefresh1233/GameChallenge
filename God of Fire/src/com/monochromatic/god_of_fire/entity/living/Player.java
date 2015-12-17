@@ -117,13 +117,13 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: waterMagicBall.setDirection(new Vector2d(0, -10)); 
+		case UP: waterMagicBall.setDirection(new Vector2d(0, -5)); 
 		break;
-		case DOWN: waterMagicBall.setDirection(new Vector2d(0, 10));
+		case DOWN: waterMagicBall.setDirection(new Vector2d(0, 5));
 		break;
-		case LEFT: waterMagicBall.setDirection(new Vector2d(-10, 0));
+		case LEFT: waterMagicBall.setDirection(new Vector2d(-5, 0));
 		break;
-		case RIGHT: waterMagicBall.setDirection(new Vector2d(10, 0));
+		case RIGHT: waterMagicBall.setDirection(new Vector2d(5, 0));
 		break;
 		}
 		
@@ -140,13 +140,13 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: plantMagicBall.setDirection(new Vector2d(0, -10)); 
+		case UP: plantMagicBall.setDirection(new Vector2d(0, -5)); 
 		break;
-		case DOWN: plantMagicBall.setDirection(new Vector2d(0, 10));
+		case DOWN: plantMagicBall.setDirection(new Vector2d(0, 5));
 		break;
-		case LEFT: plantMagicBall.setDirection(new Vector2d(-10, 0));
+		case LEFT: plantMagicBall.setDirection(new Vector2d(-5, 0));
 		break;
-		case RIGHT: plantMagicBall.setDirection(new Vector2d(10, 0));
+		case RIGHT: plantMagicBall.setDirection(new Vector2d(5, 0));
 		break;
 		}
 		
@@ -162,14 +162,22 @@ public class Player extends LivingEntity {
 		
 		
 		switch (orientation) {
-		case UP: fireMagicBall.setDirection(new Vector2d(0, -10)); 
-		break;
-		case DOWN: fireMagicBall.setDirection(new Vector2d(0, 10));
-		break;
-		case LEFT: fireMagicBall.setDirection(new Vector2d(-10, 0));
-		break;
-		case RIGHT: fireMagicBall.setDirection(new Vector2d(10, 0));
-		break;
+		case UP: 
+			fireMagicBall.setRotation(180);
+			fireMagicBall.setDirection(new Vector2d(0, -5)); 
+			break;
+		case DOWN: 
+			fireMagicBall.setRotation(0);
+			fireMagicBall.setDirection(new Vector2d(0, 5));
+			break;
+		case LEFT: 
+			fireMagicBall.setRotation(90);
+			fireMagicBall.setDirection(new Vector2d(-5, 0));
+			break;
+		case RIGHT: 
+			fireMagicBall.setRotation(270);
+			fireMagicBall.setDirection(new Vector2d(5, 0));
+			break;
 		}
 		
 		this.getGameState().getEC().register(fireMagicBall);

@@ -55,6 +55,11 @@ public class EntityMagic extends EntityProjectile{
 		}
 	}
 	
+	
+	public void setRotation(int value){
+		emitter.angularOffset.setValue(value);
+	}
+	
 	protected void setEmitterFilePath(String string){
 		this.emitterFilePath=string;
 	}
