@@ -20,23 +20,45 @@ public final class Music {
 	private static float volume = (float) .5;
 	private static float position = 0;
 	private static final String[] paths = { "test.ogg", "title", "main", "inv", "map" };
-	//TODO create paths for music
+	// TODO create paths for music
 	private static org.newdawn.slick.Music currentSong;
 
-	public static void playMusic(int songID) {
+	/**
+	 * Begins playing a new a new song
+	 * 
+	 * @param songID
+	 *            The id number of the song
+	 * @param loop
+	 *            Whether or not the song should loop when played
+	 */
+	public static void playMusic(int songID, boolean loop) {
 		position = 0;
 		try {
 			currentSong = new org.newdawn.slick.Music(getFilePath(songID));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		currentSong.loop();
+		if (loop) {
+			currentSong.loop();
+		} else {
+			currentSong.play();
+		}
 		currentSong.setVolume(volume);
 	}
 
+	/**
+	 * Pauses the currently playing song
+	 */
 	public void pauseMusic() {
-		position=currentSong.getPosition();
+		position = currentSong.getPosition();
 		currentSong.pause();
+	}
+
+	/**
+	 * Resumes a currently paused song
+	 */
+	public void resumeMusic() {
+		currentSong.resume();
 	}
 
 	/**
@@ -48,6 +70,15 @@ public final class Music {
 	public void setVolume(float volume) {
 		this.volume = volume;
 		currentSong.setVolume(this.volume);
+	}
+	/**
+	 * Causes the currently selected song to loop after it finishes
+	 */
+	public void loopSong(){
+		position=currentSong.getPosition();
+		currentSong.loop();
+		currentSong.setVolume(volume);
+		currentSong.setPosition(position);
 	}
 
 	private static String getFilePath(int songID) {
