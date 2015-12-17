@@ -33,7 +33,7 @@ public class Player extends LivingEntity {
 	 * Players inventory
 	 */
 
-	protected Inventory inventory;
+	protected Inventory inventory = new Inventory();
 
 	Point cameraOffsetPoint=new Point(0,0);
 

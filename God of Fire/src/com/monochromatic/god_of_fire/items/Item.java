@@ -3,7 +3,7 @@ package com.monochromatic.god_of_fire.items;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Item {
+public class Item {
 	
 	/**
 	 * Name of the item
@@ -43,7 +43,7 @@ public abstract class Item {
 	public Item(){
 		
 	}
-	
+
 	/**
 	 * Constructor
 	 * @param name
@@ -124,6 +124,10 @@ public abstract class Item {
 		return isSellable;
 	}
 	
+	public Image getImage() {
+		return itemImage;
+	}
+
 	/**
 	 * Sets the image for the item
 	 * @param filePath
@@ -137,6 +141,6 @@ public abstract class Item {
 		}
 	}
 	
-	abstract protected void render();
+	//abstract protected void render();
 
 }
