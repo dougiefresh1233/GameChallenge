@@ -1,10 +1,16 @@
 package com.monochromatic.god_of_fire.entity.living.monster;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.vecmath.Vector2d;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ConfigurableEmitter;
+import org.newdawn.slick.particles.ParticleIO;
+import org.newdawn.slick.particles.ParticleSystem;
 
 import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.ai.ACTION_ShootPlayer;
@@ -14,21 +20,44 @@ import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.state.GameState;
 
 public class FireTurret extends Monster implements Sniper {
-	Image image;
+	ParticleSystem particleSystem;
+	Image particleImage;
+	ConfigurableEmitter emitter;
 	
 	public FireTurret(GameState g, int x, int y, int h, int a, int d, int c) {
 		super(g, x, y, h, a, d, c);
-		
+		setImage("resources/KillerEye.png");
 		try {
-			image = new Image("resources/shittysword.png");
+			initSingleSpriteSheet();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		initParticles();
 		//setSprite("resources/fireball.png");
 		//setSprite("resources/fireTurret.png");
 		//this.attachAI(new FireAtPlayer());
 		//this.attachAI(new PATH_Chase());
 		this.attachAI(new ACTION_ShootPlayer());
+	}
+	
+	protected void initParticles(){
+
+		try {
+			particleImage= new Image("resources/Particle.png", false);
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		particleSystem= new ParticleSystem(particleImage, 1500);
+
+		try {
+			File xmlFile=new File("resources/BlackCloud.xml");
+			emitter = ParticleIO.loadEmitter(xmlFile);
+			particleSystem.addEmitter(emitter);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -41,13 +70,17 @@ public class FireTurret extends Monster implements Sniper {
 	}
 	
 	public void update(GameContainer gameScreen){
+		particleSystem.update(100);
 		super.update(gameScreen);
 	}
 	
 	@Override
 	public void render() {
-		image.draw((int)(location().getX()-gameState.getCamera().getxOffset()),
+		particleSystem.render((int)(location().getX()-gameState.getCamera().getxOffset()+16),
+				(int)(location().getY()-gameState.getCamera().getyOffset()+16));
+		currentAnimation.draw((int)(location().getX()-gameState.getCamera().getxOffset()),
 				(int)(location().getY()-gameState.getCamera().getyOffset()));
+
 	}
 
 	
