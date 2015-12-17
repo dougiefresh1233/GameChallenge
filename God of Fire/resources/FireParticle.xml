@@ -11,8 +11,8 @@
   <length enabled="true" max="2500.0" min="2500.0"/>
   <spread value="360.0"/>
   <angularOffset value="0.0"/>
-  <growthFactor value="100.0"/>
-  <gravityFactor value="0.0"/>
+  <growthFactor value="50.0"/>
+  <gravityFactor value="-1.5"/>
   <windFactor value="0.0"/>
   <startAlpha value="255.0"/>
   <endAlpha value="10.0"/>
