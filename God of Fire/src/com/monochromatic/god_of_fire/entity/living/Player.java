@@ -112,7 +112,7 @@ public class Player extends LivingEntity {
 		EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),
-				Direction.UP, 1, 1, 
+				Direction.UP, 1, 10, 
 				ElementalType.FLUMINIS);
 		
 		
@@ -135,7 +135,7 @@ public class Player extends LivingEntity {
 		EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),
-				Direction.UP, 1, 1, 
+				Direction.UP, 1, 10, 
 				ElementalType.VIRENTIA);
 		
 		
@@ -157,7 +157,7 @@ public class Player extends LivingEntity {
 		EntityMagicBall fireMagicBall= new EntityMagicBall(gameState, 
 				(int)(this.location().getX()),
 				(int)(this.location().getY()),
-				Direction.UP, 1, 1, 
+				Direction.UP, 1, 10, 
 				ElementalType.IGNIS);
 		
 		
