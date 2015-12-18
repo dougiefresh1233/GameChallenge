@@ -18,7 +18,7 @@ public class Clone extends Monster {
 		//this.attachAI(new PATH_Chase());
 		
 		try {
-			init();
+			init(32, 64, 6, 4);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

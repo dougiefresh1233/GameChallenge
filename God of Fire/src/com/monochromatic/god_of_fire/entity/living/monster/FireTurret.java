@@ -28,7 +28,7 @@ public class FireTurret extends Monster implements Sniper {
 		super(g, x, y, h, a, d, c);
 		setImage("resources/KillerEye.png");
 		try {
-			initSingleSpriteSheet();
+			initSingleSpriteSheet(32, 32);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

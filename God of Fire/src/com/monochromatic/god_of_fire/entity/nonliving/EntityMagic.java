@@ -94,10 +94,10 @@ public class EntityMagic extends EntityProjectile{
 	
 	private double[] calculateAttackArea() {
 		double[] area = new double[4];
-			area[0] = (location().getX()+32);
-			area[1] = (location().getY()+32);
-			area[2] = (location().getX() - 32);
-			area[3] = (location().getY() - 32);
+			area[0] = (location().getX());
+			area[1] = (location().getY());
+			area[2] = (location().getX() + 64);
+			area[3] = (location().getY() + 64);
 			System.out.println(area[0]);
 		return area;
 	}

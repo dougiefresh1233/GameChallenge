@@ -96,12 +96,12 @@ public abstract class Entity {
 	 * I just left it all as is for now as a place holder and so everyone can see whats to come
 	 * @throws SlickException
 	 */
-	public void init() throws SlickException{
+	public void init(int width, int height, int widthDim, int heightDim) throws SlickException{
 		// TODO
-		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, 192, 62), 32, 62);
-		leftMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 64, 192, 64), 32, 64);
-		upwardsMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 128, 192, 64), 32, 64);
-		rightMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 192, 192, 64),32, 64);
+		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, width*widthDim, height), width, height);
+		leftMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height, width*widthDim, height), width, height);
+		upwardsMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height*2, width*widthDim, height), width, height);
+		rightMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height*3, width*widthDim, height), width, height);
 		
 		/**
 		stationaryImages = new Image[] { 
@@ -129,9 +129,13 @@ public abstract class Entity {
 		initComplete=true;
 	}
 	
-	public void initSingleSpriteSheet() throws SlickException{
-		stationaryImages = new SpriteSheet(spriteSheet, 32, 32);
+	public void initSingleSpriteSheet(int height, int width) throws SlickException{
+		stationaryImages = new SpriteSheet(spriteSheet, height, width);
 		stationaryAnimation=new Animation(stationaryImages, 300);
+		upwardsMovementAnimation=new Animation(stationaryImages, 300);
+		downwardMovementAnimation=new Animation(stationaryImages, 300);
+		rightMovementAnimation=new Animation(stationaryImages, 300);
+		leftMovementAnimation=new Animation(stationaryImages, 300);
 		currentAnimation=stationaryAnimation;
 	}
 	

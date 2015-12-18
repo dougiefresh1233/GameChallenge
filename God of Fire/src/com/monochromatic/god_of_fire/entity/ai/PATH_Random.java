@@ -5,6 +5,7 @@ import com.monochromatic.god_of_fire.enums.Direction;
 
 public class PATH_Random implements AI {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void update(Entity e) {
 		Direction d;
