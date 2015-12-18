@@ -51,7 +51,6 @@ public class Player extends LivingEntity {
 		super(g, x, y, h, a, d, c);
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
-		//values for collision
 		try {
 			init(32, 64, 6, 4);
 		} catch (SlickException e) {

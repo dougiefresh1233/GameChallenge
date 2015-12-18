@@ -143,7 +143,6 @@ public abstract class Entity {
 		try {
 			spriteSheet=new SpriteSheet(filePath, 32, 64);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
