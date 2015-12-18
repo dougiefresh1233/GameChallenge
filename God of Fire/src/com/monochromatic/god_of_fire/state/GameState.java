@@ -15,6 +15,7 @@ import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.entity.living.monster.Clone;
 import com.monochromatic.god_of_fire.entity.living.monster.FireTurret;
 import com.monochromatic.god_of_fire.entity.living.monster.Hydra;
+import com.monochromatic.god_of_fire.entity.living.monster.Spider;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityItem;
 import com.monochromatic.god_of_fire.enums.Direction;
@@ -47,7 +48,16 @@ public class GameState extends BasicGameState{
 		Clone clone2 = new Clone(this, 800, 1020, 10, 10, 8, 5);
 		FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
 		
-		Hydra hydra = new Hydra(this, 500, 800, 10, 1, 1, 1);
+		Spider[] arrayOfSpider= new Spider[360];
+		for(int i = 0; i<arrayOfSpider.length; i++){
+			arrayOfSpider[i]= new Spider(this, 800, 1020, 10, 10, 8, 5);
+			EC.register(arrayOfSpider[i]);
+		}
+		Hydra hydra1 = new Hydra(this, 100, 100, 10, 1, 1, 1);
+		
+		Hydra hydra2 = new Hydra(this, 700, 300, 10, 1, 1, 1);
+		
+		Hydra hydra3 = new Hydra(this, 200, 600, 10, 1, 1, 1);
 		
 		Item itemLeaf = new Item("Leaf", "It's a leaf.", "resources/leaf.png", 0, false, false);
 		EntityItem entityLeaf = new EntityItem(this, 1000, 1020, itemLeaf);
@@ -56,8 +66,11 @@ public class GameState extends BasicGameState{
 		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
+
 		EC.register(turret);
-		EC.register(hydra);
+		EC.register(hydra1);
+		EC.register(hydra2);
+		EC.register(hydra3);
 		EC.register(entityLeaf);
 		
 		playersPerspective=new Camera(this, 0,0);

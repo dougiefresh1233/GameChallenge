@@ -21,6 +21,7 @@ public class Hydra extends Monster implements Sniper{
 
 	public Hydra(GameState g, int x, int y, int h, int a, int d, int c){
 		super(g, x, y, h, a, d, c);
+		movementSpeed=2;
 		setImage("resources/LargerShittyHydra.png");
 		try {
 			initSingleSpriteSheet(128, 128);
@@ -28,7 +29,7 @@ public class Hydra extends Monster implements Sniper{
 			e.printStackTrace();
 		}
 		this.attachAI(new ACTION_ShootPlayer());
-		this.attachAI(new PATH_Random());
+		this.attachAI(new PATH_Chase());
 	}
 
 	public void shoot(Vector2d direction) {

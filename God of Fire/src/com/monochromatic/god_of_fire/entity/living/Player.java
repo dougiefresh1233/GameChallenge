@@ -53,7 +53,7 @@ public class Player extends LivingEntity {
 		setImage("resources/spriteSheet.png");
 		//values for collision
 		try {
-			init();
+			init(32, 64, 6, 4);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
