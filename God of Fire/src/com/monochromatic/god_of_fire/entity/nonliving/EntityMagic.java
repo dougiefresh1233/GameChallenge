@@ -79,7 +79,6 @@ public class EntityMagic extends EntityProjectile{
 		List<Monster> targets = EntityUtility.intersectsMonsters(getGameState().getEC().getEntities(), 
 				calculateAttackArea());
 		for (Monster m : targets){
-			System.out.println(m);
 			if(m.adjustHealth(getAttack()))
 				isIntersected=true;
 				emitter.spawnCount.setMax(300);
