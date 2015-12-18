@@ -20,6 +20,7 @@ import com.monochromatic.god_of_fire.entity.nonliving.EntityFireball;
 import com.monochromatic.god_of_fire.entity.nonliving.EntityItem;
 import com.monochromatic.god_of_fire.enums.Direction;
 import com.monochromatic.god_of_fire.graphics.Camera;
+import com.monochromatic.god_of_fire.graphics.HUDOrbs;
 import com.monochromatic.god_of_fire.items.Item;
 
 public class GameState extends BasicGameState{
@@ -27,6 +28,8 @@ public class GameState extends BasicGameState{
 	TiledMap map;
 	Player player;
 	Image HUD;
+	HUDOrbs healthOrb;
+	HUDOrbs resourceOrb;
 	
 	private final int gameWidth=640;
 	private final int gameHeight=480;
@@ -38,6 +41,8 @@ public class GameState extends BasicGameState{
 		map = new TiledMap("resources/Map.tmx");//TODO Replace with real map
 		EC = new EntityController(this); // Must be declared AFTER map
 		HUD = new Image("resources/HUD.png");
+		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
+		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
 		player = new Player(this, 800, 1020, 10, 10, 10, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
@@ -87,10 +92,16 @@ public class GameState extends BasicGameState{
 				0- (int)playersPerspective.getyOffset());
 		EC.render();
 		g.drawImage(HUD,0,0);
+		
+		healthOrb.render();
+		resourceOrb.render();
+		
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		EC.update(gc);
+		healthOrb.update();
+		resourceOrb.update();
 	}
 
 	public int getID() {	//returns ID for SetupClass
