@@ -49,6 +49,7 @@ public class Player extends LivingEntity {
 
 	public Player(GameState g, int x, int y, int h, int a, int d, int c) {
 		super(g, x, y, h, a, d, c);
+		setHeight(2);
 		movementSpeed=2;
 		setImage("resources/spriteSheet.png");
 		try {
@@ -110,7 +111,7 @@ public class Player extends LivingEntity {
 			EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
 					(int)(this.location().getX()),
 					(int)(this.location().getY()),
-					Direction.UP, 1, 10, 
+					Direction.UP, 1, getLevel(), 10, 
 					ElementalType.FLUMINIS);
 		
 		
@@ -133,7 +134,7 @@ public class Player extends LivingEntity {
 			EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
 					(int)(this.location().getX()),
 					(int)(this.location().getY()),
-					Direction.UP, 1, 10, 
+					Direction.UP, 1, getLevel(), 10, 
 					ElementalType.VIRENTIA);
 		
 		
@@ -155,7 +156,7 @@ public class Player extends LivingEntity {
 			EntityMagicBall fireMagicBall= new EntityMagicBall(gameState, 
 					(int)(this.location().getX()),
 					(int)(this.location().getY()),
-					Direction.UP, 1, 10, 
+					Direction.UP, 1, getLevel(), 10, 
 					ElementalType.IGNIS);
 			
 			

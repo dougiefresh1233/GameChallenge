@@ -26,8 +26,8 @@ public abstract class NonlivingEntity extends Entity {
 		isLiving=false;
 	}
 
-	public NonlivingEntity(GameState g, int x, int y, Direction d, int s) {
-		super(g, x, y, d, s);
+	public NonlivingEntity(GameState g, int x, int y, Direction d, int s, int l) {
+		super(g, x, y, d, s, l);
 		isLiving=false;
 	}
 

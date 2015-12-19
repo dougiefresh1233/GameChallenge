@@ -33,6 +33,8 @@ public abstract class Entity {
 	protected boolean setForRemoval = false;
 	protected boolean initComplete = false;
 	protected boolean movedBack = false;
+	/** how many tiles high is entity?**/
+	protected int HEIGHT=1;
 	
 	/** Spritesheet for all images **/
 	protected Image spriteSheet;
@@ -63,15 +65,16 @@ public abstract class Entity {
 	}
 	
 	public Entity(GameState g, int x, int y, Direction d){
-		this(g, x, y, d, 0);
+		this(g, x, y, d, 0, 1);
 	}
 	
-	public Entity(GameState g, int x, int y, Direction d, int s){
+	public Entity(GameState g, int x, int y, Direction d, int s, int l){
 		gameState = g;
 		this.location = new Point(x, y);
 		this.previous = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
+		this.level = l;
 	}
 	
 	/**
@@ -381,5 +384,12 @@ public abstract class Entity {
 	public boolean isDown(){
 		return (velocity.y>0)? true:false;
 	}
-	
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+
+	public void setHeight(int height) {
+		HEIGHT = height;
+	}
 }

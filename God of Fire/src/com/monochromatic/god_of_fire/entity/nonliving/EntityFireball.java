@@ -10,8 +10,8 @@ public class EntityFireball extends EntityProjectile {
 
 	Image image;
 	
-	public EntityFireball(GameState g, int x, int y, Direction d, int s, int a) {
-		super(g, x, y, d, s, a);
+	public EntityFireball(GameState g, int x, int y, Direction d, int s, int l, int a) {
+		super(g, x, y, d, s, l, a);
 		//this.setSprite("resources/fireball.png");
 		try {
 			image = new Image("resources/fireball.png");

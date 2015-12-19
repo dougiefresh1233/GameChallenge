@@ -22,6 +22,7 @@ public class Hydra extends Monster implements Sniper{
 	public Hydra(GameState g, int x, int y, int h, int a, int d, int c){
 		super(g, x, y, h, a, d, c);
 		movementSpeed=2;
+		setHeight(4);	//TODO check height
 		setImage("resources/LargerShittyHydra.png");
 		try {
 			initSingleSpriteSheet(128, 128);
@@ -35,7 +36,7 @@ public class Hydra extends Monster implements Sniper{
 	public void shoot(Vector2d direction) {
 		EntityFireball fireball = new EntityFireball(getGameState(), 
 				(int) location().getX()+32, (int) location().getY()+32,
-				Direction.DOWN, 3, 0);
+				Direction.DOWN, 3, getLevel(), 0);
 		fireball.setDirection(direction);
 		this.getGameState().getEC().register(fireball);
 	}

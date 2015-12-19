@@ -11,8 +11,8 @@ import com.monochromatic.god_of_fire.state.GameState;
 
 public class EntityMagicBall extends EntityMagic{
 
-	public EntityMagicBall(GameState g, int x, int y, Direction d, int s, int a, ElementalType type) {
-		super(g, x, y, d, s, a, type);
+	public EntityMagicBall(GameState g, int x, int y, Direction d, int s, int l, int a, ElementalType type) {
+		super(g, x, y, d, s, l, a, type);
 		
 		switch (type) {
 		case IGNIS: 

@@ -37,9 +37,8 @@ public class EntityMagic extends EntityProjectile{
 
 	private long startOfCooldown;
 
-	public EntityMagic(GameState g, int x, int y, Direction d, 
-			int s, int a, ElementalType type) {
-		super(g, x, y, d, s, a);
+	public EntityMagic(GameState g, int x, int y, Direction d, int s, int a, int l, ElementalType type) {
+		super(g, x, y, d, s, l, a);
 		this.elementType=type;
 	}
 	
