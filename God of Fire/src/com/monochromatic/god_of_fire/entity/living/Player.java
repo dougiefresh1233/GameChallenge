@@ -54,7 +54,6 @@ public class Player extends LivingEntity {
 		try {
 			init(32, 64, 6, 4);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -72,10 +71,10 @@ public class Player extends LivingEntity {
 		try {
 			userInput(gameScreen);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		move();
 		equippedWeapon.update();
 		gameState.getCamera().centerCamera(this);
 		cameraOffsetPoint.setLocation((int)(location().getX()-gameState.getCamera().getxOffset()),
@@ -87,100 +86,100 @@ public class Player extends LivingEntity {
 	private void userInput(GameContainer gameScreen) throws SlickException{
 		Input userInput = gameScreen.getInput();
 		if(userInput.isKeyDown(Input.KEY_W))
-			move(Direction.UP);
+			velocity.y=-movementSpeed;
 		else
 			upwardsMovementAnimation.stop();
 
-		if(userInput.isKeyDown(Input.KEY_S))
-			move(Direction.DOWN);
-		else
+		if(userInput.isKeyDown(Input.KEY_S)){
+			velocity.y=movementSpeed;
+		}else
 			downwardMovementAnimation.stop();
 
-		if (userInput.isKeyDown(Input.KEY_A))
-			move(Direction.LEFT);
-		else
+		if (userInput.isKeyDown(Input.KEY_A)){
+			velocity.x=-movementSpeed;
+		}else
 			leftMovementAnimation.stop();
 
-		if (userInput.isKeyDown(Input.KEY_D))
-			move(Direction.RIGHT);
-		else
+		if (userInput.isKeyDown(Input.KEY_D)){
+			velocity.x=movementSpeed;
+		}else
 			rightMovementAnimation.stop();
 
 
-	if (userInput.isKeyPressed(Input.KEY_DOWN)){
-		EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
-				(int)(this.location().getX()),
-				(int)(this.location().getY()),
-				Direction.UP, 1, 10, 
-				ElementalType.FLUMINIS);
+		if (userInput.isKeyPressed(Input.KEY_DOWN)){
+			EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
+					(int)(this.location().getX()),
+					(int)(this.location().getY()),
+					Direction.UP, 1, 10, 
+					ElementalType.FLUMINIS);
 		
 		
-		switch (orientation) {
-		case UP: waterMagicBall.setDirection(new Vector2d(0, -5)); 
-		break;
-		case DOWN: waterMagicBall.setDirection(new Vector2d(0, 5));
-		break;
-		case LEFT: waterMagicBall.setDirection(new Vector2d(-5, 0));
-		break;
-		case RIGHT: waterMagicBall.setDirection(new Vector2d(5, 0));
-		break;
+			switch (orientation) {
+			case UP: waterMagicBall.setDirection(new Vector2d(0, -5)); 
+			break;
+			case DOWN: waterMagicBall.setDirection(new Vector2d(0, 5));
+			break;
+			case LEFT: waterMagicBall.setDirection(new Vector2d(-5, 0));
+			break;
+			case RIGHT: waterMagicBall.setDirection(new Vector2d(5, 0));
+			break;
+			}
+			
+			this.getGameState().getEC().register(waterMagicBall);
 		}
-		
-		this.getGameState().getEC().register(waterMagicBall);
-	}
 		
 
-	if (userInput.isKeyPressed(Input.KEY_RIGHT)){
-		EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
-				(int)(this.location().getX()),
-				(int)(this.location().getY()),
-				Direction.UP, 1, 10, 
-				ElementalType.VIRENTIA);
+		if (userInput.isKeyPressed(Input.KEY_RIGHT)){
+			EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
+					(int)(this.location().getX()),
+					(int)(this.location().getY()),
+					Direction.UP, 1, 10, 
+					ElementalType.VIRENTIA);
 		
 		
-		switch (orientation) {
-		case UP: plantMagicBall.setDirection(new Vector2d(0, -5)); 
-		break;
-		case DOWN: plantMagicBall.setDirection(new Vector2d(0, 5));
-		break;
-		case LEFT: plantMagicBall.setDirection(new Vector2d(-5, 0));
-		break;
-		case RIGHT: plantMagicBall.setDirection(new Vector2d(5, 0));
-		break;
+			switch (orientation) {
+			case UP: plantMagicBall.setDirection(new Vector2d(0, -5)); 
+			break;
+			case DOWN: plantMagicBall.setDirection(new Vector2d(0, 5));
+			break;
+			case LEFT: plantMagicBall.setDirection(new Vector2d(-5, 0));
+			break;
+			case RIGHT: plantMagicBall.setDirection(new Vector2d(5, 0));
+			break;
+			}
+			
+			this.getGameState().getEC().register(plantMagicBall);
 		}
-		
-		this.getGameState().getEC().register(plantMagicBall);
-	}
 
-	if (userInput.isKeyPressed(Input.KEY_LEFT)){
-		EntityMagicBall fireMagicBall= new EntityMagicBall(gameState, 
-				(int)(this.location().getX()),
-				(int)(this.location().getY()),
-				Direction.UP, 1, 10, 
-				ElementalType.IGNIS);
-		
-		
-		switch (orientation) {
-		case UP: 
-			fireMagicBall.setRotation(180);
-			fireMagicBall.setDirection(new Vector2d(0, -5)); 
-			break;
-		case DOWN: 
-			fireMagicBall.setRotation(0);
-			fireMagicBall.setDirection(new Vector2d(0, 5));
-			break;
-		case LEFT: 
-			fireMagicBall.setRotation(90);
-			fireMagicBall.setDirection(new Vector2d(-5, 0));
-			break;
-		case RIGHT: 
-			fireMagicBall.setRotation(270);
-			fireMagicBall.setDirection(new Vector2d(5, 0));
-			break;
+		if (userInput.isKeyPressed(Input.KEY_LEFT)){
+			EntityMagicBall fireMagicBall= new EntityMagicBall(gameState, 
+					(int)(this.location().getX()),
+					(int)(this.location().getY()),
+					Direction.UP, 1, 10, 
+					ElementalType.IGNIS);
+			
+			
+			switch (orientation) {
+			case UP: 
+				fireMagicBall.setRotation(180);
+				fireMagicBall.setDirection(new Vector2d(0, -5)); 
+				break;
+			case DOWN: 
+				fireMagicBall.setRotation(0);
+				fireMagicBall.setDirection(new Vector2d(0, 5));
+				break;
+			case LEFT: 
+				fireMagicBall.setRotation(90);
+				fireMagicBall.setDirection(new Vector2d(-5, 0));
+				break;
+			case RIGHT: 
+				fireMagicBall.setRotation(270);
+				fireMagicBall.setDirection(new Vector2d(5, 0));
+				break;
+			}
+			
+			this.getGameState().getEC().register(fireMagicBall);
 		}
-		
-		this.getGameState().getEC().register(fireMagicBall);
-	}
 	
 		if(userInput.isKeyPressed(Input.KEY_UP)){
 			switch (orientation) {

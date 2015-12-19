@@ -153,10 +153,11 @@ public abstract class Entity {
 	 */
 	@Deprecated
 	public void move(Direction d) {
-		if (d == Direction.UP) move(new Vector2d(0, -movementSpeed));
-		if (d == Direction.DOWN) move(new Vector2d(0, movementSpeed));
-		if (d == Direction.LEFT) move(new Vector2d(-movementSpeed, 0));
-		if (d == Direction.RIGHT) move(new Vector2d(movementSpeed, 0));
+		if (d == Direction.UP) velocity.y=-movementSpeed;
+		if (d == Direction.DOWN) velocity.y=movementSpeed;
+		if (d == Direction.LEFT) velocity.x=-movementSpeed;
+		if (d == Direction.RIGHT) velocity.x=movementSpeed;
+		move();
 	}
 	
 	public void move() {
@@ -361,6 +362,23 @@ public abstract class Entity {
 
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState;
+	}
+	
+	public void stopVelocity(){
+		velocity.x=0;
+		velocity.y=0;
+	}
+	public boolean isLeft(){
+		return (velocity.x<0)? true:false;
+	}
+	public boolean isRight(){
+		return (velocity.x>0)? true:false;
+	}
+	public boolean isUp(){
+		return (velocity.y<0)? true:false;
+	}
+	public boolean isDown(){
+		return (velocity.y>0)? true:false;
 	}
 	
 }

@@ -26,25 +26,22 @@ public class MapCollider {
 	}
 	
 	public void collide(Entity e) {
-		if(collides(e/*, e.orientation()*/))
+		if(collides(e))
 			e.movePrevious();
 	}
 	
-	private boolean collides(Entity e/*, Direction d*/) {
-		/*switch(d){
-			case UP: 	return collidesTileUp(e);
-			case DOWN: 	return collidesTileDown(e);
-			case LEFT: 	return collidesTileLeft(e);
-			default: 	return collidesTileRight(e);
-			*/
-		Vector2d origin= new Vector2d(1,0);	//Vector along x axis
-		double angle=e.getVelocity().angle(origin);	//angle between direction and x axis
-		/*if(angle==0){	//Moving right
-			return collidesTileRight(e);	//check right tile	
-		}else if(angle==Math.PI/2){	//Moving up
-			return collidesTileUp(e);
-		}*/
-		return collidesTileUp(e)  || collidesTileDown(e) || collidesTileRight(e) || collidesTileLeft(e);
+	private boolean collides(Entity e) {
+		boolean up=false; 
+		boolean	down=false; 
+		boolean	left=false; 
+		boolean right=false;
+		
+		if (e.isRight()) right =collidesTileRight(e); 
+		if (e.isLeft()) left = collidesTileLeft(e);
+		if (e.isUp()) up = collidesTileUp(e);
+		if (e.isDown()) down = collidesTileDown(e);
+		e.stopVelocity();
+		return left || right || up || down;
 	}
 	
 	private boolean collidesTileUp(Entity e) {
