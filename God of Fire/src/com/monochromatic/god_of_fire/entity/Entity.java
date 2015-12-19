@@ -170,7 +170,7 @@ public abstract class Entity {
 
 	public void move(Vector2d v) {
 		movedBack = false;
-		Direction d;
+		Direction d=Direction.UP;
 		if (Math.abs(v.x) > Math.abs(v.y))
 			if (v.x > 0) {
 				moveRight();
@@ -185,7 +185,7 @@ public abstract class Entity {
 				moveDown();
 				d = Direction.DOWN;
 			}
-			else {
+			else if (v.y < 0){
 				moveUp();
 				d = Direction.UP;
 			}
