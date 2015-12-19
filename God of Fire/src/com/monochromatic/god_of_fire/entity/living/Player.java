@@ -67,15 +67,13 @@ public class Player extends LivingEntity {
 
 
 	public void update(GameContainer gameScreen){
-		
-		
 		try {
 			userInput(gameScreen);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 
-		
+		move();
 		equippedWeapon.update();
 		gameState.getCamera().centerCamera(this);
 		cameraOffsetPoint.setLocation((int)(location().getX()-gameState.getCamera().getxOffset()),
@@ -88,25 +86,25 @@ public class Player extends LivingEntity {
 		Input userInput = gameScreen.getInput();
 		if(userInput.isKeyDown(Input.KEY_W)){
 			velocity.y=-movementSpeed;
-			move();
+			//move();
 		}else{
 			upwardsMovementAnimation.stop();
 		}
 		if(userInput.isKeyDown(Input.KEY_S)){
 			velocity.y=+movementSpeed;
-			move();
+			//move();
 		}else{
 			downwardMovementAnimation.stop();
 		}
 		if (userInput.isKeyDown(Input.KEY_A)){
 			velocity.x=-movementSpeed;
-			move();
+			//move();
 		}else{
 			leftMovementAnimation.stop();
 		}
 		if (userInput.isKeyDown(Input.KEY_D)){
 			velocity.x=+movementSpeed;
-			move();
+			//move();
 		}else{
 			rightMovementAnimation.stop();
 		}
