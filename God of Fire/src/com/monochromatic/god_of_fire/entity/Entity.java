@@ -27,11 +27,14 @@ public abstract class Entity {
 	protected Direction orientation; /** Orientation of the entity. */
 	protected int movementSpeed = 0;
 	protected Vector2d velocity = new Vector2d(0, 0);
+	public boolean isLiving=true;
 	
 	protected boolean hardCollision = false;
 	protected boolean setForRemoval = false;
 	protected boolean initComplete = false;
 	protected boolean movedBack = false;
+	/** how many tiles high is entity?**/
+	protected int HEIGHT=1;
 	
 	/** Spritesheet for all images **/
 	protected Image spriteSheet;
@@ -62,15 +65,16 @@ public abstract class Entity {
 	}
 	
 	public Entity(GameState g, int x, int y, Direction d){
-		this(g, x, y, d, 0);
+		this(g, x, y, d, 0, 1);
 	}
 	
-	public Entity(GameState g, int x, int y, Direction d, int s){
+	public Entity(GameState g, int x, int y, Direction d, int s, int l){
 		gameState = g;
 		this.location = new Point(x, y);
 		this.previous = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
+		this.level = l;
 	}
 	
 	/**
@@ -143,7 +147,6 @@ public abstract class Entity {
 		try {
 			spriteSheet=new SpriteSheet(filePath, 32, 64);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -154,10 +157,11 @@ public abstract class Entity {
 	 */
 	@Deprecated
 	public void move(Direction d) {
-		if (d == Direction.UP) move(new Vector2d(0, -movementSpeed));
-		if (d == Direction.DOWN) move(new Vector2d(0, movementSpeed));
-		if (d == Direction.LEFT) move(new Vector2d(-movementSpeed, 0));
-		if (d == Direction.RIGHT) move(new Vector2d(movementSpeed, 0));
+		if (d == Direction.UP) velocity.y=-movementSpeed;
+		if (d == Direction.DOWN) velocity.y=movementSpeed;
+		if (d == Direction.LEFT) velocity.x=-movementSpeed;
+		if (d == Direction.RIGHT) velocity.x=movementSpeed;
+		move();
 	}
 	
 	public void move() {
@@ -364,4 +368,28 @@ public abstract class Entity {
 		this.gameState = gameState;
 	}
 	
+	public void stopVelocity(){
+		velocity.x=0;
+		velocity.y=0;
+	}
+	public boolean isLeft(){
+		return (velocity.x<0)? true:false;
+	}
+	public boolean isRight(){
+		return (velocity.x>0)? true:false;
+	}
+	public boolean isUp(){
+		return (velocity.y<0)? true:false;
+	}
+	public boolean isDown(){
+		return (velocity.y>0)? true:false;
+	}
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+
+	public void setHeight(int height) {
+		HEIGHT = height;
+	}
 }

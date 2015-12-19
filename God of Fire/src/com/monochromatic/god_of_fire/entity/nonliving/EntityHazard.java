@@ -17,11 +17,11 @@ public class EntityHazard extends NonlivingEntity{
 	protected DamageTarget target;
 	
 	public EntityHazard(GameState g, int x, int y, Direction d, int a){
-		this(g, x, y, d, a, DamageTarget.NEUTRAL);
+		this(g, x, y, d, 1, a, DamageTarget.NEUTRAL);
 	}
 	
-	public EntityHazard(GameState g, int x, int y, Direction d, int a, DamageTarget t){
-		super(g, x, y, d, 0);
+	public EntityHazard(GameState g, int x, int y, Direction d, int l, int a, DamageTarget t){
+		super(g, x, y, d, 0, l);
 	}
 	
 	/**

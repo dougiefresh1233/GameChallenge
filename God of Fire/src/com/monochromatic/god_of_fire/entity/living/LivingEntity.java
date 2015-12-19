@@ -16,7 +16,7 @@ public abstract class LivingEntity extends Entity {
 	protected int defense = 0;
 	/** Modifier for critical chance. */
 	protected int critical = 0;
-
+	
 	public LivingEntity(GameState g, int x, int y, int h) {
 		super(g, x, y);
 		this.maximumHealth = h;

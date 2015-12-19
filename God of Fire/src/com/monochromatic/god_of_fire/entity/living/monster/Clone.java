@@ -13,6 +13,7 @@ public class Clone extends Monster {
 	public Clone(GameState g, int x, int y, int h, int a, int d, int c) {
 		super(g, x, y, h, a, d, c);
 		movementSpeed = 2;
+		setHeight(2);
 		setImage("resources/spriteSheet.png");
 		this.attachAI(new PATH_Random());
 		//this.attachAI(new PATH_Chase());

@@ -27,6 +27,7 @@ public class FireTurret extends Monster implements Sniper {
 	public FireTurret(GameState g, int x, int y, int h, int a, int d, int c) {
 		super(g, x, y, h, a, d, c);
 		setImage("resources/KillerEye.png");
+		setHeight(2);
 		try {
 			initSingleSpriteSheet(32, 32);
 		} catch (SlickException e) {
@@ -64,7 +65,7 @@ public class FireTurret extends Monster implements Sniper {
 	public void shoot(Vector2d direction) {
 		EntityFireball fireball = new EntityFireball(getGameState(), 
 				(int) location().getX(), (int) location().getY(),
-				Direction.DOWN, 3, 0);
+				Direction.DOWN, 3, getLevel(), 0);
 		fireball.setDirection(direction);
 		this.getGameState().getEC().register(fireball);
 	}

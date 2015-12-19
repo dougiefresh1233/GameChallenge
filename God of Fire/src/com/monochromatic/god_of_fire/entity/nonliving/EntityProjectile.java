@@ -19,12 +19,12 @@ public class EntityProjectile extends NonlivingEntity {
 	protected int attack;
 	protected DamageTarget target;
 
-	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int a) {
-		this(g, x, y, d, s, a, DamageTarget.NEUTRAL);
+	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int l, int a) {
+		this(g, x, y, d, s, 1, a, DamageTarget.NEUTRAL);
 	}
 	
-	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int a, DamageTarget t) {
-		super(g, x, y, d, s);
+	public EntityProjectile(GameState g, int x, int y, Direction d, int s, int l, int a, DamageTarget t) {
+		super(g, x, y, d, s, l);
 		attack = a;
 	}
 
