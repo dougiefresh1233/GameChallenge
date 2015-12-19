@@ -75,7 +75,7 @@ public class Player extends LivingEntity {
 			e.printStackTrace();
 		}
 
-		move();
+		
 		equippedWeapon.update();
 		gameState.getCamera().centerCamera(this);
 		cameraOffsetPoint.setLocation((int)(location().getX()-gameState.getCamera().getxOffset()),
@@ -88,21 +88,25 @@ public class Player extends LivingEntity {
 		Input userInput = gameScreen.getInput();
 		if(userInput.isKeyDown(Input.KEY_W)){
 			velocity.y=-movementSpeed;
+			move();
 		}else{
 			upwardsMovementAnimation.stop();
 		}
 		if(userInput.isKeyDown(Input.KEY_S)){
-			velocity.y=movementSpeed;
+			velocity.y=+movementSpeed;
+			move();
 		}else{
 			downwardMovementAnimation.stop();
 		}
 		if (userInput.isKeyDown(Input.KEY_A)){
 			velocity.x=-movementSpeed;
+			move();
 		}else{
 			leftMovementAnimation.stop();
 		}
 		if (userInput.isKeyDown(Input.KEY_D)){
-			velocity.x=movementSpeed;
+			velocity.x=+movementSpeed;
+			move();
 		}else{
 			rightMovementAnimation.stop();
 		}
