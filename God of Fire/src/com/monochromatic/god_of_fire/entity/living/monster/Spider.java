@@ -26,6 +26,7 @@ public class Spider extends Monster{
 		public Spider(GameState g, int x, int y, int h, int a, int d, int c){
 			super(g, x, y, h, a, d, c);
 			movementSpeed=2;
+			setHeight(1);
 			setImage("resources/spiderSpriteSheet.png");
 			try {
 				init(32, 32, 4, 4);

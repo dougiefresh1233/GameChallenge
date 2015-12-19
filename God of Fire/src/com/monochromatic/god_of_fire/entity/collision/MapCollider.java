@@ -6,6 +6,8 @@ import static com.monochromatic.god_of_fire.GameConstants.LAYER_STAIRS;
 import static com.monochromatic.god_of_fire.GameConstants.LAYER_WALLS;
 import static com.monochromatic.god_of_fire.GameConstants.TILE_SIZE;
 
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.tiled.TiledMap;
 
 import com.monochromatic.god_of_fire.entity.Entity;
@@ -24,23 +26,28 @@ public class MapCollider {
 	}
 	
 	public void collide(Entity e) {
-		if(collides(e, e.orientation()))
+		if(collides(e))
 			e.movePrevious();
 	}
 	
-	private boolean collides(Entity e, Direction d) {
-		switch(d){
-			case UP: 	return collidesTileUp(e);
-			case DOWN: 	return collidesTileDown(e);
-			case LEFT: 	return collidesTileLeft(e);
-			default: 	return collidesTileRight(e);
-		}
+	private boolean collides(Entity e) {
+		boolean up=false; 
+		boolean	down=false; 
+		boolean	left=false; 
+		boolean right=false;
+		
+		if (e.isRight()) right =collidesTileRight(e); 
+		if (e.isLeft()) left = collidesTileLeft(e);
+		if (e.isUp()) up = collidesTileUp(e);
+		if (e.isDown()) down = collidesTileDown(e);
+		if(e.isLiving) e.stopVelocity();
+		return left || right || up || down;
 	}
 	
 	private boolean collidesTileUp(Entity e) {
 		int x, y;
 		x = (int) Math.round(e.previous().getX() / TILE_SIZE);
-		y = (int) Math.ceil(e.previous().getY() / TILE_SIZE) + 1;
+		y = (int) Math.ceil(e.previous().getY() / TILE_SIZE) + e.getHeight()-1;
 		if (map.getTileId(x, y - 1, walls) != 0) {
 			return true;
 		} else if (map.getTileId(x, y - 1, floor2) != 0) {
@@ -59,7 +66,7 @@ public class MapCollider {
 	private boolean collidesTileDown(Entity e) {
 		int x, y;
 		x= (int)Math.round(e.previous().getX()/TILE_SIZE);
-		y= (int)Math.floor(e.previous().getY()/TILE_SIZE)+1;
+		y= (int)Math.floor(e.previous().getY()/TILE_SIZE)+ e.getHeight()-1;
 		if(map.getTileId(x, y+1, walls) != 0) {
 			return true;
 		} else if(map.getTileId(x, y+1, floor2) != 0){
@@ -78,7 +85,7 @@ public class MapCollider {
 	private boolean collidesTileLeft(Entity e) {
 		int x, y;
 		x= (int)Math.ceil(e.previous().getX()/TILE_SIZE);
-		y= (int)Math.round(e.previous().getY()/TILE_SIZE)+1;
+		y= (int)Math.round(e.previous().getY()/TILE_SIZE)+ e.getHeight()-1;
 		if (map.getTileId(x-1, y, walls) != 0) {
 			return true;
 		} else if(map.getTileId(x-1, y, floor2) != 0) {
@@ -97,7 +104,7 @@ public class MapCollider {
 	private boolean collidesTileRight(Entity e) {
 		int x, y;
 		x= (int)Math.floor(e.previous().getX()/TILE_SIZE);
-		y= (int)Math.round(e.previous().getY()/TILE_SIZE)+1;
+		y= (int)Math.round(e.previous().getY()/TILE_SIZE)+ e.getHeight()-1;
 		if(map.getTileId(x+1, y, walls) != 0){
 			return true;
 		}else if(map.getTileId(x+1, y, floor2) != 0){
