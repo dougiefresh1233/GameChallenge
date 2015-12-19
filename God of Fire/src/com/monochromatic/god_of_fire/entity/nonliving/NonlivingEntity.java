@@ -18,14 +18,17 @@ public abstract class NonlivingEntity extends Entity {
 
 	public NonlivingEntity(GameState g, int x, int y) {
 		super(g, x, y);
+		isLiving=false;
 	}
 
 	public NonlivingEntity(GameState g, int x, int y, Direction d) {
 		super(g, x, y, d);
+		isLiving=false;
 	}
 
 	public NonlivingEntity(GameState g, int x, int y, Direction d, int s) {
 		super(g, x, y, d, s);
+		isLiving=false;
 	}
 
 	public boolean isCollidable() {

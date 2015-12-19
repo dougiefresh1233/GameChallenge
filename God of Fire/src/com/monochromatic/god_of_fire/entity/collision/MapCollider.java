@@ -40,7 +40,7 @@ public class MapCollider {
 		if (e.isLeft()) left = collidesTileLeft(e);
 		if (e.isUp()) up = collidesTileUp(e);
 		if (e.isDown()) down = collidesTileDown(e);
-		e.stopVelocity();
+		if(e.isLiving) e.stopVelocity();
 		return left || right || up || down;
 	}
 	

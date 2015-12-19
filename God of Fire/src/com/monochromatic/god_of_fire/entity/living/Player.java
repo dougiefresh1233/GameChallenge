@@ -85,26 +85,26 @@ public class Player extends LivingEntity {
 
 	private void userInput(GameContainer gameScreen) throws SlickException{
 		Input userInput = gameScreen.getInput();
-		if(userInput.isKeyDown(Input.KEY_W))
+		if(userInput.isKeyDown(Input.KEY_W)){
 			velocity.y=-movementSpeed;
-		else
+		}else{
 			upwardsMovementAnimation.stop();
-
+		}
 		if(userInput.isKeyDown(Input.KEY_S)){
 			velocity.y=movementSpeed;
-		}else
+		}else{
 			downwardMovementAnimation.stop();
-
+		}
 		if (userInput.isKeyDown(Input.KEY_A)){
 			velocity.x=-movementSpeed;
-		}else
+		}else{
 			leftMovementAnimation.stop();
-
+		}
 		if (userInput.isKeyDown(Input.KEY_D)){
 			velocity.x=movementSpeed;
-		}else
+		}else{
 			rightMovementAnimation.stop();
-
+		}
 
 		if (userInput.isKeyPressed(Input.KEY_DOWN)){
 			EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 

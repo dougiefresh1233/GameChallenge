@@ -27,6 +27,7 @@ public abstract class Entity {
 	protected Direction orientation; /** Orientation of the entity. */
 	protected int movementSpeed = 0;
 	protected Vector2d velocity = new Vector2d(0, 0);
+	public boolean isLiving=true;
 	
 	protected boolean hardCollision = false;
 	protected boolean setForRemoval = false;
