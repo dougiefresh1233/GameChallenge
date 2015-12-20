@@ -44,7 +44,7 @@ public class GameState extends BasicGameState{
 		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
-		player = new Player(this, 2780, 4320, 10, 10, 10, 5);
+		player = new Player(this, 2780, 4320, 100, 10, 10, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
 		//		300, 800,
 		//		Direction.DOWN, 3, 0);
@@ -100,8 +100,8 @@ public class GameState extends BasicGameState{
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		EC.update(gc);
-		healthOrb.update();
-		resourceOrb.update();
+		healthOrb.update(player.getHealth()*2);
+		resourceOrb.update(player.getIgnis()-20);
 	}
 
 	public int getID() {	//returns ID for SetupClass
