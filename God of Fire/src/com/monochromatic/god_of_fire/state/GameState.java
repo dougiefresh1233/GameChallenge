@@ -49,9 +49,9 @@ public class GameState extends BasicGameState{
 		//		300, 800,
 		//		Direction.DOWN, 3, 0);
 		//fireball.setDirection(new Vector2d(.5, .5));
-		Clone clone1 = new Clone(this, 800, 1020, 10, 10, 8, 5);
-		Clone clone2 = new Clone(this, 800, 1020, 10, 10, 8, 5);
-		FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
+		Clone clone1 = new Clone(this, 2880, 4120, 10, 10, 8, 5);
+		Clone clone2 = new Clone(this, 2880, 4120, 10, 10, 8, 5);
+		/*FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
 		
 		Spider[] arrayOfSpider= new Spider[360];
 		for(int i = 0; i<arrayOfSpider.length; i++){
@@ -66,18 +66,18 @@ public class GameState extends BasicGameState{
 		
 		Item itemLeaf = new Item("Leaf", "It's a leaf.", "resources/leaf.png", 0, false, false);
 		EntityItem entityLeaf = new EntityItem(this, 1000, 1020, itemLeaf);
-		
+		*/
 		EC.register(player);
 		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
-
+	/*
 		EC.register(turret);
 		EC.register(hydra1);
 		EC.register(hydra2);
 		EC.register(hydra3);
 		EC.register(entityLeaf);
-		
+		*/
 		playersPerspective=new Camera(this, 0,0);
 		
 		//Test this 
