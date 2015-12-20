@@ -38,13 +38,13 @@ public class GameState extends BasicGameState{
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		 //All variables defined here
-		map = new TiledMap("resources/Map.tmx");//TODO Replace with real map
+		map = new TiledMap("resources/HepsForge.tmx");//TODO Replace with real map
 		EC = new EntityController(this); // Must be declared AFTER map
 		HUD = new Image("resources/HUD.png");
 		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
-		player = new Player(this, 800, 1020, 10, 10, 10, 5);
+		player = new Player(this, 2780, 4320, 10, 10, 10, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
 		//		300, 800,
 		//		Direction.DOWN, 3, 0);
