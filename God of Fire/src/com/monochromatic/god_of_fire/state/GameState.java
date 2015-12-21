@@ -44,7 +44,7 @@ public class GameState extends BasicGameState{
 		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
-		player = new Player(this, 2780, 4320, 10, 10, 10, 5);
+		player = new Player(this, 2780, 4320, 100, 100, 100, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
 		//		300, 800,
 		//		Direction.DOWN, 3, 0);
@@ -93,8 +93,8 @@ public class GameState extends BasicGameState{
 		EC.render();
 		g.drawImage(HUD,0,0);
 		
-		healthOrb.render();
-		resourceOrb.render();
+		healthOrb.render(player.getHealth()*2);
+		resourceOrb.render(player.getIgnis()*2);
 		
 	}
 
