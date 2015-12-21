@@ -37,7 +37,6 @@ public class Player extends LivingEntity {
 
 	Point cameraOffsetPoint=new Point(0,0);
 
-
 	ParticleSystem particleSystem;
 	Image particleImage;
 	ConfigurableEmitter emitter;
@@ -59,6 +58,8 @@ public class Player extends LivingEntity {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		
+		ignis=200;
 
 		equippedWeapon=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				c, true, true, 10, 10, 10);
@@ -112,38 +113,39 @@ public class Player extends LivingEntity {
 		}
 
 		if (userInput.isKeyPressed(Input.KEY_DOWN)){
-			if(ignis>10){
-				EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
-						(int)(this.location().getX()),
-						(int)(this.location().getY()),
-						Direction.UP, 1, getLevel(), 10, 
-						ElementalType.FLUMINIS);
-
-
-				switch (orientation) {
-				case UP: waterMagicBall.setDirection(new Vector2d(0, -5)); 
-				break;
-				case DOWN: waterMagicBall.setDirection(new Vector2d(0, 5));
-				break;
-				case LEFT: waterMagicBall.setDirection(new Vector2d(-5, 0));
-				break;
-				case RIGHT: waterMagicBall.setDirection(new Vector2d(5, 0));
-				break;
-				}
-
-				this.getGameState().getEC().register(waterMagicBall);
-				ignis-=10;
+			if(ignis>20){
+			EntityMagicBall waterMagicBall= new EntityMagicBall(gameState, 
+					(int)(this.location().getX()),
+					(int)(this.location().getY()),
+					Direction.UP, 1, getLevel(), 10, 
+					ElementalType.FLUMINIS);
+		
+		
+			switch (orientation) {
+			case UP: waterMagicBall.setDirection(new Vector2d(0, -5)); 
+			break;
+			case DOWN: waterMagicBall.setDirection(new Vector2d(0, 5));
+			break;
+			case LEFT: waterMagicBall.setDirection(new Vector2d(-5, 0));
+			break;
+			case RIGHT: waterMagicBall.setDirection(new Vector2d(5, 0));
+			break;
+			}
+			
+			this.getGameState().getEC().register(waterMagicBall);
+			ignis-=20;
 			}
 		}
 
 
-		if (userInput.isKeyPressed(Input.KEY_RIGHT)){
-			if(ignis>10){
+		if (userInput.isKeyPressed(Input.KEY_RIGHT)){			
+			if(ignis>20){
 				EntityMagicBall plantMagicBall= new EntityMagicBall(gameState, 
 						(int)(this.location().getX()),
 						(int)(this.location().getY()),
 						Direction.UP, 1, getLevel(), 10, 
 						ElementalType.VIRENTIA);
+
 
 
 				switch (orientation) {
@@ -206,6 +208,7 @@ public class Player extends LivingEntity {
 			case RIGHT: equippedWeapon.attack(270, 1);
 			break;
 			}
+			ignis+=10;
 			List<Monster> targets = EntityUtility.intersectsMonsters(getGameState().getEC().getEntities(), 
 					calculateAttackArea(orientation));
 			for (Monster m : targets){
@@ -292,6 +295,10 @@ public class Player extends LivingEntity {
 
 
 	}
+	
+	public int getIgnis(){
+		return ignis;
+	}
 
 
 	@Override
@@ -300,10 +307,4 @@ public class Player extends LivingEntity {
 
 	}
 
-
-
-	public int getIgnis() {
-
-		return ignis;
-	}
 }

@@ -58,8 +58,9 @@ public class HUDOrbs {
 		}
 	}
 	
-	public void update(){
+	public void update(float i){
 		particleSystem.update(100);
+		setIntensity(i);
 	}
 	
 	public void setIntensity(float i){
