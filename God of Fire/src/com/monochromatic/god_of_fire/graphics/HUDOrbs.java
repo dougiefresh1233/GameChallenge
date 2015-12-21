@@ -68,7 +68,8 @@ public class HUDOrbs {
 	}
 	
 	
-	public void render(){
+	public void render(int i){
+		setIntensity(i);
 		particleSystem.render(xPosition+image.getWidth()/2, 
 					yPosition+image.getHeight()/2);
 		image.draw(xPosition, yPosition);

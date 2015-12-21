@@ -45,13 +45,14 @@ public class GameState extends BasicGameState{
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
 		player = new Player(this, 2780, 4320, 100, 10, 10, 5);
+		//player = new Player(this, 2780, 4320, 100, 100, 100, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
 		//		300, 800,
 		//		Direction.DOWN, 3, 0);
 		//fireball.setDirection(new Vector2d(.5, .5));
-		Clone clone1 = new Clone(this, 800, 1020, 10, 10, 8, 5);
-		Clone clone2 = new Clone(this, 800, 1020, 10, 10, 8, 5);
-		FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
+		Clone clone1 = new Clone(this, 2880, 4120, 10, 10, 8, 5);
+		Clone clone2 = new Clone(this, 2880, 4120, 10, 10, 8, 5);
+		/*FireTurret turret = new FireTurret(this, 300, 800, 10, 1, 1, 1);
 		
 		Spider[] arrayOfSpider= new Spider[360];
 		for(int i = 0; i<arrayOfSpider.length; i++){
@@ -66,18 +67,18 @@ public class GameState extends BasicGameState{
 		
 		Item itemLeaf = new Item("Leaf", "It's a leaf.", "resources/leaf.png", 0, false, false);
 		EntityItem entityLeaf = new EntityItem(this, 1000, 1020, itemLeaf);
-		
+		*/
 		EC.register(player);
 		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
-
+	/*
 		EC.register(turret);
 		EC.register(hydra1);
 		EC.register(hydra2);
 		EC.register(hydra3);
 		EC.register(entityLeaf);
-		
+		*/
 		playersPerspective=new Camera(this, 0,0);
 		
 		//Test this 
@@ -93,8 +94,8 @@ public class GameState extends BasicGameState{
 		EC.render();
 		g.drawImage(HUD,0,0);
 		
-		healthOrb.render();
-		resourceOrb.render();
+		healthOrb.render(player.getHealth()*2);
+		resourceOrb.render(player.getIgnis()*2);
 		
 	}
 

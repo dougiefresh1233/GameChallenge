@@ -5,6 +5,7 @@ import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import com.monochromatic.god_of_fire.state.*;	//Imports all states
+import com.monochromatic.god_of_fire.utility.Music;
 
 public class SetupClass extends StateBasedGame{
 
@@ -30,6 +31,10 @@ public class SetupClass extends StateBasedGame{
 		this.addState(new NewGameState()); 
 		this.addState(new LoadGameState());
 		this.addState(new OptionsState());
+		
+
+		Music.playMusic(Music.TEST, true);
+		//just for testing, remove this later
 	}
 
 	public int getGameWidth() {
