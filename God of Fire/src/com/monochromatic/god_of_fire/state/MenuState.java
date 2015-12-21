@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
 import com.monochromatic.god_of_fire.SetupClass;
 
 public class MenuState  extends BasicGameState {
@@ -39,6 +40,7 @@ public class MenuState  extends BasicGameState {
 			loadButton=new Rectangle(290,230,60,20);
 			optionsButton=new Rectangle(270,255,100,20);
 			exitButton=new Rectangle(295,280,55,20);
+			
 			
 			cursor=new Circle(0,0,1/2);
 			
