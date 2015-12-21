@@ -1,6 +1,7 @@
 package com.monochromatic.god_of_fire.entity.living;
 
 import com.monochromatic.god_of_fire.entity.Entity;
+import com.monochromatic.god_of_fire.mechanics.Damage;
 import com.monochromatic.god_of_fire.state.GameState;
 
 public abstract class LivingEntity extends Entity {
@@ -16,7 +17,7 @@ public abstract class LivingEntity extends Entity {
 	protected int defense = 0;
 	/** Modifier for critical chance. */
 	protected int critical = 0;
-	
+
 	public LivingEntity(GameState g, int x, int y, int h) {
 		super(g, x, y);
 		this.maximumHealth = h;
@@ -46,7 +47,6 @@ public abstract class LivingEntity extends Entity {
 		return alive;
 	}
 
-	
 	// COMBAT METHODS //
 	/**
 	 * Method to calculate the attack value for this entity, including double
@@ -74,13 +74,26 @@ public abstract class LivingEntity extends Entity {
 	}
 
 	/**
+	 * Method to calculate damage and modify the entity's health accordingly
+	 * 
+	 * @param d
+	 *            - The damage to deal to the entity
+	 * @return - Killing Blow
+	 */
+	public boolean takeDamage(Damage d) {
+		int amount = d.getDamageValue();
+		amount -= (defense / 2);
+		// TODO set up elemental types and range types
+		return adjustHealth(amount);
+	}
+
+	/**
 	 * Returns this entities current health.
 	 */
 	public int getHealth() {
 		return currentHealth;
 	}
 
-	
 	// ANIMATION METHODS //
 	/**
 	 * Plays the animation when this entity attacks.
@@ -104,7 +117,6 @@ public abstract class LivingEntity extends Entity {
 	 */
 	public abstract void deathAnim();
 
-	
 	// GETTERS/SETTERS //
 	public int getMaximumHealth() {
 		return maximumHealth;
