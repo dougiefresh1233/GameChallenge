@@ -35,11 +35,11 @@ public class MenuState  extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) 
 		throws SlickException {
 			menu = new Image("resources/menu_screen.png");
-			continueButton=new Rectangle(265,178,120,20);
-			newButton=new Rectangle(295,205,50,20);
-			loadButton=new Rectangle(290,230,60,20);
-			optionsButton=new Rectangle(270,255,100,20);
-			exitButton=new Rectangle(295,280,55,20);
+			continueButton=new Rectangle(265,255,120,20);
+			newButton=new Rectangle(295,282,50,20);
+			loadButton=new Rectangle(290,307,60,20);
+			optionsButton=new Rectangle(270,332,100,20);
+			exitButton=new Rectangle(295,357,55,20);
 			
 			
 			cursor=new Circle(0,0,1/2);
@@ -48,15 +48,13 @@ public class MenuState  extends BasicGameState {
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) 
 		throws SlickException {
-			g.drawImage(menu, 0, 0);	//attaches menu image
+			g.drawImage(menu, -20, 5);	//attaches menu image
 			g.setColor(Color.white);
 			if(hoverContinue) g.draw(continueButton);
 			if(hoverNew) g.draw(newButton);
 			if(hoverLoad) g.draw(loadButton);
 			if(hoverOptions) g.draw(optionsButton);
 			if(hoverExit) g.draw(exitButton);
-			
-			g.drawString("God of Fire",270,100);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
