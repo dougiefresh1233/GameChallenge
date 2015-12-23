@@ -44,7 +44,7 @@ public class GameState extends BasicGameState{
 		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
-		player = new Player(this, 2780, 4320, 100, 10, 10, 5);
+		player = new Player(this, 2780, 4320, 100, 10, 0, 5);
 		//player = new Player(this, 2780, 4320, 100, 100, 100, 5);
 		//EntityFireball fireball = new EntityFireball(this, 
 		//		300, 800,
