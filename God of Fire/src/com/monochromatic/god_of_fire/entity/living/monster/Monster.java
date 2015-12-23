@@ -2,9 +2,11 @@ package com.monochromatic.god_of_fire.entity.living.monster;
 
 import org.newdawn.slick.GameContainer;
 
+import com.monochromatic.god_of_fire.entity.Entity;
 import com.monochromatic.god_of_fire.entity.ai.AI;
 import com.monochromatic.god_of_fire.entity.ai.AI_Controller;
 import com.monochromatic.god_of_fire.entity.living.LivingEntity;
+import com.monochromatic.god_of_fire.entity.living.Player;
 import com.monochromatic.god_of_fire.state.GameState;
 
 public abstract class Monster extends LivingEntity {
@@ -27,6 +29,10 @@ public abstract class Monster extends LivingEntity {
 	/** Attaches AI to this entities {@link AI_Controller}*/
 	public void attachAI(AI ai) {
 		controller.addAI(ai);
+	}
+	
+	public void collide(Entity e) {
+		
 	}
 	
 }

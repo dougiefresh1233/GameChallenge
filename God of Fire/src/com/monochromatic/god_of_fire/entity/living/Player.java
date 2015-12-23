@@ -43,6 +43,8 @@ public class Player extends LivingEntity {
 
 
 	MeleeWeapon equippedWeapon;
+	MeleeWeapon weaponOption1;
+	MeleeWeapon weaponOption2;
 
 	private boolean superPower;
 
@@ -61,9 +63,16 @@ public class Player extends LivingEntity {
 		
 		ignis=200;
 
-		equippedWeapon=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
+		weaponOption1=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				c, true, true, 10, 10, 10);
-		equippedWeapon.equip(cameraOffsetPoint);
+		
+		weaponOption2=new MeleeWeapon("Axe", "A battleAxe", "resources/BigAxe.png",
+				c, true, true, 10, 10, 10);
+		
+		weaponOption1.equip(cameraOffsetPoint);
+		weaponOption2.equip(cameraOffsetPoint);
+		equippedWeapon=weaponOption2;
+		
 
 	}
 
@@ -74,6 +83,10 @@ public class Player extends LivingEntity {
 			userInput(gameScreen);
 		} catch (SlickException e) {
 			e.printStackTrace();
+		}
+		
+		if(currentHealth<0){
+			setForRemoval(true);
 		}
 
 		move();
@@ -217,6 +230,15 @@ public class Player extends LivingEntity {
 					m.kill();
 			}
 		}
+		
+		
+		if(userInput.isKeyPressed(Input.KEY_E)){
+			equippedWeapon=weaponOption1;
+		}
+		
+		if(userInput.isKeyPressed(Input.KEY_Q)){
+			equippedWeapon=weaponOption2;
+		}
 	}
 
 	private double[] calculateAttackArea(Direction d) {
@@ -303,7 +325,12 @@ public class Player extends LivingEntity {
 
 	@Override
 	public void collide(Entity e) {
-		// TODO Auto-generated method stub
+		if (e instanceof Monster) {
+			adjustHealth(((Monster) e).getAttack());
+			
+		}
+		else
+			return; // Do Nothing
 
 	}
 
