@@ -27,12 +27,14 @@ public class GameState extends BasicGameState{
 	EntityController EC;
 	TiledMap map;
 	Player player;
+	Hydra boss;
 	Image HUD;
 	HUDOrbs healthOrb;
 	HUDOrbs resourceOrb;
 	
 	private final int gameWidth=640;
 	private final int gameHeight=480;
+	public static boolean win;
 	
 	Camera playersPerspective;
 	
@@ -59,7 +61,7 @@ public class GameState extends BasicGameState{
 			arrayOfSpider[i]= new Spider(this, 800, 1020, 10, 10, 8, 5);
 			EC.register(arrayOfSpider[i]);
 		}*/
-		Hydra boss = new Hydra(this, 4960, 1184, 10, 1, 1, 1);
+		boss = new Hydra(this, 4960, 1184, 10, 1, 1, 1);
 		/*
 		Hydra hydra2 = new Hydra(this, 700, 300, 10, 1, 1, 1);
 		
@@ -104,6 +106,14 @@ public class GameState extends BasicGameState{
 		EC.update(gc);
 		healthOrb.update(player.getHealth()*2);
 		resourceOrb.update(player.getIgnis()-20);
+		if(player.getHealth()<0){
+			sbg.enterState(SetupClass.gameoverState);
+			win=false;
+		}
+		if(boss.getHealth()<0){
+			sbg.enterState(SetupClass.gameoverState);
+			win=true;
+		}
 	}
 
 	public int getID() {	//returns ID for SetupClass
