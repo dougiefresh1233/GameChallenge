@@ -3,7 +3,7 @@ package com.monochromatic.god_of_fire.items;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Item {
+public class Item {
 	
 	/**
 	 * Name of the item
@@ -14,6 +14,11 @@ public abstract class Item {
 	 * Brief description of the item
 	 */
 	private String description;
+	
+	/**
+	 * Number of items in the stack. Defaults to 1.
+	 */
+	private int quantity = 1;
 	
 	/**
 	 * Value in gold of the item
@@ -33,12 +38,12 @@ public abstract class Item {
 	/**
 	 * Image for the item
 	 */
-	private Image itemImage;
+	protected Image itemImage;
 	
 	public Item(){
 		
 	}
-	
+
 	/**
 	 * Constructor
 	 * @param name
@@ -58,11 +63,10 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Getter for the value of the item
-	 * @return
+	 * Gets the unique name of this item.
 	 */
-	public int getValue(){
-		return value;
+	public String getName(){
+		return name;
 	}
 	
 	/**
@@ -71,6 +75,37 @@ public abstract class Item {
 	 */
 	public String getDesciption(){
 		return description;
+	}
+	
+	/**
+	 * Gets the quantity of this item.
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * Adjusts the current quantity of this item.
+	 */
+	public void adjustQuantity(int quantity) {
+		this.quantity += quantity;
+		if (quantity < 0)
+			quantity = 0;
+	}
+	
+	/**
+	 * Sets the quantity of this item.
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	/**
+	 * Getter for the value of the item
+	 * @return
+	 */
+	public int getValue(){
+		return value;
 	}
 	
 	/**
@@ -89,6 +124,10 @@ public abstract class Item {
 		return isSellable;
 	}
 	
+	public Image getImage() {
+		return itemImage;
+	}
+
 	/**
 	 * Sets the image for the item
 	 * @param filePath
@@ -101,5 +140,7 @@ public abstract class Item {
 			e.printStackTrace();
 		}
 	}
+	
+	//abstract protected void render();
 
 }

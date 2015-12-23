@@ -1,55 +1,97 @@
 package com.monochromatic.god_of_fire.entity;
 import java.awt.*;
 
+import javax.vecmath.Vector2d;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SpriteSheet;
+import com.monochromatic.god_of_fire.enums.Direction;
+import com.monochromatic.god_of_fire.state.GameState;
 
+/**
+ * Base entity class. All entities need to be registered with the
+ * {@link EntityController} if they are to be interactive with the rest of the
+ * game world.
+ * 
+ * @author calmattier
+ */
 public abstract class Entity {
-	/** Location of the entity */
-	protected Point location;
-	/** Orientation of the entity */
-	protected Direction orientation;
-	/** How fast the entity moves */
-	protected int movementSpeed;
+	protected GameState gameState; /**Game State */
+	
+	protected Point location; /** Current location of the entity */
+	private Point previous; /** Previous location of the entity */
+	protected int level = 1; /**Current floor level. */
+	protected Direction orientation; /** Orientation of the entity. */
+	protected int movementSpeed = 0;
+	protected Vector2d velocity = new Vector2d(0, 0);
+	public boolean isLiving=true;
+	
+	protected boolean hardCollision = false;
+	protected boolean setForRemoval = false;
+	protected boolean initComplete = false;
+	protected boolean movedBack = false;
+	/** how many tiles high is entity?**/
+	protected int HEIGHT=1;
 	
 	/** Spritesheet for all images **/
-	protected SpriteSheet spriteSheet;
+	protected Image spriteSheet;
 	/** Array of images for multidirectional movement **/
-	protected Image[] upwardsMovementImages, downwardMovementImages, rightMovementImages, leftMovementImages;
+	protected SpriteSheet 	upwardsMovementImages, 
+							leftMovementImages, 
+							downwardMovementImages, 
+							rightMovementImages;
 	/** What animation is currently being used **/
 	protected Animation currentAnimation;
-	
 	/** Animations for the entity **/
-	protected Animation upwardsMovementAnimation, downwardMovementAnimation, leftMovementAnimation, rightMovementAnimation  ;
+	protected Animation 	upwardsMovementAnimation, 
+							downwardMovementAnimation, 
+							leftMovementAnimation,
+							rightMovementAnimation;
 	
-	
-	/**
-	 * Array of images and animation for when the entity is not moving
-	 */
-	protected Image[] stationaryImages;
+	/** Array of images and animation for when the entity is not moving */
+	protected SpriteSheet stationaryImages;
 	protected Animation stationaryAnimation;
 	
-	/**
-	 * Array of images and animation for entities physical attacks
-	 */
+	/** Array of images and animation for entities physical attacks */
 	protected Image[] attackingImages, castingImages;
 	protected Animation attackingAnimation, castingAnimation;
 		
-	public Entity(int x, int y){
-		this(x, y, Direction.DOWN);
+	
+	public Entity(GameState g, int x, int y){
+		this(g, x, y, Direction.DOWN);
 	}
 	
-	public Entity(int x, int y, Direction d){
-		this(x, y, d, 0);
+	public Entity(GameState g, int x, int y, Direction d){
+		this(g, x, y, d, 0, 1);
 	}
 	
-	public Entity(int x, int y, Direction d, int s){
+	public Entity(GameState g, int x, int y, Direction d, int s, int l){
+		gameState = g;
 		this.location = new Point(x, y);
+		this.previous = new Point(x, y);
 		this.orientation = d;
 		this.movementSpeed = s;
+		this.level = l;
 	}
+	
+	/**
+	 * Updates this entity. Movement and AI happen at this step.
+	 */
+	public abstract void update(GameContainer g);
+	
+	/**
+	 * Renders this entity.
+	 */
+	public abstract void render();
+	
+	/**
+	 * Applies the effects on the given entity, if it were to collide with
+	 * this entity.
+	 */
+	public abstract void collide(Entity e);
 	
 	/**
 	 * Looks like a clusterfuck now, but it will improve!
@@ -58,74 +100,296 @@ public abstract class Entity {
 	 * I just left it all as is for now as a place holder and so everyone can see whats to come
 	 * @throws SlickException
 	 */
-	public void init() throws SlickException{
+	public void init(int width, int height, int widthDim, int heightDim) throws SlickException{
 		// TODO
-		int x=0, y=0, width=0, height=0;
-		upwardsMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		downwardMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		rightMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
-		leftMovementImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+		downwardMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, 0, width*widthDim, height), width, height);
+		leftMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height, width*widthDim, height), width, height);
+		upwardsMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height*2, width*widthDim, height), width, height);
+		rightMovementImages=new SpriteSheet(spriteSheet.getSubImage(0, height*3, width*widthDim, height), width, height);
+		
+		/**
 		stationaryImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
 		attackingImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
 		castingImages = new Image[] { 
-				spriteSheet.getSubImage(x, y, width, height),
-				spriteSheet.getSubImage(x, y, width, height) };
+				spriteSheet.getSubImage(x, y),
+				spriteSheet.getSubImage(x, y)};
+		*/
 
-		upwardsMovementAnimation=new Animation(upwardsMovementImages, 1, false);
-		downwardMovementAnimation=new Animation(downwardMovementImages, 1, false);
-		rightMovementAnimation=new Animation(rightMovementImages, 1, false);
-		leftMovementAnimation=new Animation(leftMovementImages, 1, false);
+		upwardsMovementAnimation=new Animation(upwardsMovementImages, 100);
+		downwardMovementAnimation=new Animation(downwardMovementImages, 100);
+		rightMovementAnimation=new Animation(rightMovementImages, 100);
+		leftMovementAnimation=new Animation(leftMovementImages, 100);
+		currentAnimation=upwardsMovementAnimation;
+	
+		/**
 		stationaryAnimation=new Animation(stationaryImages, 1, false);
 		attackingAnimation=new Animation(attackingImages, 1, false);
 		castingAnimation=new Animation(castingImages, 1, false);
-		
+		*/
+		initComplete=true;
+	}
+	
+	public void initSingleSpriteSheet(int height, int width) throws SlickException{
+		stationaryImages = new SpriteSheet(spriteSheet, height, width);
+		stationaryAnimation=new Animation(stationaryImages, 300);
+		upwardsMovementAnimation=new Animation(stationaryImages, 300);
+		downwardMovementAnimation=new Animation(stationaryImages, 300);
+		rightMovementAnimation=new Animation(stationaryImages, 300);
+		leftMovementAnimation=new Animation(stationaryImages, 300);
+		currentAnimation=stationaryAnimation;
+	}
+	
+	public void setImage(String filePath){
+		try {
+			spriteSheet=new SpriteSheet(filePath, 32, 64);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * Determines if the given entity has collided with this one.
-	 * 
-	 * @param entity
+	 * Moves the entity in the given direction and changes to the corresponding
+	 * animation.
 	 */
-	public boolean isColliding(Entity entity){
-		//TODO - Advanced collision logic
-		Point them = entity.location();
-		boolean collided = ((int) them.getX() == (int) location.getX() &&
-							(int) them.getY() == (int) location.getY()) 
-							? true : false;
-		return collided;
+	@Deprecated
+	public void move(Direction d) {
+		if (d == Direction.UP) velocity.y=-movementSpeed;
+		if (d == Direction.DOWN) velocity.y=movementSpeed;
+		if (d == Direction.LEFT) velocity.x=-movementSpeed;
+		if (d == Direction.RIGHT) velocity.x=movementSpeed;
+		move();
+	}
+	
+	public void move() {
+		move(velocity);
+	}
+
+	public void move(Vector2d v) {
+		movedBack = false;
+		Direction d=Direction.UP;
+		if (Math.abs(v.x) > Math.abs(v.y))
+			if (v.x > 0) {
+				moveRight();
+				d = Direction.RIGHT;
+			}
+			else {
+				moveLeft();
+				d = Direction.LEFT;
+			}
+		else
+			if (v.y > 0) {
+				moveDown();
+				d = Direction.DOWN;
+			}
+			else if (v.y < 0){
+				moveUp();
+				d = Direction.UP;
+			}
+		stopAnimations(d);
+		previous.setLocation(location.getX(), location.getY());
+		location.translate((int) v.x, (int) v.y);
+	}
+	
+	public void stopAnimations(Direction d) {
+		if(currentAnimation == null)
+			return;
+		if (!(d == Direction.UP) && !upwardsMovementAnimation.isStopped())
+			upwardsMovementAnimation.stop();
+		if (!(d == Direction.LEFT) && !leftMovementAnimation.isStopped())
+			leftMovementAnimation.stop();
+		if (!(d == Direction.DOWN) && !downwardMovementAnimation.isStopped())
+			downwardMovementAnimation.stop();
+		if (!(d == Direction.RIGHT) && !rightMovementAnimation.isStopped())
+			rightMovementAnimation.stop();
+	}
+	
+	/**
+	 * Moves the entity up and changes corresponding animations.
+	 */
+	private void moveUp() {
+		if(currentAnimation == null)
+			return;
+		orientation(Direction.UP);
+		upwardsMovementAnimation.start();
+		currentAnimation = upwardsMovementAnimation;
+	}
+	
+	/**
+	 * Moves the entity down and changes corresponding animations.
+	 */
+	private void moveDown() {
+		if(currentAnimation == null)
+			return;
+		orientation(Direction.DOWN);
+		downwardMovementAnimation.start();
+		currentAnimation = downwardMovementAnimation;
+	}
+	
+	/**
+	 * Moves the entity to the left and changes corresponding animations.
+	 */
+	private void moveLeft() {
+		if(currentAnimation == null)
+			return;
+		orientation(Direction.LEFT);
+		leftMovementAnimation.start();
+		currentAnimation = leftMovementAnimation;
+	}
+	
+	/**
+	 * Moves the entity to the right and changes corresponding animations.
+	 */
+	private void moveRight() {
+		if(currentAnimation == null)
+			return;
+		orientation(Direction.RIGHT);
+		rightMovementAnimation.start();
+		currentAnimation = rightMovementAnimation;
+	}
+	
+	/**
+	 * Moves this entity back to the previous location.
+	 */
+	public void movePrevious() {
+		double dX = previous.getX() - location.getX();
+		double dY = previous.getY() - location.getY();
+		location.translate((int) dX, (int) dY);
+		movedBack = true;
+	}
+	
+	/**
+	 * Sets this entities location.
+	 */
+	public void location(Point p) {
+		previous.setLocation(location.getX(), location.getY());
+		location.setLocation(p.getX(), p.getY());
 	}
 	
 	/**
 	 * Returns a copy of this entities location.
 	 */
 	public Point location() {
-		return new Point((int) location.getX(), (int) location.getY());
+		return (Point) location.clone();
+	}
+	
+	/**
+	 * Returns a copy of this entities previous location.
+	 */
+	public Point previous() {
+		return (Point) previous.clone();
+	}
+	
+	/**
+	 * Gets orientation of the entity
+	 */
+	public Direction orientation(){
+		return orientation;
 	}
 	
 	/**
 	 * Sets orientation of the entity
 	 * @param d
 	 */
-	protected void setOrientation(Direction d){
+	public void orientation(Direction d){
 		orientation = d;
 	}
 	
-	public void move() {
-		//TODO
+	public Vector2d getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2d velocity) {
+		this.velocity = velocity;
 	}
 	
-	public abstract void render();
+	public int getSpeed() {
+		return movementSpeed;
+	}
+
+	public void setSpeed(int movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+
+	/**
+	 * Retrieves the current room level for this entity.
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	/**
+	 * Sets the current room level for this entity.
+	 */
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	
+	/**
+	 * Checks the hard collision value for this entity. If set to true, this
+	 * entity cannot occupy the same tile as another entity and will act
+	 * like a wall.
+	 */
+	public boolean isHardCollision() {
+		return hardCollision;
+	}
+
+	/**
+	 * Sets the hard collision value for this entity. If set to true, this
+	 * entity cannot occupy the same tile as another entity and will act
+	 * like a wall.
+	 */
+	public void setHardCollision(boolean hardCollision) {
+		this.hardCollision = hardCollision;
+	}
+	
+	/**
+	 * Checks to see if this entity has been flagged for removal.
+	 */
+	public boolean isSetForRemoval() {
+		return setForRemoval;
+	}
+	
+	/**
+	 * Sets this entities removal flag.
+	 */
+	public void setForRemoval(boolean b) {
+		setForRemoval = b;
+	}
+	
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+	
+	public void stopVelocity(){
+		velocity.x=0;
+		velocity.y=0;
+	}
+	public boolean isLeft(){
+		return (velocity.x<0)? true:false;
+	}
+	public boolean isRight(){
+		return (velocity.x>0)? true:false;
+	}
+	public boolean isUp(){
+		return (velocity.y<0)? true:false;
+	}
+	public boolean isDown(){
+		return (velocity.y>0)? true:false;
+	}
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+
+	public void setHeight(int height) {
+		HEIGHT = height;
+	}
 }

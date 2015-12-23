@@ -4,15 +4,21 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
-import com.monochromatic.god_of_fire.state.GameState;
-import com.monochromatic.god_of_fire.state.MenuState;
+import com.monochromatic.god_of_fire.state.*;	//Imports all states
+import com.monochromatic.god_of_fire.utility.Music;
 
 public class SetupClass extends StateBasedGame{
 
 	public static final String gameName = "God of Fire";
 	public static final int menuState = 0;
 	public static final int gameState = 1;
+	public static final int newGameState = 2;
+	public static final int loadGameState = 3;
+	public static final int optionsState = 4;
+	
+	public static final int gameoverState = 6;
+	private final int gameWidth=640;
+	private final int gameHeight=480;
 	
 	public SetupClass() {
 		
@@ -20,9 +26,25 @@ public class SetupClass extends StateBasedGame{
 		super(gameName);
 		
 		
-		//create all necisarry states
+		//create all necessary states
 		this.addState(new MenuState()); 
 		this.addState(new GameState());
+		this.addState(new NewGameState()); 
+		this.addState(new LoadGameState());
+		this.addState(new OptionsState());
+		this.addState(new GameoverState());
+		
+
+		Music.playMusic(Music.TEST, true);
+		//just for testing, remove this later
+	}
+
+	public int getGameWidth() {
+		return gameWidth;
+	}
+
+	public int getGameHeight() {
+		return gameHeight;
 	}
 
 	public void initStatesList(GameContainer container) throws SlickException {
@@ -42,6 +64,10 @@ public class SetupClass extends StateBasedGame{
 			appGC.setDisplayMode(640, 480, false);
 			
 			//TODO add icon to the window when we get one
+			
+			appGC.setAlwaysRender(true);
+			appGC.setVSync(true);
+			appGC.setShowFPS(false);
 			
 			appGC.setTargetFrameRate(60);
 			
