@@ -79,10 +79,10 @@ public class MenuState  extends BasicGameState {
 				sbg.enterState(SetupClass.newGameState);	//goes to NewGameState
 			}
 			if(hoverLoad && click){ //Load is pressed
-				sbg.enterState(SetupClass.loadGameState);	//goes to LoadGameState
+				sbg.enterState(SetupClass.gameState);	//goes to LoadGameState
 			}
 			if(hoverOptions && click){	//Options is pressed
-				sbg.enterState(SetupClass.optionsState);	//goes to OptionsState
+				sbg.enterState(SetupClass.gameState);	//goes to OptionsState
 			}
 			if(hoverExit && click){	//Exit is pressed
 				//appGC.exit();	//<-- Probably a better way to exit

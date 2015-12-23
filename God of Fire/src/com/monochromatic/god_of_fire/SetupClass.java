@@ -16,6 +16,7 @@ public class SetupClass extends StateBasedGame{
 	public static final int loadGameState = 3;
 	public static final int optionsState = 4;
 	
+	public static final int gameoverState = 6;
 	private final int gameWidth=640;
 	private final int gameHeight=480;
 	
@@ -31,6 +32,7 @@ public class SetupClass extends StateBasedGame{
 		this.addState(new NewGameState()); 
 		this.addState(new LoadGameState());
 		this.addState(new OptionsState());
+		this.addState(new GameoverState());
 		
 
 		Music.playMusic(Music.TEST, true);
