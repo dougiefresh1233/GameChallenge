@@ -58,9 +58,9 @@ public class GameState extends BasicGameState{
 		for(int i = 0; i<arrayOfSpider.length; i++){
 			arrayOfSpider[i]= new Spider(this, 800, 1020, 10, 10, 8, 5);
 			EC.register(arrayOfSpider[i]);
-		}
-		Hydra hydra1 = new Hydra(this, 100, 100, 10, 1, 1, 1);
-		
+		}*/
+		Hydra boss = new Hydra(this, 4960, 1184, 10, 1, 1, 1);
+		/*
 		Hydra hydra2 = new Hydra(this, 700, 300, 10, 1, 1, 1);
 		
 		Hydra hydra3 = new Hydra(this, 200, 600, 10, 1, 1, 1);
@@ -72,6 +72,7 @@ public class GameState extends BasicGameState{
 		//EC.register(fireball);
 		EC.register(clone1);
 		EC.register(clone2);
+		EC.register(boss);
 	/*
 		EC.register(turret);
 		EC.register(hydra1);
