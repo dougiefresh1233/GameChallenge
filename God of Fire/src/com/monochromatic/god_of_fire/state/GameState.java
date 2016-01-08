@@ -100,8 +100,6 @@ public class GameState extends BasicGameState{
 				0- (int)playersPerspective.getyOffset());
 		EC.render();
 		drawHUD(g);
-		//g.drawImage(HUD,0,0);
-		
 		
 		healthOrb.render(player.getHealth()*2);
 		resourceOrb.render(player.getIgnis()*2);
@@ -126,11 +124,12 @@ public class GameState extends BasicGameState{
 		return SetupClass.gameState;
 	}
 	
-	private void drawHUD(Graphics g){
-		g.drawImage(HUD,0,0);
-		for (int i = 0; i<player.getHealth(); i++ ){
+	private void drawHUD(Graphics g){	//renders the hud based on health and mana
+		g.drawImage(HUD,0,0);	//background of hud
+		for (int i = 0; i<player.getHealth(); i++ ){	//renders a 1 px wide red bar for every point of health
 			g.drawImage(hNug, i+42, 457);
 		}
+		//TODO add Mana Bar
 	}
 
 	public int getGameWidth() {
