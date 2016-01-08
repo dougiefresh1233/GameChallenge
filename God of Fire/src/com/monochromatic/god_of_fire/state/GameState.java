@@ -29,6 +29,8 @@ public class GameState extends BasicGameState{
 	Player player;
 	Hydra boss;
 	Image HUD;
+	Image hNug;
+	Image mNug;
 	HUDOrbs healthOrb;
 	HUDOrbs resourceOrb;
 	
@@ -43,6 +45,8 @@ public class GameState extends BasicGameState{
 		map = new TiledMap("resources/HepsForge.tmx");//TODO Replace with real map
 		EC = new EntityController(this); // Must be declared AFTER map
 		HUD = new Image("resources/HUD.png");
+		hNug= new Image("resources/HealthNugget.png");
+		mNug= new Image("resources/ManaNugget.png");
 		healthOrb = new HUDOrbs("resources/healthParticles.xml","resources/redHealthOrb.png", 10, 420);
 		resourceOrb= new HUDOrbs("resources/resourceParticles.xml","resources/resourceOrb.png", 590, 420);
 		
@@ -95,7 +99,7 @@ public class GameState extends BasicGameState{
 		map.render(0 - (int)playersPerspective.getxOffset(), 
 				0- (int)playersPerspective.getyOffset());
 		EC.render();
-		g.drawImage(HUD,0,0);
+		drawHUD(g);
 		
 		healthOrb.render(player.getHealth()*2);
 		resourceOrb.render(player.getIgnis()*2);
@@ -120,6 +124,15 @@ public class GameState extends BasicGameState{
 		return SetupClass.gameState;
 	}
 	
+	private void drawHUD(Graphics g){	//renders the hud based on health and mana
+		g.drawImage(HUD,0,0);	//background of hud
+		for (int i = 0; i<player.getHealth(); i++ ){	//renders a 1 px wide red bar for every point of health
+			g.drawImage(hNug, i+42, 457);
+		}
+		for (int i = 0; i<player.getIgnis(); i++ ){	//renders a 1 px wide yellow bar for every point of mana
+			g.drawImage(mNug, 595-i, 457);
+		}
+	}
 
 	public int getGameWidth() {
 		return gameWidth;
