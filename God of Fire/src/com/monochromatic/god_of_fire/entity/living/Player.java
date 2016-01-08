@@ -61,7 +61,7 @@ public class Player extends LivingEntity {
 			e.printStackTrace();
 		}
 		
-		ignis=200;
+		//ignis=200;
 
 		weaponOption1=new MeleeWeapon("Sword", "A sword", "resources/shittysword.png",
 				c, true, true, 10, 10, 10);
@@ -221,7 +221,7 @@ public class Player extends LivingEntity {
 			case RIGHT: equippedWeapon.attack(270, 1);
 			break;
 			}
-			ignis+=10;
+			if(ignis<100)ignis+=10;
 			List<Monster> targets = EntityUtility.intersectsMonsters(getGameState().getEC().getEntities(), 
 					calculateAttackArea(orientation));
 			for (Monster m : targets){

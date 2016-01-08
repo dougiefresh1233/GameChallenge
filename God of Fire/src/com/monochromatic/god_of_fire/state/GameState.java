@@ -129,7 +129,9 @@ public class GameState extends BasicGameState{
 		for (int i = 0; i<player.getHealth(); i++ ){	//renders a 1 px wide red bar for every point of health
 			g.drawImage(hNug, i+42, 457);
 		}
-		//TODO add Mana Bar
+		for (int i = 0; i<player.getIgnis(); i++ ){	//renders a 1 px wide yellow bar for every point of mana
+			g.drawImage(mNug, 595-i, 457);
+		}
 	}
 
 	public int getGameWidth() {
